@@ -29,16 +29,16 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 if(ANDROID)
   add_library(totem SHARED
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    interface.cpp
+    interface.h
+    interface.ui
   )
 else()
   add_executable(totem
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    interface.cpp
+    interface.h
+    interface.ui
   )
 endif()
 

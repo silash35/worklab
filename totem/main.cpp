@@ -1,11 +1,11 @@
-#include "mainwindow.h"
+#include "interface.h"
 
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
   QApplication a(argc, argv);
-  MainWindow w;
-  w.show();
+  interface w;
+  //w.showFullScreen();
+  w.showMaximized();
   return a.exec();
 }
