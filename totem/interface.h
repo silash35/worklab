@@ -2,6 +2,7 @@
 #define INTERFACE_H
 
 #include <QMainWindow>
+#include <paciente.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class interface; }
@@ -20,6 +21,6 @@ private slots:
 
 private:
   Ui::interface *ui;
-  int pontos{0};
+  Paciente paciente;
 };
 #endif // INTERFACE_H

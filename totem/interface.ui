@@ -135,7 +135,7 @@ Color: blue;</string>
       <widget class="QWidget" name="pergunta1">
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLabel" name="legenda_3">
+         <widget class="QLabel" name="p1_texto">
           <property name="font">
            <font>
             <pointsize>20</pointsize>
@@ -168,7 +168,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_2">
+           <widget class="QPushButton" name="p1_sim">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -204,7 +204,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_3">
+           <widget class="QPushButton" name="p1_nao">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -246,7 +246,7 @@ Color: blue;</string>
       <widget class="QWidget" name="pergunta2">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QLabel" name="legenda_4">
+         <widget class="QLabel" name="p2_texto">
           <property name="font">
            <font>
             <pointsize>20</pointsize>
@@ -279,7 +279,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_4">
+           <widget class="QPushButton" name="p2_sim">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -315,7 +315,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_5">
+           <widget class="QPushButton" name="p2_nao">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -357,7 +357,7 @@ Color: blue;</string>
       <widget class="QWidget" name="pergunta3">
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QLabel" name="legenda_5">
+         <widget class="QLabel" name="p3_texto">
           <property name="font">
            <font>
             <pointsize>20</pointsize>
@@ -390,7 +390,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_6">
+           <widget class="QPushButton" name="p3_sim">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -426,7 +426,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_7">
+           <widget class="QPushButton" name="p3_nao">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -468,7 +468,7 @@ Color: blue;</string>
       <widget class="QWidget" name="pergunta4">
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QLabel" name="legenda_6">
+         <widget class="QLabel" name="p4_texto">
           <property name="font">
            <font>
             <pointsize>20</pointsize>
@@ -501,7 +501,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_8">
+           <widget class="QPushButton" name="p4_sim">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -537,7 +537,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_9">
+           <widget class="QPushButton" name="p4_nao">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -579,7 +579,7 @@ Color: blue;</string>
       <widget class="QWidget" name="medicao1">
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QLabel" name="legenda_7">
+         <widget class="QLabel" name="med_texto">
           <property name="font">
            <font>
             <pointsize>20</pointsize>
@@ -612,7 +612,7 @@ Color: blue;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="botao_iniciar_10">
+           <widget class="QPushButton" name="med">
             <property name="font">
              <font>
               <pointsize>20</pointsize>
@@ -654,7 +654,7 @@ Color: blue;</string>
       <widget class="QWidget" name="resultados">
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QLabel" name="legenda_8">
+         <widget class="QLabel" name="resul_texto">
           <property name="font">
            <font>
             <pointsize>20</pointsize>
@@ -672,7 +672,7 @@ Color: blue;</string>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="result_result">
           <property name="font">
            <font>
             <pointsize>20</pointsize>

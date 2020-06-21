@@ -32,6 +32,9 @@ if(ANDROID)
     interface.cpp
     interface.h
     interface.ui
+
+    paciente.cpp
+    paciente.h
   )
 else()
   add_executable(totem
@@ -39,6 +42,9 @@ else()
     interface.cpp
     interface.h
     interface.ui
+
+    paciente.cpp
+    paciente.h
   )
 endif()
 

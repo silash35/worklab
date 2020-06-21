@@ -12,5 +12,5 @@ interface::~interface(){
 
 void interface::on_botao_iniciar_clicked(){
   ui->pagina->setCurrentIndex(1);
-  pontos = 0;
+  paciente.zeraDados();  
 }
