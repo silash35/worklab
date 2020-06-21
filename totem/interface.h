@@ -2,7 +2,7 @@
 #define INTERFACE_H
 
 #include <QMainWindow>
-#include <paciente.h>
+#include "paciente.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class interface; }
@@ -18,6 +18,8 @@ public:
 
 private slots:
   void on_botao_iniciar_clicked();
+
+  void on_med_clicked();
 
 private:
   Ui::interface *ui;

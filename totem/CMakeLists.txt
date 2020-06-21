@@ -35,6 +35,8 @@ if(ANDROID)
 
     paciente.cpp
     paciente.h
+
+    wiringPi/wiringPi.h
   )
 else()
   add_executable(totem
@@ -45,6 +47,8 @@ else()
 
     paciente.cpp
     paciente.h
+
+    wiringPi/wiringPi.h
   )
 endif()
 

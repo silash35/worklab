@@ -1,7 +1,9 @@
 #ifndef PACIENTE_H
 #define PACIENTE_H
 
-#include<QtConcurrent/qtconcurrentrun.h>
+#include <QtConcurrent/qtconcurrentrun.h>
+//#include <wiringPi.h>
+#include "wiringPi/wiringPi.h"
 
 #define temperaturaMax 37 //Temperatura maxima até ser considerada febre
 #define pressaoMax 15 //Pressão maxima até ser considerada pressão alta

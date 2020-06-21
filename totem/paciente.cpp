@@ -2,6 +2,12 @@
 
 Paciente::Paciente(){
   //GPIO init
+  /*
+  wiringPiSetup();
+  for(int i = 0;i<=16;++i){ //16 é o numero de pins do Raspberry,
+    pinMode(i,INPUT);
+  }
+  */
   QFuture<void> future = QtConcurrent::run([=]() {
     getDados();
   });
@@ -22,14 +28,20 @@ void Paciente::getDados(){
 
   while(true){
     //GPIO getDados
+/*
+    tempera = analogRead(1);
+    press = analogRead(2);
+    satura = analogRead(3);
 
+    delay(100);
+*/
     if(tempera > temperatura){
       temperatura = tempera;
     }
     if(press > pressao){
       temperatura = pressao;
     }
-    if(satura > saturacao){
+    if(satura < saturacao){
       saturacao = satura;
     }
   }
