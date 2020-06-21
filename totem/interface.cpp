@@ -22,19 +22,19 @@ void interface::on_med_clicked(){
   pontosTotal = 9;
 
   if(pontosTotal <= 10){
-    ui->result_result->setText("Azul");
+    ui->result_result->setText("Não Urgente");
     ui->result_result->setStyleSheet("color: white; border:10px solid black; background-color:blue;");
   }else if(pontosTotal <= 20){
-    ui->result_result->setText("Verde");
+    ui->result_result->setText("Pouco Urgente");
     ui->result_result->setStyleSheet("color: white; border:10px solid black; background-color: green;");
   }else if(pontosTotal <= 30){
-    ui->result_result->setText("Amarelo");
+    ui->result_result->setText("Urgente");
     ui->result_result->setStyleSheet("color: white; border:10px solid black; background-color: yellow;");
   }else if(pontosTotal <= 40){
-    ui->result_result->setText("Laranja");
+    ui->result_result->setText("Muito Urgente");
     ui->result_result->setStyleSheet("color: white; border:10px solid black; background-color: orange;");
   }else if (pontosTotal > 40){
-    ui->result_result->setText("Vermelho");
+    ui->result_result->setText("Extremamente Urgente (Emergência)");
     ui->result_result->setStyleSheet("color: white; border:10px solid black; background-color: red;");
   }else{
     //ERRO
