@@ -1,0 +1,29 @@
+<Interface>:
+    Screen:
+        name: '0' #Usar numeros faz ficar mais facil fazer comparações depois
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: 'Lorem Ipsulum'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Começar'
+                    on_release: root.proximaTela()
+    Screen:
+        name: '1'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: 'Lorem Ipsulum'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+
+<BoxLayout>
+    padding: 20
