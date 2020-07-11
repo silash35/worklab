@@ -15,7 +15,7 @@
         BoxLayout:
             orientation: 'vertical'
             Label: 
-                text: 'Lorem Ipsulum'
+                text: 'Pergunta 1'
             BoxLayout:
                 orientation: 'horizontal'
                 Button:
@@ -24,6 +24,34 @@
                 Button:
                     text: 'Não'
                     on_release: root.proximaTela()
+
+    Screen:
+        name: '2'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: 'Pergunta 2'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+
+    Screen:
+        name: '3' #fim
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                id: result
+                text: 'Resultado'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Recomeçar'
+                    on_release: root.proximaTela(); 
 
 <BoxLayout>
     padding: 50
@@ -53,4 +81,4 @@
     halign: 'center'
     valign: 'middle'
     font_size:'50sp'
-    color: 0,0,0,1
+    color: [0,0,0,1]

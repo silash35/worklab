@@ -57,3 +57,26 @@ class Paciente:
         pass
 
 paciente = Paciente()
+
+def calculaGrau(pontos):
+    cor = '#ffffff'
+    grau = 'Não Urgente'
+
+    if(pontos <= 10):
+        cor = '#1c5cff'
+        grau = "Não Urgente"
+    elif(pontos <= 20):
+        cor = '#1fd158'
+        grau = 'Pouco Urgente'
+    elif(pontos <= 30):
+        cor = '#f5d800'
+        grau = 'Urgente'
+    elif(pontos <= 40):
+        cor = '#ff6f00'
+        grau = 'Muito Urgente'
+    elif (pontos > 40):
+        cor = '#ff1500'
+        grau = 'Emergência'
+    else:
+        pass #ERRO
+    return [grau, cor]
