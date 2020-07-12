@@ -14,12 +14,20 @@ class Paciente:
         self.pontosDePerguntas = 0
         self.id = 0
 
+        self.covid = [False,False,False,False,False]
+        #0- Teve tosse seca
+        #1- Febre alta por 5 dias ou mais
+        #2- dificuldade de respirar
+        #3- diarreia
+        #4- contato com alguém que teve covid
+
     def zeraDados(self):
         self.temperatura = 0
         self.pressao = 0
         self.saturacao = 0
         self.pontosDePerguntas = 0
         self.id = self.id + 1
+        self.covid = [False,False,False,False,False]
 
     def getDados(self):
         #codigo leitura da GPIO
@@ -78,7 +86,14 @@ class Paciente:
 	Temperatura: '''+str(self.temperatura)+'''<br>
 	Pressão: '''+str(self.pressao)+'''<br>
 	Saturação: '''+str(self.saturacao)+'''<br>
-	Covid: '''+'false'+'''<br>
+      </p>
+      <p>
+	<strong>Dados Covid:</strong><br>
+        Tosse seca: '''+ str(self.covid[0]) +''' <br>
+        Febre alta (+5 dias): '''+ str(self.covid[1]) +''' <br>
+        dificuldade de respirar: '''+ str(self.covid[2]) +''' <br>
+        diarreia: '''+ str(self.covid[3]) +''' <br>
+        contato com alguém que teve covid: '''+ str(self.covid[4]) +''' <br>
       </p>
 
     </div>

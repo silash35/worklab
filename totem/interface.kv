@@ -1,10 +1,12 @@
+#:kivy 1.0
+
 <Interface>:
     Screen:
         name: '0' #Usar numeros faz ficar mais facil fazer comparações depois
         BoxLayout:
             orientation: 'vertical'
             Label: 
-                text: 'Lorem Ipsulum'
+                text: 'Lorem ipsum'
             BoxLayout:
                 orientation: 'horizontal'
                 Button:
@@ -15,18 +17,75 @@
         BoxLayout:
             orientation: 'vertical'
             Label: 
-                text: 'Pergunta 1'
+                text: '"Tosse seca" é um dos seus sintomas?'
             BoxLayout:
                 orientation: 'horizontal'
                 Button:
                     text: 'Sim'
-                    on_release: root.addPontos(20); root.proximaTela()
+                    on_release: root.atualizarCovid(0,True); root.proximaTela()
                 Button:
                     text: 'Não'
                     on_release: root.proximaTela()
 
     Screen:
         name: '2'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: 'Você sentiu "Febre alta" por mais de 5 dias?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.atualizarCovid(1,True); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+    Screen:
+        name: '3'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: 'Você está sentindo dificuldade em respirar?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.atualizarCovid(2,True); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+    Screen:
+        name: '4'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: '"Diarreia" é um dos seus sintomas?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.atualizarCovid(3,True); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+    Screen:
+        name: '5'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                text: 'Recentemente você teve contato com alguem com Covid?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.atualizarCovid(4,True); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+
+    Screen:
+        name: '6'
         BoxLayout:
             orientation: 'vertical'
             Label: 
@@ -41,7 +100,7 @@
                     on_release: root.proximaTela()
 
     Screen:
-        name: '3' #fim
+        name: '7' #fim
         BoxLayout:
             orientation: 'vertical'
             Label: 

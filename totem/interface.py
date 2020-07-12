@@ -5,7 +5,7 @@ from kivy.graphics import *
 from kivy.utils import get_color_from_hex
 from paciente import *
 
-nTelas = 3 #numero de telas atual (começa a contagem do 0)
+nTelas = 7 #numero de telas atual (começa a contagem do 0)
 
 Builder.load_file('interface.kv')
 class Interface(ScreenManager):
@@ -37,3 +37,5 @@ class Interface(ScreenManager):
             self.current = '0'
     def addPontos(self, pontos):
         paciente.pontosDePerguntas = int(paciente.pontosDePerguntas) + int(pontos)
+    def atualizarCovid(self, pergunta, valor):
+        paciente.covid[pergunta] = valor
