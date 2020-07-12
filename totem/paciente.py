@@ -12,12 +12,14 @@ class Paciente:
         self.saturacao = 0
         # Não tem maneira melhor,e mais escalável de calcular o grau de emergencia do que com pontos
         self.pontosDePerguntas = 0
+        self.id = 0
 
     def zeraDados(self):
         self.temperatura = 0
         self.pressao = 0
         self.saturacao = 0
         self.pontosDePerguntas = 0
+        self.id = self.id + 1
 
     def getDados(self):
         #codigo leitura da GPIO
@@ -52,31 +54,65 @@ class Paciente:
 
         return (self.pontosDePerguntas + ptemp + ppress + psatura)
 
-    def enviarEmail(self):
-        #codigo enviar resultado para Email, chamando 'pontosTotal'
-        pass
+    def publicarNoSite(self):
+        f = open('./site/templates/users/'+str(self.id)+'.html','wt')
+        f.write('''
+        <div class="card hoverable">
+    <div class="card-image waves-effect waves-block waves-light">
+      <!-- Card Image -->
+      <img class="activator" src="static/images/users/'''+calculaGrau(self.pontosTotal())[2]+'''.png">
+    </div>
+    <div class="card-content activator" style="cursor:pointer">
+      <!-- Card Title -->
+      <span class="card-title grey-text text-darken-4">'''+str(self.id)+'''</span>
+    </div>
+    <div class="card-reveal">
+      <!-- Card Reveal Content -->
+      <span class="card-title grey-text text-darken-4">'''+str(self.id)+'''<i class="material-icons right">close</i></span>
+
+      <p>
+        '''+ str(calculaGrau(self.pontosTotal())[0]) +'''
+      </p>
+
+      <p class="center">
+	Temperatura: '''+str(self.temperatura)+'''<br>
+	Pressão: '''+str(self.pressao)+'''<br>
+	Saturação: '''+str(self.saturacao)+'''<br>
+	Covid: '''+'false'+'''<br>
+      </p>
+
+    </div>
+  </div>
+        ''')
+        f.close()
 
 paciente = Paciente()
 
 def calculaGrau(pontos):
-    cor = '#ffffff'
     grau = 'Não Urgente'
+    cor = '#ffffff'
+    corNome = 'branco'
 
     if(pontos <= 10):
         cor = '#1c5cff'
         grau = "Não Urgente"
+        corNome = 'azul'
     elif(pontos <= 20):
         cor = '#1fd158'
         grau = 'Pouco Urgente'
+        corNome = 'verde'
     elif(pontos <= 30):
         cor = '#f5d800'
         grau = 'Urgente'
+        corNome = 'amarelo'
     elif(pontos <= 40):
         cor = '#ff6f00'
         grau = 'Muito Urgente'
+        corNome = 'laranja'
     elif (pontos > 40):
         cor = '#ff1500'
         grau = 'Emergência'
+        corNome = 'vermelho'
     else:
         pass #ERRO
-    return [grau, cor]
+    return [grau, cor, corNome]

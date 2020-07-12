@@ -16,6 +16,8 @@ class Interface(ScreenManager):
             paciente.zeraDados()
 
         if(int(self.current) == (nTelas-1)):
+            paciente.publicarNoSite()
+
             self.ids['result'].color = [1,1,1,1]
             self.ids['result'].text = str(calculaGrau(paciente.pontosTotal())[0])
             #Desenha retangulo com a cor dependendo do grau de emergencia.
@@ -33,3 +35,5 @@ class Interface(ScreenManager):
             self.current = str(int(self.current) + 1)
         else:
             self.current = '0'
+    def addPontos(self, pontos):
+        paciente.pontosDePerguntas = int(paciente.pontosDePerguntas) + int(pontos)
