@@ -5,18 +5,22 @@ from kivy.graphics import *
 from kivy.utils import get_color_from_hex
 from paciente import *
 
-nTelas = 7 #numero de telas atual (começa a contagem do 0)
+nTelas = 10 #numero de telas atual (começa a contagem do 0)
 
 Builder.load_file('interface.kv')
 class Interface(ScreenManager):
 
     def proximaTela(self):
 
-        if(int(self.current) == 0):
+        if(int(self.current) == nTelas):
             paciente.zeraDados()
 
-        if(int(self.current) == (nTelas-1)):
-            paciente.publicarNoSite()
+        if(int(self.current) < nTelas):
+            self.current = str(int(self.current) + 1)
+        else:
+            self.current = '0'
+
+        if(paciente.pontosDePerguntas != 0):
 
             self.ids['result'].color = [1,1,1,1]
             self.ids['result'].text = str(calculaGrau(paciente.pontosTotal())[0])
@@ -31,10 +35,9 @@ class Interface(ScreenManager):
                     )
                 Rectangle(pos = self.ids['result'].pos, size = self.ids['result'].size)
 
-        if(int(self.current) < nTelas):
-            self.current = str(int(self.current) + 1)
-        else:
-            self.current = '0'
+            self.current = str(nTelas)
+            paciente.publicarNoSite()
+
     def addPontos(self, pontos):
         paciente.pontosDePerguntas = int(paciente.pontosDePerguntas) + int(pontos)
     def atualizarCovid(self, pergunta, valor):

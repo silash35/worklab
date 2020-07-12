@@ -107,27 +107,33 @@ def calculaGrau(pontos):
     grau = 'Não Urgente'
     cor = '#ffffff'
     corNome = 'branco'
+    grauNum = 0
 
     if(pontos <= 10):
         cor = '#1c5cff'
         grau = "Não Urgente"
         corNome = 'azul'
+        grauNum = 0
     elif(pontos <= 20):
         cor = '#1fd158'
         grau = 'Pouco Urgente'
         corNome = 'verde'
+        grauNum = 1
     elif(pontos <= 30):
         cor = '#f5d800'
         grau = 'Urgente'
         corNome = 'amarelo'
+        grauNum = 2
     elif(pontos <= 40):
         cor = '#ff6f00'
         grau = 'Muito Urgente'
         corNome = 'laranja'
+        grauNum = 3
     elif (pontos > 40):
         cor = '#ff1500'
         grau = 'Emergência'
         corNome = 'vermelho'
+        grauNum = 4
     else:
         pass #ERRO
-    return [grau, cor, corNome]
+    return [grau, cor, corNome, grauNum]

@@ -89,18 +89,84 @@
         BoxLayout:
             orientation: 'vertical'
             Label: 
-                text: 'Pergunta 2'
+                halign: 'left'
+                text:
+                    'Você esta sentindo algum desses sintomas? \n' +\
+                    '-Comprometimento da via aérea \n' +\
+                    '-Respiração ineficaz \n' +\
+                    '-Choque \n' +\
+                    '-Criança não responde'
             BoxLayout:
                 orientation: 'horizontal'
                 Button:
                     text: 'Sim'
-                    on_release: root.addPontos(20); root.proximaTela()
+                    on_release: root.addPontos(50); root.proximaTela()
                 Button:
                     text: 'Não'
                     on_release: root.proximaTela()
 
     Screen:
-        name: '7' #fim
+        name: '7'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                halign: 'left'
+                text:
+                    'Você esta sentindo algum desses sintomas? \n' +\
+                    '-Dor severa? \n' +\
+                    '-Hemorragia Grande incontrolável \n' +\
+                    '-Criança quente \n' +\
+                    'Ou há alguma alteração do nível de consciência?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.addPontos(31); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+
+    Screen:
+        name: '8'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                halign: 'left'
+                text:
+                    'Você esta sentindo algum desses sintomas? \n' +\
+                    '-Dor moderada? \n' +\
+                    '-Pequena hemorragia incontrolável? \n' +\
+                    '-Vômitos persistentes?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.addPontos(21); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.proximaTela()
+    Screen:
+        name: '9'
+        BoxLayout:
+            orientation: 'vertical'
+            Label: 
+                halign: 'left'
+                text:
+                    'Você esta sentindo algum desses sintomas? \n' +\
+                    '-Dor \n' +\
+                    '-Vomitos \n' +\
+                    'Ou seu problema é antigo?'
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Sim'
+                    on_release: root.addPontos(11); root.proximaTela()
+                Button:
+                    text: 'Não'
+                    on_release: root.addPontos(1); root.proximaTela()
+
+    Screen:
+        name: '10' #fim
         BoxLayout:
             orientation: 'vertical'
             Label: 
