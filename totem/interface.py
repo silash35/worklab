@@ -23,7 +23,7 @@ class Interface(ScreenManager):
 
             self.ids['result'].color = [1,1,1,1]
             self.ids['result'].text = str(calculaGrau(paciente.pontosTotal())[0])
-            #Desenha retangulo com a cor dependendo do grau de emergencia.
+            #Desenha retângulo com a cor dependendo do grau de emergência.
             #Aqui tem um Bug que ele só desenha na segunda vez que o programa roda, não consegui resolver
             with self.ids['result'].canvas.before:
                 Color(

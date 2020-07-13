@@ -10,7 +10,7 @@ class Paciente:
         self.temperatura = 0
         self.pressao = 0
         self.saturacao = 0
-        # Não tem maneira melhor,e mais escalável de calcular o grau de emergencia do que com pontos
+        # Não tem maneira melhor,e mais escalável de calcular o grau de emergência do que com pontos
         self.pontosDePerguntas = 0
         self.id = 0
 
@@ -30,10 +30,10 @@ class Paciente:
         self.covid = [False,False,False,False,False]
 
     def getDados(self):
-        #codigo leitura da GPIO
+        #código leitura da GPIO
 
         # Como essa função vai rodar em Loop, 
-        # talves ela pegue dados errados da GPIO, e não 
+        # talvez ela pegue dados errados da GPIO, e não 
         # queremos que ela sobrescreva os dados antigos
         # caso os dados antigos sejam mais "graves"
         temp = 0
@@ -47,20 +47,20 @@ class Paciente:
             self.saturacao = satura
 
     def pontosTotal(self):
-        #codigo calcular total de pontos
-        ptemp = 0
+        #código calcular total de pontos
+        pTemp = 0
         if(self.temperatura > temperaturaMax):
-            ptemp = 10
+            pTemp = 10
 
-        ppress = 0
+        pPress = 0
         if(self.pressao > pressaoMax or self.pressao < pressaoMin):
-            ppress = 10
+            pPress = 10
 
-        psatura = 0
+        pSatura = 0
         if(self.saturacao < saturacaoMin):
-            psatura = 10
+            pSatura = 10
 
-        return (self.pontosDePerguntas + ptemp + ppress + psatura)
+        return (self.pontosDePerguntas + pTemp + pPress + pSatura)
 
     def publicarNoSite(self):
         f = open('./site/templates/users/'+str(self.id)+'.html','wt')

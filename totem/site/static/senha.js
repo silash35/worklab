@@ -1,4 +1,4 @@
-var senha=prompt("Digite a senha:");
+var senha = 'nada'
 
 do{
     senha=prompt("Digite a senha:");

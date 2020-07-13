@@ -3,7 +3,7 @@ from kivy.app import App
 from interface import *
 from paciente import *
 
-#Codigo que irá rodar em loop em segundo plano
+#Código que irá rodar em loop em segundo plano
 def runA():
     while(True):
         paciente.getDados()
