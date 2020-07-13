@@ -1,6 +1,5 @@
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.label import Label
 from kivy.graphics import *
 from kivy.utils import get_color_from_hex
 from paciente import *
