@@ -41,5 +41,10 @@ class Interface(ScreenManager):
 
     def addPontos(self, pontos):
         paciente.pontosDePerguntas = int(paciente.pontosDePerguntas) + int(pontos)
+
     def atualizarCovid(self, pergunta, valor):
         paciente.covid[pergunta] = valor
+
+    def cancelar(self):
+        paciente.zeraDados()
+        self.current = '0'
