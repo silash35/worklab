@@ -1,5 +1,7 @@
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.graphics.context_instructions import Color
+from kivy.graphics.vertex_instructions import Rectangle
 from kivy.graphics import *
 from kivy.utils import get_color_from_hex
 from paciente import *

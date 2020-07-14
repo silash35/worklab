@@ -1,7 +1,5 @@
 from threading import Thread
 from kivy.app import App
-from kivy.graphics.context_instructions import Color
-from kivy.graphics.vertex_instructions import Rectangle
 from interface import *
 from paciente import *
 
