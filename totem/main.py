@@ -1,5 +1,6 @@
 from threading import Thread
 from kivy.app import App
+from kivy.config import Config
 from interface import *
 from paciente import *
 
@@ -14,4 +15,6 @@ t1.start()
 class Totem(App):
     def build(self):
         return Interface()
+
+Config.set('graphics', 'fullscreen', 'auto')
 Totem().run()
