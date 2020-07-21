@@ -21,10 +21,11 @@ def index():
 def get_users():
     return '%d' % len(list_users())
 
-@app.route('/postmethod', methods = ['POST'])
+@app.route('/excluir', methods = ['POST'])
 def get_post_javascript_data():
     jsdata = request.form['javascript_data']
     print(jsdata)
+    os.remove('templates/users/' + jsdata + ".html")
     return jsdata
 
 if __name__ == '__main__':

@@ -13,8 +13,9 @@ if (window.sessionStorage.getItem("senha") != "true"){
 
 function excluir(card){
 
-    $.post( "/postmethod", {
+    $.post( "/excluir", {
         javascript_data: card 
     });
+    location.reload();
 
 }
