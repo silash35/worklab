@@ -95,7 +95,9 @@ class Paciente:
         diarreia: '''+ str(self.covid[3]) +''' <br>
         contato com alguém que teve covid: '''+ str(self.covid[4]) +''' <br>
       </p>
-
+      <div class="center">
+        <button class=" green btn" onclick="excluir('''+ str(self.id) +''')">Finalizar</button>
+      </div>
     </div>
   </div>
         ''')

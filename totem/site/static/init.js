@@ -12,5 +12,9 @@ if (window.sessionStorage.getItem("senha") != "true"){
 }
 
 function excluir(card){
-    window.alert(card);
+
+    $.post( "/postmethod", {
+        javascript_data: card 
+    });
+
 }
