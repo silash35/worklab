@@ -7,12 +7,18 @@ from kivy.graphics.vertex_instructions import Rectangle
 
 from kivy.utils import get_color_from_hex
 from paciente import *
+from textos import *
 
 nTelas = 10 #numero de telas atual (começa a contagem do 0)
 primeiraVez = True #Solução temporaria pra o bug misterioso
 
 Builder.load_file('interface.kv')
 class Interface(ScreenManager):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        textToSpeech(textosDaTela[0])
+
 
     def proximaTela(self):
 
@@ -23,6 +29,7 @@ class Interface(ScreenManager):
             self.current = str(int(self.current) + 1)
         else:
             self.current = '0'
+            textToSpeech(textosDaTela[0])
 
         
         global primeiraVez
@@ -63,7 +70,7 @@ class Interface(ScreenManager):
         if(primeiraVez):
             primeiraVez = False
             self.current = '1'
-            
+        textToSpeech(textosDaTela[int(self.current)])
 
     def addPontos(self, pontos):
         paciente.pontosDePerguntas = int(paciente.pontosDePerguntas) + int(pontos)
@@ -74,3 +81,4 @@ class Interface(ScreenManager):
     def cancelar(self):
         paciente.zeraDados()
         self.current = '0'
+        textToSpeech(textosDaTela[0])
