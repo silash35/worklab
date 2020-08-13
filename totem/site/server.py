@@ -1,14 +1,18 @@
 from flask import Flask
 from flask import request
 from flask.templating import render_template
-import os
+import os, glob
 import json
 
 app = Flask(__name__)
 
 
 def list_users():
-    users = os.listdir('./templates/users')
+    usersPath = glob.glob('./templates/users/*.html')
+    users = []
+    for user in usersPath:
+        users.append(os.path.basename(user))
+    users.sort()
     return users
 
 
