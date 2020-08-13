@@ -1,4 +1,4 @@
-#Projeto Totem de Autoatendimento
+# Projeto Totem de Autoatendimento
 
 Para rodar o aplicativo, primeiro vc irá precisar instalar as seguintes dependências:
 
