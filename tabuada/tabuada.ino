@@ -84,7 +84,7 @@ void loop(){
             Serial.println("Parabens, voce acertou!");
             hits++;
           }else{
-            Serial.println("Respota Incorreta");
+            Serial.println("Resposta Incorreta");
             mistakes++;
           }
           answeredQuestions++;
