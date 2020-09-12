@@ -1,15 +1,15 @@
 #Constantes medicas, só devem ser alteradas 1 vez
 temperaturaMax = 0
-saturacaoMin = 0
-pressaoMin = 0
-pressaoMax = 0
+saturaçãoMin = 0
+pressãoMin = 0
+pressãoMax = 0
 
 class Paciente:
 
     def __init__(self):
         self.temperatura = 0
-        self.pressao = 0
-        self.saturacao = 0
+        self.pressão = 0
+        self.saturação = 0
         # Não tem maneira melhor,e mais escalável de calcular o grau de emergência do que com pontos
         self.pontosDePerguntas = 0
         self.id = 0
@@ -23,8 +23,8 @@ class Paciente:
 
     def zeraDados(self):
         self.temperatura = 0
-        self.pressao = 0
-        self.saturacao = 0
+        self.pressão = 0
+        self.saturação = 0
         self.pontosDePerguntas = 0
         self.id = self.id + 1
         self.covid = [False,False,False,False,False]
@@ -32,19 +32,19 @@ class Paciente:
     def getDados(self):
         #código leitura da GPIO
 
-        # Como essa função vai rodar em Loop, 
-        # talvez ela pegue dados errados da GPIO, e não 
+        # Como essa função vai rodar em Loop,
+        # talvez ela pegue dados errados da GPIO, e não
         # queremos que ela sobrescreva os dados antigos
         # caso os dados antigos sejam mais "graves"
         temp = 0
-        press = 0 
+        press = 0
         satura = 0
         if(temp > self.temperatura):
             self.temperatura = temp
-        if(press > self.pressao):
-            self.pressao = press
-        if(satura < self.saturacao):
-            self.saturacao = satura
+        if(press > self.pressão):
+            self.pressão = press
+        if(satura < self.saturação):
+            self.saturação = satura
 
     def pontosTotal(self):
         #código calcular total de pontos
@@ -53,11 +53,11 @@ class Paciente:
             pTemp = 10
 
         pPress = 0
-        if(self.pressao > pressaoMax or self.pressao < pressaoMin):
+        if(self.pressão > pressãoMax or self.pressão < pressãoMin):
             pPress = 10
 
         pSatura = 0
-        if(self.saturacao < saturacaoMin):
+        if(self.saturação < saturaçãoMin):
             pSatura = 10
 
         return (self.pontosDePerguntas + pTemp + pPress + pSatura)
@@ -84,8 +84,8 @@ class Paciente:
 
       <p class="center">
 	Temperatura: '''+str(self.temperatura)+'''<br>
-	Pressão: '''+str(self.pressao)+'''<br>
-	Saturação: '''+str(self.saturacao)+'''<br>
+	Pressão: '''+str(self.pressão)+'''<br>
+	Saturação: '''+str(self.saturação)+'''<br>
       </p>
       <p>
 	<strong>Dados Covid:</strong><br>

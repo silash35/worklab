@@ -31,7 +31,7 @@ class Interface(ScreenManager):
             self.current = '0'
             textToSpeech(textosDaTela[0])
 
-        
+
         global primeiraVez
         if(primeiraVez):
             self.current = str(nTelas)
@@ -42,7 +42,7 @@ class Interface(ScreenManager):
             self.current = str(nTelas)
 
             self.ids['result'].color = [1,1,1,1]
-            self.ids['result'].text = str(calculaGrau(paciente.pontosTotal())[0])
+            self.ids['result'].text = str(calculaGrau(paciente.pontosTotal())[0]) + "\n Aguarde chamar o numero " + str(paciente.id)
             #Desenha retângulo com a cor dependendo do grau de emergência.
             corGrau = InstructionGroup()
             corGrau.add(
@@ -60,7 +60,7 @@ class Interface(ScreenManager):
                 )
             )
             self.ids['result'].canvas.before.add(corGrau)
-            
+
             if(primeiraVez):
                 paciente.id = -1
                 paciente.zeraDados()
