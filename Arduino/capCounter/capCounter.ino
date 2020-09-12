@@ -2,7 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 
 #include "pinout.hpp"
-#include "smallFunctions.hpp"
+#include "utils.hpp"
 #include "EEPROMhelper.hpp"
 
 long scoreEletro{0};
@@ -12,13 +12,13 @@ long scoreMetal{0};
 
 int selectedButton{0};
 
-LiquidCrystal_I2C LCDEletro(LCDPinEletro, 16, 2);
-LiquidCrystal_I2C LCDMec(LCDPinMec, 16, 2);
-LiquidCrystal_I2C LCDPgn(LCDPinPgn, 16, 2);
-LiquidCrystal_I2C LCDMetal(LCDPinMetal, 16, 2);
+LiquidCrystal_I2C LCDEletro(LCD_PIN_ELETRO, 16, 2);
+LiquidCrystal_I2C LCDMec(LCD_PIN_MEC, 16, 2);
+LiquidCrystal_I2C LCDPgn(LCD_PIN_PGN, 16, 2);
+LiquidCrystal_I2C LCDMetal(LCD_PIN_METAL, 16, 2);
 
 void setup(){
-  normalInfraValue = analogRead(infrared);
+  normalInfraValue = analogRead(INFRARED_PIN);
 
   LCDEletro.begin(16, 2);
   LCDMec.begin(16, 2);
@@ -33,43 +33,43 @@ void setup(){
 
 void loop(){
 
-  digitalWrite(LEDPinEletro, LOW);
-  digitalWrite(LEDPinMec, LOW);
-  digitalWrite(LEDPinPgn, LOW);
-  digitalWrite(LEDPinMetal, LOW);
+  digitalWrite(LED_PIN_ELETRO, LOW);
+  digitalWrite(LED_PIN_MEC, LOW);
+  digitalWrite(LED_PIN_PGN, LOW);
+  digitalWrite(LED_PIN_METAL, LOW);
 
   selectedButton = getSelectedButton();
   if(selectedButton == 1){
-    digitalWrite(LEDPinEletro, HIGH);
+    digitalWrite(LED_PIN_ELETRO, HIGH);
     if(detectCap()){
       ++scoreEletro;
     }
   }else if(selectedButton == 2){
-    digitalWrite(LEDPinMec, HIGH);
+    digitalWrite(LED_PIN_MEC, HIGH);
     if(detectCap()){
       ++scoreMec;
     }
   }else if(selectedButton == 3){
-    digitalWrite(LEDPinPgn, HIGH);
+    digitalWrite(LED_PIN_PGN, HIGH);
     if(detectCap()){
       ++scorePgn;
     }
   }else if(selectedButton == 4){
-    digitalWrite(LEDPinMetal, HIGH);
+    digitalWrite(LED_PIN_METAL, HIGH);
     if(detectCap()){
       ++scoreMetal;
     }
   }
 
-  eletroLCD.clear();
-  mecLCD.clear();
-  pgnLCD.clear();
-  metalLCD.clear();
+  LCDEletro.clear();
+  LCDMec.clear();
+  LCDPgn.clear();
+  LCDMetal.clear();
 
-  eletroLCD.print(scoreEletro);
-  mecLCD.print(scoreMec);
-  pgnLCD.print(scorePgn);
-  metalLCD.print(scoreMetal);
+  LCDEletro.print(scoreEletro);
+  LCDMec.print(scoreMec);
+  LCDPgn.print(scorePgn);
+  LCDMetal.print(scoreMetal);
 
   EEPROMWriteLong(0, scoreEletro);
   EEPROMWriteLong(10, scoreMec);

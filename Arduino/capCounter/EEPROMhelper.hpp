@@ -1,6 +1,6 @@
 #include <EEPROM.h>
 
-void EEPROMWriteLong(int address, long value) {
+void EEPROMWriteLong(int address, long value){
    byte four = (value & 0xFF);
    byte three = ((value >> 8) & 0xFF);
    byte two = ((value >> 16) & 0xFF);
@@ -12,7 +12,7 @@ void EEPROMWriteLong(int address, long value) {
    EEPROM.write(address + 3, one);
 }
 
-long EEPROMReadLong(int address) {
+long EEPROMReadLong(int address){
    long four = EEPROM.read(address);
    long three = EEPROM.read(address + 1);
    long two = EEPROM.read(address + 2);

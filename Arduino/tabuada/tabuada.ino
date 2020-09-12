@@ -1,5 +1,5 @@
 #include "questions.hpp"
-#include "smallFunctions.hpp"
+#include "utils.hpp"
 
 int intSerialResponse, hits, mistakes, answeredQuestions, trueAlt;
 unsigned long long int partTime, finalTime;

@@ -5,7 +5,7 @@ bool detectCap(){
   long int timer{0};
 
   while(!capDetected && timer < 180000){
-    unsigned int diff = normalInfraValue - analogRead(infraredPin);
+    unsigned int diff = normalInfraValue - analogRead(INFRARED_PIN);
     if(diff > 50){
       capDetected = true;
     }else {
@@ -22,13 +22,13 @@ int getSelectedButton(){
   int selectedButton{0};
 
   while (selectedButton == 0){
-    if(digitalRead(buttonPinEletro) == HIGH){
+    if(digitalRead(BUTTON_PIN_ELETRO) == HIGH){
       selectedButton = 1;
-    }else if(digitalRead(buttonPinMec) == HIGH){
+    }else if(digitalRead(BUTTON_PIN_MEC) == HIGH){
       selectedButton = 2;
-    }else if(digitalRead(buttonPinPgn) == HIGH){
+    }else if(digitalRead(BUTTON_PIN_PGN) == HIGH){
       selectedButton = 3;
-    }else if(digitalRead(buttonPinMetal) == HIGH){
+    }else if(digitalRead(BUTTON_PIN_METAL) == HIGH){
       selectedButton = 4;
     }
     delay(1);
