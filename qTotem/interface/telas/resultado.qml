@@ -37,6 +37,7 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
+                py.getTexto(0);
                 stackView.push("inicio.qml");
             }
         }
@@ -74,6 +75,7 @@ Page {
 
         retResultado.color = cor;
         resultado.text = grau + "\n Aguarde chamar o número " + py.getId();
+        py.getTexto(10);
         py.publicarNoSite(grau,corNome);
     }
 }

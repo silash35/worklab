@@ -35,7 +35,7 @@ opções = ''' Toque no botão da esquerda, caso a resposta seja sim.
     Toque no botão da direita, caso a resposta seja não.'''
 
 textosDeAcessibilidade = [
-    'Responda as perguntas a seguir. Toque no botão de borda azul (Um pouco abaixo do centro da tela) para começar',
+    'Responda às perguntas a seguir. Toque no botão, um pouco abaixo do centro da tela para começar',
     'Tosse seca é um dos seus sintomas?' + opções,
     'Você sentiu Febre alta por mais de 5 dias?' + opções,
     'Você está sentindo dificuldade em respirar?' + opções,

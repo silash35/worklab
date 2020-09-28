@@ -36,14 +36,19 @@ class Ponte(QObject):
             perguntaAtual = numeroDePerguntas-1
 
     @Slot(result=str)
-    def getPergunta(self):
+    def getPerguntaAtual(self):
+        falarTextos(perguntaAtual+1)
         return perguntas[perguntaAtual]
+
+    @Slot(int,result=str)
+    def getTexto(self, i):
+        falarTextos(i)
+        return perguntas[i]
 
     @Slot(result=bool)
     def proximaPergunta(self):
         global perguntaAtual
         perguntaAtual += 1
-        falarTextos(perguntaAtual+1)
         return not(perguntaAtual >= numeroDePerguntas)
 
     @Slot(result=int)

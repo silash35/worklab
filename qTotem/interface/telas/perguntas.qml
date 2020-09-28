@@ -6,7 +6,7 @@ Page {
 
     function passarPergunta(){
         if (py.proximaPergunta()) {
-            labelPergunta.text = py.getPergunta()
+            labelPergunta.text = py.getPerguntaAtual()
         } else {
             stackView.push("resultado.qml");
         }
@@ -14,7 +14,7 @@ Page {
 
     Label {
         id: labelPergunta
-        text: py.getPergunta()
+        text: py.getPerguntaAtual()
         fontSizeMode: Text.Fit
         font.pointSize: 200
         minimumPointSize: 10
@@ -58,8 +58,3 @@ Page {
         }
     }
 }
-/*##^##
-Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:640}
-}
-##^##*/

@@ -13,6 +13,7 @@ ApplicationWindow {
         ToolButton {
             text: "cancelar"
             onClicked: {
+                py.getTexto(0);
                 stackView.push("telas/inicio.qml");
             }
         }
