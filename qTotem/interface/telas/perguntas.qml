@@ -4,6 +4,14 @@ import QtQuick.Layouts 1.11
 
 Page {
 
+    function passarPergunta(){
+        if (py.proximaPergunta()) {
+            labelPergunta.text = py.getPergunta()
+        } else {
+            stackView.push("resultado.qml");
+        }
+    }
+
     Label {
         id: labelPergunta
         text: py.getPergunta()
@@ -34,11 +42,7 @@ Page {
                 text: "Não"
                 onClicked: {
                     py.contablizarResposta(false);
-                    if (py.proximaPergunta()) {
-                        labelPergunta.text = py.getPergunta()
-                    } else {
-                        stackView.push("resultado.qml");
-                    }
+                    passarPergunta();
                 }
             }
 
@@ -48,11 +52,7 @@ Page {
                 text: "Sim"
                 onClicked: {
                     py.contablizarResposta(true);
-                    if (py.proximaPergunta()) {
-                        labelPergunta.text = py.getPergunta()
-                    } else {
-                        stackView.push("resultado.qml");
-                    }
+                    passarPergunta();
                 }
             }
         }

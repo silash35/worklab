@@ -68,8 +68,9 @@ textosDeAcessibilidade = [
 ]
 
 def falarTextos(i):
-    t2 = Thread(target=__falarTextos__,args=(i,))
-    t2.start()
+    t3 = Thread(target=__falarTextos__,args=(i,))
+    t3.daemon = True
+    t3.start()
 
 def __falarTextos__(i):
     system('espeak -v pt-br "' + textosDeAcessibilidade[i] + '"')

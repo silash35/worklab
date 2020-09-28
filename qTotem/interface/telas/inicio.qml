@@ -25,15 +25,14 @@ Page {
         anchors.bottom: parent.bottom
 
         Button {
-            objectName: "btnComecar"
             width: 200
             height: 100
             text: "Começar"
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                stackView.push("perguntas.qml");
                 py.comecar();
+                stackView.push("perguntas.qml");
             }
         }
     }

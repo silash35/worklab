@@ -61,14 +61,14 @@ class Paciente:
 
         return (self.pontosDePerguntas + pTemp + pPress + pSatura)
 
-    def publicarNoSite(self):
-        f = open('./site/users/'+str(self.id)+'.html', 'wt')
+    def publicarNoSite(self, grau, corNome):
+        f = open('./site/templates/users/'+str(self.id)+'.html', 'wt')
         f.write(
             '''
             <div class="card hoverable">
             <div class="card-image waves-effect waves-block waves-light">
                 <!-- Card Image -->
-                <img class="activator" src="static/images/users/'''+calculaGrau(self.pontosTotal())[2]+'''.png">
+                <img class="activator" src="static/images/users/'''+corNome+'''.png">
             </div>
             <div class="card-content activator" style="cursor:pointer">
                 <!-- Card Title -->
@@ -80,7 +80,7 @@ class Paciente:
                     class="material-icons right">close</i></span>
 
                 <p>
-                ''' + str(calculaGrau(self.pontosTotal())[0]) + '''
+                ''' + grau + '''
                 </p>
 
                 <p class="center">
@@ -106,26 +106,3 @@ class Paciente:
         f.close()
 
 paciente = Paciente()
-
-def calculaGrau(pontos):
-    grau = 'Não Urgente'
-    grauId = 0
-
-    if(pontos <= 10):
-        grau = "Não Urgente"
-        grauId = 0
-    elif(pontos <= 20):
-        grau = 'Pouco Urgente'
-        grauId = 1
-    elif(pontos <= 30):
-        grau = 'Urgente'
-        grauId = 2
-    elif(pontos <= 40):
-        grau = 'Muito Urgente'
-        grauId = 3
-    elif (pontos > 40):
-        grau = 'Emergência'
-        grauId = 4
-    else:
-        pass #ERRO
-    return [grau, grauId]

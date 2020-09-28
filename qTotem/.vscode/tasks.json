@@ -6,7 +6,7 @@
     {
       "label": "built Qt Files",
       "type": "shell",
-      "command": "pyside2-rcc interface/style.qrc > style.py &&"
+      "command": "pyside2-rcc interface/estilo.qrc > estilo.py &&"
     }
   ]
 }

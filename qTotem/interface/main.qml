@@ -11,9 +11,10 @@ ApplicationWindow {
 
     header: ToolBar {
         ToolButton {
-            id: cancelar
             text: "cancelar"
-            onClicked: py.cancelar()
+            onClicked: {
+                stackView.push("telas/inicio.qml");
+            }
         }
     }
 
