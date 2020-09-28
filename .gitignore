@@ -1,4 +1,3 @@
 *.user
-.vscode/
 *__pycache__*
 totem/site/templates/users/*.html

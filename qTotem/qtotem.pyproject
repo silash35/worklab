@@ -1,0 +1,9 @@
+{
+	"files": [
+		"main.py",
+		"paciente.py",
+		"interface/main.qml",
+		"interface/bridge.py",
+		"interface/telas/inicio.qml"
+	]
+}
