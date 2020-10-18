@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "../logic.js" as Js
 
 Page {
 
@@ -31,7 +32,8 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                py.comecar();
+                Py.comecar();
+                Js.perguntaAtual = 0;
                 stackView.push("perguntas.qml");
             }
         }

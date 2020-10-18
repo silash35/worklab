@@ -1,20 +1,13 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
+import "../logic.js" as Js
 
 Page {
 
-    function passarPergunta(){
-        if (py.proximaPergunta()) {
-            labelPergunta.text = py.getPerguntaAtual()
-        } else {
-            stackView.push("resultado.qml");
-        }
-    }
-
     Label {
         id: labelPergunta
-        text: py.getPerguntaAtual()
+        text: Js.getPerguntaAtual()
         fontSizeMode: Text.Fit
         font.pointSize: 200
         minimumPointSize: 10
@@ -41,8 +34,8 @@ Page {
                 Layout.preferredHeight: 100
                 text: "Não"
                 onClicked: {
-                    py.contablizarResposta(false);
-                    passarPergunta();
+                    Js.contarResposta(false);
+                    Js.proximaPergunta();
                 }
             }
 
@@ -51,8 +44,8 @@ Page {
                 Layout.preferredHeight: 100
                 text: "Sim"
                 onClicked: {
-                    py.contablizarResposta(true);
-                    passarPergunta();
+                    Js.contarResposta(true);
+                    Js.proximaPergunta();
                 }
             }
         }

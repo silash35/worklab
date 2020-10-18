@@ -35,7 +35,7 @@ if __name__ == '__main__':
     # deixa a Classe Bridge disponível para os aquivos .qml
     engine = QQmlApplicationEngine()
     context = engine.rootContext()
-    context.setContextProperty("py", ponte)
+    context.setContextProperty("Py", ponte)
     engine.load(abspath(qmlFile))
 
     if not engine.rootObjects():

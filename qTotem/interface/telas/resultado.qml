@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "../logic.js" as Js
 
 Page {
     Rectangle {
@@ -36,15 +37,15 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                py.getTexto(0);
+                Js.falarTexto(0);
                 //stackView.clear();
                 //stackView.push("inicio.qml");
-                stackView.pop(null)
+                stackView.pop(null);
             }
         }
     }
     Component.onCompleted: {
-        let pontos = py.getPontos();
+        let pontos = Py.getPontos();
 
         let grau = 'Não Urgente';
         let cor = '#ffffff';
@@ -73,9 +74,9 @@ Page {
         }else{
             //ERRO
         }
-        py.publicarNoSite(grau,corNome);
+        Py.publicarNoSite(grau,corNome);
         retResultado.color = cor;
-        resultado.text = grau + "\n Aguarde chamar o número " + py.getId();
-        py.getTexto(10);
+        resultado.text = grau + "\n Aguarde chamar o número " + Py.getId();
+        Js.falarTexto(10);
     }
 }

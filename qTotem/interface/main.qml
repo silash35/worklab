@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import "logic.js" as Js
 
 ApplicationWindow {
     id: mainWindow
@@ -13,7 +14,7 @@ ApplicationWindow {
         ToolButton {
             text: "cancelar"
             onClicked: {
-                py.getTexto(0);
+                Js.falarTexto(0);
                 stackView.push("telas/inicio.qml");
             }
         }
@@ -24,4 +25,9 @@ ApplicationWindow {
         anchors.fill: parent
         initialItem: "telas/inicio.qml"
     }
+
+    Component.onCompleted: {
+        Js.falarTexto(0);
+    }
+
 }
