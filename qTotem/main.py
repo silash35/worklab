@@ -15,7 +15,6 @@ def loopGPIO():
     while(True):
         paciente.getDados()
 
-
 t1 = Thread(target=loopGPIO)
 t1.daemon = True
 t1.start()

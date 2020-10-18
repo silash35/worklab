@@ -1,4 +1,4 @@
 *.user
 *__pycache__*
 totem/site/templates/users/*.html
-qTotem/site/templates/users/*.html
+qTotem/siteSide/templates/users/*.html

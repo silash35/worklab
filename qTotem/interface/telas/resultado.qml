@@ -37,7 +37,9 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 py.getTexto(0);
-                stackView.push("inicio.qml");
+                //stackView.clear();
+                //stackView.push("inicio.qml");
+                stackView.pop(null)
             }
         }
     }
@@ -71,10 +73,9 @@ Page {
         }else{
             //ERRO
         }
-
+        py.publicarNoSite(grau,corNome);
         retResultado.color = cor;
         resultado.text = grau + "\n Aguarde chamar o número " + py.getId();
         py.getTexto(10);
-        py.publicarNoSite(grau,corNome);
     }
 }

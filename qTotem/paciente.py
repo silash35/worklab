@@ -62,7 +62,7 @@ class Paciente:
         return (self.pontosDePerguntas + pTemp + pPress + pSatura)
 
     def publicarNoSite(self, grau, corNome):
-        f = open('./site/templates/users/'+str(self.id)+'.html', 'wt')
+        f = open('siteSide/templates/users/'+str(self.id)+'.html', 'wt')
         f.write(
             '''
             <div class="card hoverable">
