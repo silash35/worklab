@@ -1,5 +1,5 @@
 import sys
-from os.path import abspath, dirname, join
+from os import path, system
 from threading import Thread
 
 from PySide2.QtGui import QGuiApplication
@@ -9,6 +9,9 @@ from estilo import *
 from interface.ponte import ponte
 from paciente import paciente
 from siteSide.server import app
+
+# Procurar atualizações
+system('git pull')
 
 # Loop em segundo plano para ler os dados da GPIO
 def loopGPIO():
@@ -30,13 +33,13 @@ t2.start()
 # Código Qt
 if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
-    qmlFile = join(dirname(__file__), 'interface/main.qml')
+    qmlFile = path.join(path.dirname(__file__), 'interface/main.qml')
 
     # deixa a Classe Bridge disponível para os aquivos .qml
     engine = QQmlApplicationEngine()
     context = engine.rootContext()
     context.setContextProperty("Py", ponte)
-    engine.load(abspath(qmlFile))
+    engine.load(path.abspath(qmlFile))
 
     if not engine.rootObjects():
         sys.exit(-1)
