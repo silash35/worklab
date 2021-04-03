@@ -1,8 +1,10 @@
 #define NUMBER_OF_QUESTIONS 80
-String questions[NUMBER_OF_QUESTIONS]; //Array de Strings que vai armazenar as questões para o modo Alternativas
-int answers[NUMBER_OF_QUESTIONS];  // Array de int que vai armazenar as respostas das questões do Array acima
+String questions[NUMBER_OF_QUESTIONS]; // Array de Strings que vai armazenar as questões para o modo
+                                       // Alternativas
+int answers[NUMBER_OF_QUESTIONS]; // Array de int que vai armazenar as respostas das questões do
+                                  // Array acima
 
-void assimilate(){
+void assimilate() {
 
   questions[0] = "{((2+[((-7)+3)-5+(-2)]}";
   answers[0] = -9;

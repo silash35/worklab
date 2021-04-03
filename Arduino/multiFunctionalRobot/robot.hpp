@@ -17,25 +17,25 @@
 #define BLUETOOTH_RX A0
 #define BLUETOOTH_TX A1
 
-SoftwareSerial bluetooth(BLUETOOTH_RX, BLUETOOTH_TX); //Bluetooth Artificial Serial
+SoftwareSerial bluetooth(BLUETOOTH_RX, BLUETOOTH_TX); // Bluetooth Artificial Serial
 
-class Robot{
-  public:
-    Servo ultraServo;
+class Robot {
+public:
+  Servo ultraServo;
 
-    Robot();
-    void begin();
-    void stopAll();
-    void goForward(int rightSpeed = MAX_PWM_VALUE, int leftSpeed = MAX_PWM_VALUE);
-    void goBack(int rightSpeed = MAX_PWM_VALUE, int leftSpeed = MAX_PWM_VALUE);
-    void brake();
-    void turnLeft();
-    void turnRight();
-}robot;
+  Robot();
+  void begin();
+  void stopAll();
+  void goForward(int rightSpeed = MAX_PWM_VALUE, int leftSpeed = MAX_PWM_VALUE);
+  void goBack(int rightSpeed = MAX_PWM_VALUE, int leftSpeed = MAX_PWM_VALUE);
+  void brake();
+  void turnLeft();
+  void turnRight();
+} robot;
 
 Robot::Robot(){};
 
-void Robot::begin(){
+void Robot::begin() {
 
   pinMode(RIGHT_WHEEL_PIN_SPEED, OUTPUT);
   pinMode(LEFT_WHEEL_PIN_SPEED, OUTPUT);
@@ -60,7 +60,7 @@ void Robot::begin(){
   ultraServo.write(90);
 }
 
-void Robot::stopAll(){
+void Robot::stopAll() {
   digitalWrite(LEFT_WHEEL_PIN_CLOCKWISE, LOW);
   digitalWrite(LEFT_WHEEL_PIN_ANTICLOCKWISE, LOW);
 
@@ -71,7 +71,7 @@ void Robot::stopAll(){
   analogWrite(LEFT_WHEEL_PIN_SPEED, 0);
 }
 
-void Robot::goForward(int rightSpeed, int leftSpeed){
+void Robot::goForward(int rightSpeed, int leftSpeed) {
   stopAll();
 
   analogWrite(RIGHT_WHEEL_PIN_SPEED, rightSpeed);
@@ -81,7 +81,7 @@ void Robot::goForward(int rightSpeed, int leftSpeed){
   digitalWrite(LEFT_WHEEL_PIN_CLOCKWISE, HIGH);
 }
 
-void Robot::goBack(int rightSpeed, int leftSpeed){
+void Robot::goBack(int rightSpeed, int leftSpeed) {
   stopAll();
 
   analogWrite(RIGHT_WHEEL_PIN_SPEED, rightSpeed);
@@ -91,7 +91,7 @@ void Robot::goBack(int rightSpeed, int leftSpeed){
   digitalWrite(LEFT_WHEEL_PIN_ANTICLOCKWISE, HIGH);
 }
 
-void Robot::brake(){
+void Robot::brake() {
   digitalWrite(RIGHT_WHEEL_PIN_ANTICLOCKWISE, HIGH);
   digitalWrite(LEFT_WHEEL_PIN_ANTICLOCKWISE, HIGH);
 
@@ -102,7 +102,7 @@ void Robot::brake(){
   analogWrite(LEFT_WHEEL_PIN_SPEED, MAX_PWM_VALUE);
 }
 
-void Robot::turnLeft(){
+void Robot::turnLeft() {
   stopAll();
   digitalWrite(RIGHT_WHEEL_PIN_CLOCKWISE, HIGH);
   digitalWrite(LEFT_WHEEL_PIN_ANTICLOCKWISE, HIGH);
@@ -110,7 +110,7 @@ void Robot::turnLeft(){
   analogWrite(RIGHT_WHEEL_PIN_SPEED, MAX_PWM_VALUE);
   analogWrite(LEFT_WHEEL_PIN_SPEED, MAX_PWM_VALUE);
 }
-void Robot::turnRight(){
+void Robot::turnRight() {
   stopAll();
   digitalWrite(RIGHT_WHEEL_PIN_ANTICLOCKWISE, HIGH);
   digitalWrite(LEFT_WHEEL_PIN_CLOCKWISE, HIGH);

@@ -1,9 +1,9 @@
-#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 
+#include "EEPROMhelper.hpp"
 #include "pinout.hpp"
 #include "utils.hpp"
-#include "EEPROMhelper.hpp"
 
 long scoreEletro{0};
 long scoreMec{0};
@@ -17,7 +17,7 @@ LiquidCrystal_I2C LCDMec(LCD_PIN_MEC, 16, 2);
 LiquidCrystal_I2C LCDPgn(LCD_PIN_PGN, 16, 2);
 LiquidCrystal_I2C LCDMetal(LCD_PIN_METAL, 16, 2);
 
-void setup(){
+void setup() {
   normalInfraValue = analogRead(INFRARED_PIN);
 
   LCDEletro.begin(16, 2);
@@ -31,7 +31,7 @@ void setup(){
   scoreMetal = EEPROMReadLong(30);
 }
 
-void loop(){
+void loop() {
 
   digitalWrite(LED_PIN_ELETRO, LOW);
   digitalWrite(LED_PIN_MEC, LOW);
@@ -39,24 +39,24 @@ void loop(){
   digitalWrite(LED_PIN_METAL, LOW);
 
   selectedButton = getSelectedButton();
-  if(selectedButton == 1){
+  if (selectedButton == 1) {
     digitalWrite(LED_PIN_ELETRO, HIGH);
-    if(detectCap()){
+    if (detectCap()) {
       ++scoreEletro;
     }
-  }else if(selectedButton == 2){
+  } else if (selectedButton == 2) {
     digitalWrite(LED_PIN_MEC, HIGH);
-    if(detectCap()){
+    if (detectCap()) {
       ++scoreMec;
     }
-  }else if(selectedButton == 3){
+  } else if (selectedButton == 3) {
     digitalWrite(LED_PIN_PGN, HIGH);
-    if(detectCap()){
+    if (detectCap()) {
       ++scorePgn;
     }
-  }else if(selectedButton == 4){
+  } else if (selectedButton == 4) {
     digitalWrite(LED_PIN_METAL, HIGH);
-    if(detectCap()){
+    if (detectCap()) {
       ++scoreMetal;
     }
   }
