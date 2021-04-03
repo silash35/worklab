@@ -2,3 +2,5 @@
 *__pycache__*
 totem/site/templates/users/*.html
 qTotem/siteSide/templates/users/*.html
+
+*/build

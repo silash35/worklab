@@ -6,16 +6,15 @@ unsigned long long int partTime, finalTime;
 String serialResponse;
 String emptySerialString;
 
-//Variables that will be reused several times to save space.
+// Variables that will be reused several times to save space.
 int x, y;
 
-void reset(){
-  intSerialResponse = hits = mistakes = answeredQuestions = trueAlt =
-  partTime = finalTime =
-  x = y = 0;
+void reset() {
+  intSerialResponse = hits = mistakes = answeredQuestions = trueAlt = partTime = finalTime = x = y =
+      0;
 }
 
-void setup(){
+void setup() {
 
   Serial.begin(9600);
   while (!Serial) {
@@ -27,9 +26,9 @@ void setup(){
   assimilate();
 }
 
-void loop(){
+void loop() {
 
-  //print main menu
+  // print main menu
   Serial.println("Selecione o modo:");
   Serial.println("0: Aleatorio (Padrão)");
   Serial.println("1: Ordenado");
@@ -38,16 +37,41 @@ void loop(){
   Serial.println("4: Alternativas com botão");
   Serial.println("5: Reset");
 
-  //wait for user input
+  // wait for user input
   serialResponse = getSerialResponse(emptySerialString);
 
   intSerialResponse = stringToInt(serialResponse);
-  switch(intSerialResponse){
-    case 0: //Aleatorio, gera questões de multiplicação com os fatores gerados aleatoriamente
-      for(;;){
-        x = getRandomNumber(0, 10);
-        y = getRandomNumber(0, 10);
-        askMultiply(x,y);
+  switch (intSerialResponse) {
+  case 0: // Aleatorio, gera questões de multiplicação com os fatores gerados aleatoriamente
+    for (;;) {
+      x = getRandomNumber(0, 10);
+      y = getRandomNumber(0, 10);
+      askMultiply(x, y);
+
+      partTime = millis();
+      serialResponse = getSerialResponse(emptySerialString);
+      finalTime += millis() - partTime;
+
+      intSerialResponse = stringToInt(serialResponse);
+
+      if (intSerialResponse == x * y) {
+        Serial.println("Parabens, voce acertou!");
+        hits++;
+      } else {
+        Serial.println("Respota Incorreta");
+        mistakes++;
+      }
+      answeredQuestions++;
+
+      if (serialResponse[0] == 'q') {
+        break;
+      }
+    }
+  case 1: // Ordenado, pergunta a tabuada na ordem correta (0x0, 0x1, 0x2, 0x3...)
+    for (x = 0; x <= 10; ++x) {
+      y = 0;
+      for (y = 0; y <= 10; ++y) {
+        askMultiply(x, y);
 
         partTime = millis();
         serialResponse = getSerialResponse(emptySerialString);
@@ -55,160 +79,135 @@ void loop(){
 
         intSerialResponse = stringToInt(serialResponse);
 
-        if(intSerialResponse == x*y){
+        if (intSerialResponse == (x * y)) {
           Serial.println("Parabens, voce acertou!");
           hits++;
-        }else{
-          Serial.println("Respota Incorreta");
+        } else {
+          Serial.println("Resposta Incorreta");
           mistakes++;
         }
         answeredQuestions++;
 
-        if(serialResponse[0] == 'q'){
+        if ((serialResponse[0] == 'q')) {
           break;
         }
       }
-    case 1: //Ordenado, pergunta a tabuada na ordem correta (0x0, 0x1, 0x2, 0x3...)
-      for(x = 0;x <= 10; ++x){
-        y = 0;
-        for(y = 0; y <= 10; ++y){
-          askMultiply(x,y);
+    }
+  case 2: // personalizado, pergunta ao usuário quais os fatores da multiplicação
+    serialResponse = emptySerialString;
+    while (serialResponse[0] != 'q') {
 
-          partTime = millis();
-          serialResponse = getSerialResponse(emptySerialString);
-          finalTime += millis() - partTime;
+      Serial.println("Digite o primeiro multiplicador:");
+      serialResponse = getSerialResponse(emptySerialString);
+      x = stringToInt(serialResponse);
 
-          intSerialResponse = stringToInt(serialResponse);
+      Serial.println("Digite o segundo multiplicador:");
+      serialResponse = getSerialResponse(emptySerialString);
+      y = stringToInt(serialResponse);
 
-          if(intSerialResponse == (x*y)){
-            Serial.println("Parabens, voce acertou!");
-            hits++;
-          }else{
-            Serial.println("Resposta Incorreta");
-            mistakes++;
-          }
-          answeredQuestions++;
+      askMultiply(x, y);
 
-          if((serialResponse[0] == 'q')){
-            break;
-          }
+      partTime = millis();
+      serialResponse = getSerialResponse(emptySerialString);
+      finalTime += millis() - partTime;
+
+      intSerialResponse = stringToInt(serialResponse);
+
+      if (intSerialResponse == (x * y)) {
+        Serial.println("Parabens, voce acertou!");
+        hits++;
+      } else {
+        Serial.println("Respota Incorreta");
+        mistakes++;
+      }
+      answeredQuestions++;
+    }
+    break;
+  case 3: // Alternativas, escolhe uma pergunta aleatoria do aquivo questions.hpp
+    serialResponse = emptySerialString;
+    while (serialResponse[0] != 'q') {
+      x = getRandomNumber(0, (NUMBER_OF_QUESTIONS - 1));
+      // Gera um numero aleatorio de 0 a 4, representando as letras A,B,C,D e E.
+      trueAlt = getRandomNumber(0, 4);
+      Serial.print("Quanto é ");
+      Serial.print(questions[x]);
+      Serial.println(" ?");
+
+      Serial.println(" ");
+
+      // imprime na tela as alternativas, usando trueAlt como base para escolher qual será a correta
+      for (y = 0; y < 5; y++) {
+
+        Serial.print(intToLetter(y));
+        Serial.print(')');
+
+        if (trueAlt == y) {
+          Serial.println(answers[x]);
+        } else {
+          Serial.println((answers[x] - getRandomNumber(1, 100)));
         }
       }
-    case 2: //personalizado, pergunta ao usuário quais os fatores da multiplicação
-      serialResponse = emptySerialString;
-      while(serialResponse[0] != 'q'){
 
-        Serial.println("Digite o primeiro multiplicador:");
-        serialResponse = getSerialResponse(emptySerialString);
-        x = stringToInt(serialResponse);
+      partTime = millis();
+      serialResponse = getSerialResponse(emptySerialString);
+      finalTime += millis() - partTime;
 
-        Serial.println("Digite o segundo multiplicador:");
-        serialResponse = getSerialResponse(emptySerialString);
-        y = stringToInt(serialResponse);
-
-        askMultiply(x,y);
-
-        partTime = millis();
-        serialResponse = getSerialResponse(emptySerialString);
-        finalTime += millis() - partTime;
-
-        intSerialResponse = stringToInt(serialResponse);
-
-        if(intSerialResponse == (x*y)){
-          Serial.println("Parabens, voce acertou!");
-          hits++;
-        }else{
-          Serial.println("Respota Incorreta");
-          mistakes++;
-        }
-        answeredQuestions++;
+      if (serialResponse[0] == intToLetter(trueAlt)) {
+        Serial.println("Parabens, voce acertou!");
+        hits++;
+      } else {
+        Serial.println("Respota Incorreta");
+        mistakes++;
       }
+      answeredQuestions++;
+      delay(500);
+    }
     break;
-    case 3: //Alternativas, escolhe uma pergunta aleatoria do aquivo questions.hpp
-      serialResponse = emptySerialString;
-      while(serialResponse[0] != 'q'){
-        x = getRandomNumber(0, (NUMBER_OF_QUESTIONS - 1));
-        //Gera um numero aleatorio de 0 a 4, representando as letras A,B,C,D e E.
-        trueAlt = getRandomNumber(0, 4);
-        Serial.print("Quanto é ");
-        Serial.print(questions[x]);
-        Serial.println(" ?");
+  case 4: // Alternativas com botão, escolhe uma pergunta aleatoria no arquivo questions.hpp
+    serialResponse = emptySerialString;
+    while (serialResponse[0] != 'q') {
+      x = getRandomNumber(0, (NUMBER_OF_QUESTIONS - 1));
+      // Gera um numero aleatorio de 0 a 4, representando as letras A,B,C,D e E.
+      trueAlt = getRandomNumber(0, 4);
+      Serial.print("Quanto é ");
+      Serial.print(questions[x]);
+      Serial.println(" ?");
 
-        Serial.println(" ");
+      Serial.println(" ");
 
-        //imprime na tela as alternativas, usando trueAlt como base para escolher qual será a correta
-        for (y = 0; y < 5; y++){
+      // imprime na tela as alternativas, usando trueAlt como base para escolher qual será a correta
+      for (y = 0; y < 5; y++) {
 
-          Serial.print(intToLetter(y));
-          Serial.print(')');
+        Serial.print(intToLetter(y));
+        Serial.print(')');
 
-          if(trueAlt == y){
-            Serial.println(answers[x]);
-          }else{
-            Serial.println((answers[x] - getRandomNumber(1, 100)));
-          }
+        if (trueAlt == y) {
+          Serial.println(answers[x]);
+        } else {
+          Serial.println((answers[x] - getRandomNumber(1, 100)));
         }
-
-        partTime = millis();
-        serialResponse = getSerialResponse(emptySerialString);
-        finalTime += millis() - partTime;
-
-        if(serialResponse[0] == intToLetter(trueAlt)){
-          Serial.println("Parabens, voce acertou!");
-          hits++;
-        }else{
-          Serial.println("Respota Incorreta");
-          mistakes++;
-        }
-        answeredQuestions++;
-        delay(500);
       }
-    break;
-    case 4: //Alternativas com botão, escolhe uma pergunta aleatoria no arquivo questions.hpp
-      serialResponse = emptySerialString;
-      while(serialResponse[0] != 'q'){
-        x = getRandomNumber(0, (NUMBER_OF_QUESTIONS - 1));
-        //Gera um numero aleatorio de 0 a 4, representando as letras A,B,C,D e E.
-        trueAlt = getRandomNumber(0, 4);
-        Serial.print("Quanto é ");
-        Serial.print(questions[x]);
-        Serial.println(" ?");
 
-        Serial.println(" ");
+      partTime = millis();
+      serialResponse = getButtonsResponse();
+      finalTime += millis() - partTime;
 
-        //imprime na tela as alternativas, usando trueAlt como base para escolher qual será a correta
-        for (y = 0; y < 5; y++){
-
-          Serial.print(intToLetter(y));
-          Serial.print(')');
-
-          if(trueAlt == y){
-            Serial.println(answers[x]);
-          }else{
-            Serial.println((answers[x] - getRandomNumber(1, 100)));
-          }
-        }
-
-        partTime = millis();
-        serialResponse = getButtonsResponse();
-        finalTime += millis() - partTime;
-
-        if(serialResponse[0] == intToLetter(trueAlt)){
-          Serial.println("Parabens, voce acertou!");
-          hits++;
-        }else{
-          Serial.println("Respota Incorreta");
-          mistakes++;
-        }
-        answeredQuestions++;
-        delay(500);
+      if (serialResponse[0] == intToLetter(trueAlt)) {
+        Serial.println("Parabens, voce acertou!");
+        hits++;
+      } else {
+        Serial.println("Respota Incorreta");
+        mistakes++;
       }
+      answeredQuestions++;
+      delay(500);
+    }
     break;
-    case 5: //reset
-      reset();
-      Serial.println("Resetado com sucesso");
+  case 5: // reset
+    reset();
+    Serial.println("Resetado com sucesso");
     break;
-    default:
+  default:
     // do nothing
     break;
   }
@@ -222,12 +221,12 @@ void loop(){
   Serial.println(" vezes");
 
   Serial.print("Isso significa que você acertou ");
-  Serial.print(((hits*100)/answeredQuestions));
+  Serial.print(((hits * 100) / answeredQuestions));
   Serial.println("%");
 
   delay(1000);
 
   Serial.print("Voce demorou ");
-  Serial.print(int(finalTime/1000));
+  Serial.print(int(finalTime / 1000));
   Serial.println(" Segundos");
 }
