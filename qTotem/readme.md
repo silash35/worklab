@@ -8,6 +8,6 @@ Para rodar o aplicativo, primeiro vc irá precisar instalar as seguintes depend�
 4. espeak (opcional)
 5. Git (opcional)
 
-Em seguida execute aqui "main.py". Neste unico arquivo está incluso o servidor (Interface Web) e a interface em Qt.
+Em seguida execute aqui "main.py". Neste único arquivo está incluso o servidor (Interface Web) e a interface em Qt.
 
-	python main.py
+    python main.py

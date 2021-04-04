@@ -1,5 +1,6 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.5
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 import "logic.js" as Js
 
 ApplicationWindow {
@@ -9,6 +10,9 @@ ApplicationWindow {
     visible: true
     //visibility: "FullScreen"
     title: "Totem"
+    Material.theme: Material.Dark
+    Material.accent: Material.Blue
+    Material.primary: Material.Red
 
     header: ToolBar {
         ToolButton {

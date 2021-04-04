@@ -5,35 +5,45 @@ from threading import Thread
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
 
-from estilo import *
 from interface.ponte import ponte
 from paciente import paciente
 from siteSide.server import app
 
 # Procurar atualizações
-system('git pull')
+system("git pull")
 
 # Loop em segundo plano para ler os dados da GPIO
+
+
 def loopGPIO():
-    while(True):
+    while True:
         paciente.getDados()
+
 
 t1 = Thread(target=loopGPIO)
 t1.daemon = True
 t1.start()
 
 # Servidor
+
+
 def server():
-    app.run(host='0.0.0.0')
+    app.run(host="0.0.0.0")
+
+
 t2 = Thread(target=server)
 t2.daemon = True
 t2.start()
 
 
 # Código Qt
-if __name__ == '__main__':
-    app = QGuiApplication(sys.argv)
-    qmlFile = path.join(path.dirname(__file__), 'interface/main.qml')
+if __name__ == "__main__":
+    # Apply Material Style
+    sys_argv = sys.argv
+    sys_argv += ["--style", "material"]
+
+    qtApp = QGuiApplication(sys_argv)
+    qmlFile = path.join(path.dirname(__file__), "interface/main.qml")
 
     # deixa a Classe Bridge disponível para os aquivos .qml
     engine = QQmlApplicationEngine()
@@ -43,5 +53,5 @@ if __name__ == '__main__':
 
     if not engine.rootObjects():
         sys.exit(-1)
-    #initServer()
-    sys.exit(app.exec_())
+    # initServer()
+    sys.exit(qtApp.exec_())
