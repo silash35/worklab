@@ -3,7 +3,6 @@ from flask import request
 from flask.templating import render_template
 import os
 import glob
-import json
 
 app = Flask(__name__)
 

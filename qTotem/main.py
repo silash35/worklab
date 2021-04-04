@@ -28,7 +28,9 @@ t1.start()
 
 
 def server():
-    app.run(host="0.0.0.0")
+    from waitress import serve
+
+    serve(app, host="0.0.0.0", port=8080)
 
 
 t2 = Thread(target=server)
