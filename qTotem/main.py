@@ -9,22 +9,10 @@ from interface.ponte import ponte
 from paciente import paciente
 from siteSide.server import app
 
-# Procurar atualizações
-system("git pull")
-
-# Loop em segundo plano para ler os dados da GPIO
-
 
 def loopGPIO():
     while True:
         paciente.getDados()
-
-
-t1 = Thread(target=loopGPIO)
-t1.daemon = True
-t1.start()
-
-# Servidor
 
 
 def server():
@@ -33,12 +21,21 @@ def server():
     serve(app, host="0.0.0.0", port=8080)
 
 
-t2 = Thread(target=server)
-t2.daemon = True
-t2.start()
+# Procurar e instalar atualizações
+system("git pull")
+
+# Iniciar Loop em segundo plano para ler os dados da GPIO
+gpioThread = Thread(target=loopGPIO)
+gpioThread.daemon = True
+gpioThread.start()
+
+# Iniciar Servidor para interface Web
+serverThread = Thread(target=server)
+serverThread.daemon = True
+serverThread.start()
 
 
-# Código Qt
+# Iniciar interface Qt
 if __name__ == "__main__":
     # Apply Material Style
     sys_argv = sys.argv
