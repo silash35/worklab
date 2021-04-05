@@ -7,7 +7,7 @@ from PySide2.QtQml import QQmlApplicationEngine
 
 from interface.ponte import ponte
 from paciente import paciente
-from siteSide.server import app
+from web.server import app
 
 
 def loopGPIO():
