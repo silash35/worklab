@@ -19,9 +19,14 @@ class Paciente:
         if len(existentUsers) == 0:
             self.id = 0
         else:
-            biggestExistentUser = existentUsers[len(existentUsers)]
-            biggestExistentID = biggestExistentUser.replace(".html", "")
-            self.id = int(biggestExistentID)
+            lastFile = existentUsers[len(existentUsers) - 1]
+            # Pegando o arquivo com maior ID e removendo o lixo,
+            # deixando somente o numero
+            biggestID = lastFile.replace(".html", "").replace(
+                "./web/templates/users/", ""
+            )
+
+            self.id = int(biggestID) + 2
 
         self.covid = [False, False, False, False, False]
         # 0- Teve tosse seca
@@ -58,6 +63,8 @@ class Paciente:
     def pontosTotal(self):
         # código calcular total de pontos
         pTemp = 0
+        pPress = 0
+        pSatura = 0
         if self.temperatura > temperaturaMax:
             pTemp = 10
             pPress = 0
@@ -70,7 +77,7 @@ class Paciente:
         return self.pontosDePerguntas + pTemp + pPress + pSatura
 
     def publicarNoSite(self, grau, corNome):
-        f = open("web/templates/users/" + str(self.id) + ".html", "wt")
+        f = open(f"web/templates/users/{str(self.id)}.html", "wt")
         f.write(
             f"""
             <div class="card hoverable">

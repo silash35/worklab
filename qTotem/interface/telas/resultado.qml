@@ -7,7 +7,7 @@ Page {
         id: retResultado
         anchors.fill: parent
         anchors.bottomMargin: parent.height / 4
-        color: "#ffffff"
+        color: "#1c5cff"
         border.width: 0
 
         Label {
@@ -45,6 +45,7 @@ Page {
         }
     }
     Component.onCompleted: {
+        console.debug("oiiii");
         let pontos = Py.getPontos();
 
         let grau = 'Não Urgente';
