@@ -1,3 +1,5 @@
+import glob
+
 # Constantes medicas, só devem ser alteradas 1 vez
 temperaturaMax = 0
 saturaçãoMin = 0
@@ -12,6 +14,14 @@ class Paciente:
         self.saturação = 0
         self.pontosDePerguntas = 0
         self.id = 0
+        # Checar os usuários existentes para não sobrescreve-los
+        existentUsers = glob.glob("./web/templates/users/*.html")
+        if len(existentUsers) == 0:
+            self.id = 0
+        else:
+            biggestExistentUser = existentUsers[len(existentUsers)]
+            biggestExistentID = biggestExistentUser.replace(".html", "")
+            self.id = int(biggestExistentID)
 
         self.covid = [False, False, False, False, False]
         # 0- Teve tosse seca
@@ -60,7 +70,7 @@ class Paciente:
         return self.pontosDePerguntas + pTemp + pPress + pSatura
 
     def publicarNoSite(self, grau, corNome):
-        f = open("siteSide/templates/users/" + str(self.id) + ".html", "wt")
+        f = open("web/templates/users/" + str(self.id) + ".html", "wt")
         f.write(
             f"""
             <div class="card hoverable">
