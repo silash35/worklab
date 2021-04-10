@@ -1,0 +1,15 @@
+click==7.1.2
+Flask==1.1.2
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+mccabe==0.6.1
+pycodestyle==2.7.0
+pydocstyle==6.0.0
+pyflakes==2.3.1
+pylama==7.7.1
+PySide2==5.15.2
+shiboken2==5.15.2
+snowballstemmer==2.1.0
+waitress==2.0.0
+Werkzeug==1.0.1
