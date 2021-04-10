@@ -5,12 +5,11 @@ from os import system
 from paciente import paciente
 
 
-def espeak(t):
-    system('espeak -v pt-br "' + t + '"')
+def espeak(t: str):
+    system(f'espeak -v pt-br "{t}"')
 
 
 class Ponte(QObject):
-
     @Slot()
     def comecar(self):
         paciente.zeraDados()
@@ -37,9 +36,9 @@ class Ponte(QObject):
 
     @Slot(str)
     def falarTexto(self, t):
-        t3 = Thread(target=espeak, args=(t,))
-        t3.daemon = True
-        t3.start()
+        espeakThread = Thread(target=espeak, args=(t,))
+        espeakThread.daemon = True
+        espeakThread.start()
 
 
 ponte = Ponte()
