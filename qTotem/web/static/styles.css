@@ -5,17 +5,16 @@
   justify-content: space-around;
   align-content: flex-start;
   align-items: stretch;
-
 }
 
-.user-item{
+.user-item {
   flex: 1 0 200px;
   max-width: 350px;
   margin: 20px;
 }
 
 i.material-icons.right {
-	position: absolute;
-    right: 10px;
-    top: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
