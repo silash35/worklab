@@ -1,0 +1,20 @@
+texto direitaS = ""
+texto esquerdaS = ""
+
+inicio
+   enquanto (verdadeiro) farei {
+     direitaS = cor(1)
+     esquerdaS = cor(2)
+
+     escrever(1,direitaS)
+     escrever(2,esquerdaS)
+
+     se (direitaS == "PRETO") entao {
+       direita(300)
+     } senao se (esquerdaS == "PRETO") entao {
+       esquerda(300)
+     } senao {
+       frente(80)
+     }
+   }
+fim
