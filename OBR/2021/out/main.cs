@@ -1,4 +1,5 @@
 // Classe para calcular PID
+
 public class PID {
   // Constantes a serem calibrados
   double kP = 20;
@@ -38,7 +39,6 @@ public class PID {
     return saida;
   }
 }
-
 void Main() {
   PID direitaPID = new PID(bc.Lightness(0));
   PID esquerdaPID = new PID(bc.Lightness(1));
