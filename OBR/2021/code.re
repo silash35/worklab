@@ -15,15 +15,25 @@ numero d = 0
 numero erro = 0
 numero saida = 0
 numero entrada = 0
+numero t = 0
+numero t1 = 0
+numero t2 = 0
 tarefa calcularPID{
+
+
+  
   erro = objetivo - entrada
 
   p = kP * erro
+  i = kI * erro * t
+
+  escrever(1,virartexto(t))
+  t = t+1
 
   saida = p + i + d
-
   se (erro < tolerancia) entao {
     saida = 0
+    t = 0
   }
 }
 
@@ -33,8 +43,8 @@ inicio
   enquanto (verdadeiro) farei {
     direitaS = luz(1)
     esquerdaS = luz(2)
-    escrever(1,virartexto(direitaS))
-    escrever(2,virartexto(esquerdaS))
+    #escrever(1,virartexto(direitaS))
+    #escrever(2,virartexto(esquerdaS))
 
     entrada = direitaS
     calcularPID()
