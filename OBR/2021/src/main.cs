@@ -17,13 +17,13 @@ void Main() {
 
     if(bc.ReturnColor(0) == "GREEN"){
       bc.MoveFrontal((float)100, (float)100);
-      bc.Wait(1000);
+      bc.Wait(500);
 
       bc.MoveFrontal((float)-100, (float)100);
       bc.Wait(15000);
     }else if(bc.ReturnColor(1) == "GREEN"){
       bc.MoveFrontal((float)100, (float)100);
-      bc.Wait(1000);
+      bc.Wait(500);
 
       bc.MoveFrontal((float)100, (float)-100);
       bc.Wait(15000);
