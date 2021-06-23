@@ -49,13 +49,13 @@ void Main() {
       bc.Wait(500);
 
       bc.MoveFrontal((float)-100, (float)100);
-      bc.Wait(15000);
+      bc.Wait(8000);
     }else if(bc.ReturnColor(1) == "GREEN"){
       bc.MoveFrontal((float)100, (float)100);
       bc.Wait(500);
 
       bc.MoveFrontal((float)100, (float)-100);
-      bc.Wait(15000);
+      bc.Wait(8000);
     }
   }
 }
