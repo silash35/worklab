@@ -1,30 +1,21 @@
 // Classe para calcular PID
+// Eu não precisei do I nem do D então suas implementações foram deletadas
 
 public class PID {
   // Constantes a serem calibrados
-  double kP = 10;
-  double kI = 0;
-  double kD = 0;
+  double kP = 50;
   double tolerancia = 4;
 
   // Outras variaveis
-  double t = 0;
-  double somatoriaDosErros = 0;
 
   public float calcular(double sensor1, double sensor2) {
     double erro = sensor1 - sensor2;
-    somatoriaDosErros = somatoriaDosErros + erro;
-    t = t+1;
 
     double p = kP * erro;
-    double i = kI * somatoriaDosErros * t;
-    double d = kD * 0;
 
-    float saida = (float)(p + i + d);
+    float saida = (float)(p);
     if (erro < tolerancia && erro > -tolerancia) {
-      somatoriaDosErros = 0;
       saida = 0;
-      t = 0;
     }
     return saida;
   }
