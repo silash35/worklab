@@ -2,7 +2,7 @@ importar("PID")
 
 void Main() {
   PID pid = new PID();
-  bc.Draw();
+  bc.TurnLedOn(255, 255, 255);
 
   while (true) {
 

@@ -3,7 +3,7 @@
 
 public class PID {
   // Constantes a serem calibrados
-  double kP = 50;
+  double kP = 10;
   double tolerancia = 4;
 
   // Outras variaveis
