@@ -1,8 +1,6 @@
 importar("PID")
 
 PID pid = new PID();
-int extraDireita
-int extraEsquerda
 
 void seguirLinha(){
 
@@ -15,19 +13,16 @@ void seguirLinha(){
     bc.MoveFrontal((float)80, (float)80);
   }
 
-  // Agir bruscamente caso nescessario
-  /*
-  if(bc.ReturnColor(0) == "BLACK"){
-    bc.MoveFrontalAngles(100, 10);
-  }else if(bc.ReturnColor(3) == "BLACK"){
-    bc.MoveFrontalAngles(100, -10);
-  }
-  */
-
   // Detectar quadrados verdes e agir
   if(bc.ReturnColor(1) == "GREEN"){
-    bc.MoveFrontalAngles(100, 10);
+    while(bc.ReturnColor(1) != "BLACK"){
+      bc.MoveFrontal((float)80, (float)80);
+    }
+    bc.MoveFrontalAngles(100, 30);
   }else if(bc.ReturnColor(2) == "GREEN"){
-    bc.MoveFrontalAngles(100, -10);
+    while(bc.ReturnColor(2) != "BLACK"){
+      bc.MoveFrontal((float)80, (float)80);
+    }
+    bc.MoveFrontalAngles(100, -30);
   }
 }
