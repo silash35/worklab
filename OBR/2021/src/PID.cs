@@ -4,7 +4,7 @@
 public class PID {
   // Constantes a serem calibrados
   double kP = 10;
-  double tolerancia = 4;
+  double tolerancia = 6;
 
   // Outras variaveis
 
@@ -14,6 +14,7 @@ public class PID {
     double p = kP * erro;
 
     float saida = (float)(p);
+    bc.PrintConsole(1, erro.ToString());
     if (erro < tolerancia && erro > -tolerancia) {
       saida = 0;
     }

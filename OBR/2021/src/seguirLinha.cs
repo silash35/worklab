@@ -7,7 +7,6 @@ void seguirLinha(){
   // Seguir Linha suavemente com PID
   float saida = pid.calcular(bc.Lightness(1),bc.Lightness(2));
   if (saida != 0) {
-    bc.PrintConsole(0, saida.ToString());
     bc.MoveFrontal(saida, -saida);
   }else {
     bc.MoveFrontal((float)80, (float)80);
