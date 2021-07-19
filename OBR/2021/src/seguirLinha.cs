@@ -1,11 +1,22 @@
-importar("PID")
+float calcularPID(double sensor1, double sensor2) {
+  double kP = 10;
+  double tolerancia = 6;
 
-PID pid = new PID();
+  double erro = sensor1 - sensor2;
+  double p = kP * erro;
+
+  float saida = (float)(p);
+  bc.PrintConsole(1, erro.ToString());
+  if (erro < tolerancia && erro > -tolerancia) {
+    saida = 0;
+  }
+  return saida;
+}
 
 void seguirLinha(){
 
-  // Seguir Linha suavemente com PID
-  float saida = pid.calcular(bc.Lightness(1),bc.Lightness(2));
+  // Seguir Linha com PID
+  float saida = calcularPID(bc.Lightness(1),bc.Lightness(2));
   if (saida != 0) {
     bc.MoveFrontal(saida, -saida);
   }else {
@@ -23,5 +34,10 @@ void seguirLinha(){
       bc.MoveFrontal((float)80, (float)80);
     }
     bc.MoveFrontalAngles(100, -30);
+  }
+
+  // Detectar
+  if(){
+
   }
 }
