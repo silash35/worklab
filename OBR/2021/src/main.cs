@@ -3,17 +3,19 @@ importar("acharTriangulo")
 
 /*
 TODO:
-  - Mudar o modo de reconhecer a area de resgate
   - Desenvolver a parte de pegar as bolinhas e colocar no triangulo
-  - Implementar a função de desviar de objetos na pista
 */
+
+bool isOnRescueArea(){
+  return (bc.Inclination()>300) && (bc.Distance(2)<40) && (bc.Distance(1)<40);
+}
 
 void Main() {
   bc.TurnLedOn(255, 255, 255);
   bc.ActuatorUp(8000);
 
   bc.PrintConsole(0, "Seguindo Linha");
-  while (true) {
+  while (!isOnRescueArea()) {
     seguirLinha();
   }
 

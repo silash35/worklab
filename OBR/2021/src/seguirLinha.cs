@@ -1,4 +1,6 @@
 float calcularPID(double sensor1, double sensor2) {
+  // Somente o P foi nescessario. Por isso o código do I e D foi removido
+
   double kP = 10;
   double tolerancia = 6;
 
