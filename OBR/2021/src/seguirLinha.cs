@@ -28,16 +28,31 @@ void seguirLinha(){
     while(bc.ReturnColor(1) != "BLACK"){
       bc.MoveFrontal((float)80, (float)80);
     }
-    bc.MoveFrontalAngles(100, 30);
+    bc.MoveFrontalAngles(100, 40);
   }else if(bc.ReturnColor(2) == "GREEN"){
     while(bc.ReturnColor(2) != "BLACK"){
       bc.MoveFrontal((float)80, (float)80);
     }
-    bc.MoveFrontalAngles(100, -30);
+    bc.MoveFrontalAngles(100, -40);
   }
 
-  // Detectar
-  if(){
+  // Detectar obstaculo na pista
+  if(bc.Distance(0)<15){
+    bc.MoveFrontalAngles(500, -90);
+    bc.MoveFrontal((float)300, (float)300);
+    bc.Wait(1000);
 
+    bc.MoveFrontalAngles(500, 90);
+    bc.MoveFrontal((float)300, (float)300);
+    bc.Wait(2500);
+
+    bc.MoveFrontalAngles(500, 90);
+    bc.MoveFrontal((float)300, (float)300);
+    bc.Wait(1000);
+
+    bc.MoveFrontalAngles(500, -90);
+    while(!bc.Touch(0)){
+      bc.MoveFrontal((float)-300, (float)-300);
+    }
   }
 }

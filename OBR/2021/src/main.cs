@@ -10,9 +10,10 @@ TODO:
 
 void Main() {
   bc.TurnLedOn(255, 255, 255);
+  bc.ActuatorUp(8000);
 
   bc.PrintConsole(0, "Seguindo Linha");
-  while (bc.Distance(0)>25) {
+  while (true) {
     seguirLinha();
   }
 
