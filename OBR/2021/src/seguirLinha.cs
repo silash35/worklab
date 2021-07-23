@@ -16,6 +16,7 @@ float calcularPID(double sensor1, double sensor2) {
 }
 
 void seguirLinha(){
+  bc.PrintConsole(0, "Seguindo Linha");
 
   // Seguir Linha com PID
   float saida = calcularPID(bc.Lightness(1),bc.Lightness(2));
