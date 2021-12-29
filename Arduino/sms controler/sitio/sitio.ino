@@ -53,36 +53,91 @@ void loop() {
       bomba1.ligarBomba();
     } else {
       int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba1.agendarLigamento(time);
     }
   }
   if (textSms.indexOf(LB2) != -1) {
-    bomba2.ligarBomba();
+    commandIndex = textSms.indexOf(LB2);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba2.ligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba2.agendarLigamento(time);
+    }
   }
   if (textSms.indexOf(LB3) != -1) {
-    bomba3.ligarBomba();
+    commandIndex = textSms.indexOf(LB3);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba3.ligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba3.agendarLigamento(time);
+    }
   }
   if (textSms.indexOf(LB4) != -1) {
-    bomba4.ligarBomba();
+    commandIndex = textSms.indexOf(LB4);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba4.ligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba4.agendarLigamento(time);
+    }
   }
   if (textSms.indexOf(LB5) != -1) {
-    bomba5.ligarBomba();
+    commandIndex = textSms.indexOf(LB5);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba5.ligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba5.agendarLigamento(time);
+    }
   }
 
   // Caso receba DBX, Desligar a bomba X
   if (textSms.indexOf(DB1) != -1) {
-    bomba1.desligarBomba();
+    commandIndex = textSms.indexOf(DB1);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba1.desligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba1.agendarDesligamento(time);
+    }
   }
   if (textSms.indexOf(DB2) != -1) {
-    bomba2.desligarBomba();
+    commandIndex = textSms.indexOf(DB2);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba2.desligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba2.agendarDesligamento(time);
+    }
   }
   if (textSms.indexOf(DB3) != -1) {
-    bomba3.desligarBomba();
+    commandIndex = textSms.indexOf(DB3);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba3.desligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba3.agendarDesligamento(time);
+    }
   }
   if (textSms.indexOf(DB4) != -1) {
-    bomba4.desligarBomba();
+    commandIndex = textSms.indexOf(DB4);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba4.desligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba4.agendarDesligamento(time);
+    }
   }
   if (textSms.indexOf(DB5) != -1) {
-    bomba5.desligarBomba();
+    commandIndex = textSms.indexOf(DB5);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba5.desligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+      bomba5.agendarDesligamento(time);
+    }
   }
 
   // Caso receba RSX, Ler os dados da bomba X
