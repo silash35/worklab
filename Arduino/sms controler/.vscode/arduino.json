@@ -1,0 +1,4 @@
+{
+    "sketch": "sitio/sitio.ino",
+    "board": "arduino:avr:uno"
+}
