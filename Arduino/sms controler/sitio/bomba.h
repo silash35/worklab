@@ -1,3 +1,9 @@
+#include <RTClib.h>
+
+#define INFINITO UINT32_MAX
+
+RTC_DS1307 RTC;
+
 class Bomba {
 private:
   int pinBomba = 0;
@@ -6,8 +12,8 @@ private:
 
   bool bombIsOn = false;
 
-  int horarioParaDesligar = 0;
-  int horarioParaLigar = 0;
+  uint32_t horarioParaDesligar = INFINITO;
+  uint32_t horarioParaLigar = INFINITO;
 
 public:
   Bomba(String n, int pb, int ps) {
@@ -16,6 +22,8 @@ public:
     pinBomba = pb;
     pinMode(pb, OUTPUT);
     pinSensor = ps;
+
+    RTC.begin();
   }
 
   void ligarBomba() {
@@ -27,8 +35,23 @@ public:
     bombIsOn = false;
   }
 
+  void agendarLigamento(int min) { horarioParaLigar = RTC.now().unixtime() + min * 60; }
+  void agendarDesligamento(int min) { horarioParaDesligar = RTC.now().unixtime() + min * 60; }
+
   int getSensor() { return analogRead(pinSensor); }
-  // bool isOn() { return bombIsOn; }
+
+  void verificarAgendamentos() {
+    uint32_t now = RTC.now().unixtime();
+
+    if (now > horarioParaLigar) {
+      ligarBomba();
+      horarioParaLigar = INFINITO;
+    }
+    if (now > horarioParaDesligar) {
+      desligarBomba();
+      horarioParaDesligar = INFINITO;
+    }
+  }
 
   String getMessage() {
     String message = "A bomba '" + nome + "' está ";

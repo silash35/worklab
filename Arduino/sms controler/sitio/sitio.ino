@@ -6,7 +6,9 @@
 #define TELEFONE_MESTRE "99999999999"
 
 Sim800l sim800l;
-String textSms, numberSms;
+int commandIndex = 0;
+String textSms = "";
+String numberSms = "";
 
 Bomba bomba1("Bomba 1", 1, A1);
 Bomba bomba2("Bomba 2", 2, A2);
@@ -22,6 +24,13 @@ void setup() {
 }
 
 void loop() {
+
+  // Verficar Agendamentos
+  bomba1.verificarAgendamentos();
+  bomba2.verificarAgendamentos();
+  bomba3.verificarAgendamentos();
+  bomba4.verificarAgendamentos();
+  bomba5.verificarAgendamentos();
 
   // Ler SMS e executar comandos
   textSms = sim800l.readSms(1);
@@ -39,7 +48,12 @@ void loop() {
 
   // Caso receba LBX, Ligar a bomba X
   if (textSms.indexOf(LB1) != -1) {
-    bomba1.ligarBomba();
+    commandIndex = textSms.indexOf(LB1);
+    if (textSms[commandIndex + 3] != '-') {
+      bomba1.ligarBomba();
+    } else {
+      int time = textSms.substring(commandIndex + 4, 4).toInt();
+    }
   }
   if (textSms.indexOf(LB2) != -1) {
     bomba2.ligarBomba();
@@ -73,19 +87,19 @@ void loop() {
 
   // Caso receba RSX, Ler os dados da bomba X
   if (textSms.indexOf(RS1) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, (char *)bomba1.getMessage().c_str());
+    sim800l.sendSms(TELEFONE_MESTRE, bomba1.getMessage());
   }
   if (textSms.indexOf(RS2) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, (char *)bomba2.getMessage().c_str());
+    sim800l.sendSms(TELEFONE_MESTRE, bomba2.getMessage());
   }
   if (textSms.indexOf(RS3) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, (char *)bomba3.getMessage().c_str());
+    sim800l.sendSms(TELEFONE_MESTRE, bomba3.getMessage());
   }
   if (textSms.indexOf(RS4) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, (char *)bomba4.getMessage().c_str());
+    sim800l.sendSms(TELEFONE_MESTRE, bomba4.getMessage());
   }
   if (textSms.indexOf(RS5) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, (char *)bomba5.getMessage().c_str());
+    sim800l.sendSms(TELEFONE_MESTRE, bomba5.getMessage());
   }
 
   // Apagar todas as mensagens da memoria
