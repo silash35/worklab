@@ -16,6 +16,9 @@ Bomba bomba3("Bomba 3", 3, A3);
 Bomba bomba4("Bomba 4", 4, A4);
 Bomba bomba5("Bomba 5", 5, A5);
 
+Bomba bombas[] = {Bomba("Bomba 1", 1, A1), Bomba("Bomba 2", 2, A2), Bomba("Bomba 3", 3, A3),
+                  Bomba("Bomba 4", 4, A4), Bomba("Bomba 5", 5, A5)};
+
 void setup() {
   Serial.begin(9600);
 
@@ -31,6 +34,10 @@ void loop() {
   bomba3.verificarAgendamentos();
   bomba4.verificarAgendamentos();
   bomba5.verificarAgendamentos();
+
+  for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
+    bombas[i].verificarAgendamentos();
+  }
 
   // Ler SMS e executar comandos
   textSms = sim800l.readSms(1);
