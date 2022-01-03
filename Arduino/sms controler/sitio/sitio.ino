@@ -7,17 +7,12 @@
 
 Sim800l sim800l;
 int commandIndex = 0;
+int selectedBomb = 0;
 String textSms = "";
 String numberSms = "";
 
-Bomba bomba1("Bomba 1", 1, A1);
-Bomba bomba2("Bomba 2", 2, A2);
-Bomba bomba3("Bomba 3", 3, A3);
-Bomba bomba4("Bomba 4", 4, A4);
-Bomba bomba5("Bomba 5", 5, A5);
-
-Bomba bombas[] = {Bomba("Bomba 1", 1, A1), Bomba("Bomba 2", 2, A2), Bomba("Bomba 3", 3, A3),
-                  Bomba("Bomba 4", 4, A4), Bomba("Bomba 5", 5, A5)};
+Bomba bombas[] = {Bomba("Bomba 0", 0, A0), Bomba("Bomba 1", 1, A1), Bomba("Bomba 2", 2, A2),
+                  Bomba("Bomba 3", 3, A3), Bomba("Bomba 4", 4, A4)};
 
 void setup() {
   Serial.begin(9600);
@@ -29,12 +24,6 @@ void setup() {
 void loop() {
 
   // Verficar Agendamentos
-  bomba1.verificarAgendamentos();
-  bomba2.verificarAgendamentos();
-  bomba3.verificarAgendamentos();
-  bomba4.verificarAgendamentos();
-  bomba5.verificarAgendamentos();
-
   for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
     bombas[i].verificarAgendamentos();
   }
@@ -54,114 +43,56 @@ void loop() {
   textSms.toUpperCase();
 
   // Caso receba LBX, Ligar a bomba X
-  if (textSms.indexOf(LB1) != -1) {
-    commandIndex = textSms.indexOf(LB1);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba1.ligarBomba();
+  commandIndex = textSms.indexOf(LB);
+  if (commandIndex != -1) {
+    if (isDigit(textSms[commandIndex + 2])) {
+      selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
+
+      if (textSms[commandIndex + 3] != '-') {
+        bombas[selectedBomb].ligarBomba();
+      } else {
+        int time = textSms.substring(commandIndex + 4, 4).toInt();
+        bombas[selectedBomb].agendarLigamento(time);
+      }
     } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba1.agendarLigamento(time);
-    }
-  }
-  if (textSms.indexOf(LB2) != -1) {
-    commandIndex = textSms.indexOf(LB2);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba2.ligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba2.agendarLigamento(time);
-    }
-  }
-  if (textSms.indexOf(LB3) != -1) {
-    commandIndex = textSms.indexOf(LB3);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba3.ligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba3.agendarLigamento(time);
-    }
-  }
-  if (textSms.indexOf(LB4) != -1) {
-    commandIndex = textSms.indexOf(LB4);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba4.ligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba4.agendarLigamento(time);
-    }
-  }
-  if (textSms.indexOf(LB5) != -1) {
-    commandIndex = textSms.indexOf(LB5);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba5.ligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba5.agendarLigamento(time);
+      for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
+        bombas[i].ligarBomba();
+      }
     }
   }
 
   // Caso receba DBX, Desligar a bomba X
-  if (textSms.indexOf(DB1) != -1) {
-    commandIndex = textSms.indexOf(DB1);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba1.desligarBomba();
+  commandIndex = textSms.indexOf(DB);
+  if (commandIndex != -1) {
+    if (isDigit(textSms[commandIndex + 2])) {
+      selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
+
+      if (textSms[commandIndex + 3] != '-') {
+        bombas[selectedBomb].desligarBomba();
+      } else {
+        int time = textSms.substring(commandIndex + 4, 4).toInt();
+        bombas[selectedBomb].agendarDesligamento(time);
+      }
     } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba1.agendarDesligamento(time);
-    }
-  }
-  if (textSms.indexOf(DB2) != -1) {
-    commandIndex = textSms.indexOf(DB2);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba2.desligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba2.agendarDesligamento(time);
-    }
-  }
-  if (textSms.indexOf(DB3) != -1) {
-    commandIndex = textSms.indexOf(DB3);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba3.desligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba3.agendarDesligamento(time);
-    }
-  }
-  if (textSms.indexOf(DB4) != -1) {
-    commandIndex = textSms.indexOf(DB4);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba4.desligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba4.agendarDesligamento(time);
-    }
-  }
-  if (textSms.indexOf(DB5) != -1) {
-    commandIndex = textSms.indexOf(DB5);
-    if (textSms[commandIndex + 3] != '-') {
-      bomba5.desligarBomba();
-    } else {
-      int time = textSms.substring(commandIndex + 4, 4).toInt();
-      bomba5.agendarDesligamento(time);
+      for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
+        bombas[i].desligarBomba();
+      }
     }
   }
 
   // Caso receba RSX, Ler os dados da bomba X
-  if (textSms.indexOf(RS1) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, bomba1.getMessage());
-  }
-  if (textSms.indexOf(RS2) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, bomba2.getMessage());
-  }
-  if (textSms.indexOf(RS3) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, bomba3.getMessage());
-  }
-  if (textSms.indexOf(RS4) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, bomba4.getMessage());
-  }
-  if (textSms.indexOf(RS5) != -1) {
-    sim800l.sendSms(TELEFONE_MESTRE, bomba5.getMessage());
+  commandIndex = textSms.indexOf(RS);
+  if (commandIndex != -1) {
+    if (isDigit(textSms[commandIndex + 2])) {
+      selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
+      sim800l.sendSms(TELEFONE_MESTRE, bombas[selectedBomb].getMessage());
+    } else {
+      String message = "";
+      for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
+        message = message + "\n \n" + bombas[i].getMessage();
+      }
+      sim800l.sendSms(TELEFONE_MESTRE, message);
+    }
   }
 
   // Apagar todas as mensagens da memoria
