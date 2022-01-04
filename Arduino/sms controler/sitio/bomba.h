@@ -4,6 +4,11 @@
 
 RTC_DS1307 RTC;
 
+struct Time {
+  int hour;
+  int minutes;
+};
+
 class Bomba {
 private:
   int pinBomba = 0;
@@ -12,16 +17,22 @@ private:
 
   bool bombIsOn = false;
 
-  uint32_t horarioParaDesligar = INFINITO;
-  uint32_t horarioParaLigar = INFINITO;
+  Time horarioParaLigar = {.hour = 0, .minutes = 0};
+  Time horarioParaDesligar = {.hour = 0, .minutes = 0};
+
+  uint32_t timerParaLigar = INFINITO;
+  uint32_t timerParaDesligar = INFINITO;
 
 public:
-  Bomba(String n, int pb, int ps) {
+  Bomba(String n, int pb, int ps, Time hpl, Time hpd) {
     nome = n;
 
     pinBomba = pb;
     pinMode(pb, OUTPUT);
     pinSensor = ps;
+
+    horarioParaLigar = hpl;
+    horarioParaDesligar = hpd;
 
     RTC.begin();
   }
@@ -35,21 +46,31 @@ public:
     bombIsOn = false;
   }
 
-  void agendarLigamento(int min) { horarioParaLigar = RTC.now().unixtime() + min * 60; }
-  void agendarDesligamento(int min) { horarioParaDesligar = RTC.now().unixtime() + min * 60; }
+  void agendarLigamento(int min) { timerParaLigar = RTC.now().unixtime() + min * 60; }
+  void agendarDesligamento(int min) { timerParaDesligar = RTC.now().unixtime() + min * 60; }
 
   int getSensor() { return analogRead(pinSensor); }
 
   void verificarAgendamentos() {
-    uint32_t now = RTC.now().unixtime();
+    DateTime now = RTC.now();
 
-    if (now > horarioParaLigar) {
+    // Verificar Timers
+    if (now.unixtime() > timerParaLigar) {
       ligarBomba();
-      horarioParaLigar = INFINITO;
+      timerParaLigar = INFINITO;
     }
-    if (now > horarioParaDesligar) {
+    if (now.unixtime() > timerParaDesligar) {
       desligarBomba();
-      horarioParaDesligar = INFINITO;
+      timerParaDesligar = INFINITO;
+    }
+
+    // Verificar Horarios
+    if (now.hour() == horarioParaLigar.hour && now.minute() == horarioParaLigar.minutes) {
+      ligarBomba();
+    }
+
+    if (now.hour() == horarioParaDesligar.hour && now.minute() == horarioParaDesligar.minutes) {
+      desligarBomba();
     }
   }
 

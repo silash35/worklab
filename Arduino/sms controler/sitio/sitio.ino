@@ -11,8 +11,11 @@ int selectedBomb = 0;
 String textSms = "";
 String numberSms = "";
 
-Bomba bombas[] = {Bomba("Bomba 0", 0, A0), Bomba("Bomba 1", 1, A1), Bomba("Bomba 2", 2, A2),
-                  Bomba("Bomba 3", 3, A3), Bomba("Bomba 4", 4, A4)};
+Bomba bombas[] = {Bomba("Bomba 0", 0, A0, {.hour = 12, .minutes = 0}, {.hour = 13, .minutes = 0}),
+                  Bomba("Bomba 1", 1, A1, {.hour = 12, .minutes = 0}, {.hour = 13, .minutes = 0}),
+                  Bomba("Bomba 2", 2, A2, {.hour = 12, .minutes = 0}, {.hour = 13, .minutes = 0}),
+                  Bomba("Bomba 3", 3, A3, {.hour = 12, .minutes = 0}, {.hour = 13, .minutes = 0}),
+                  Bomba("Bomba 4", 4, A4, {.hour = 12, .minutes = 0}, {.hour = 13, .minutes = 0})};
 
 void setup() {
   Serial.begin(9600);
