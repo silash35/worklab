@@ -31,8 +31,8 @@ private:
 
   Schedule schedule;
 
-  uint32_t timerParaLigar = INFINITO;
-  uint32_t timerParaDesligar = INFINITO;
+  uint32_t onTimer = INFINITO;
+  uint32_t offTimer = INFINITO;
 
 public:
   Bomba(String n, int pb, int ps, Schedule schedule) {
@@ -56,8 +56,8 @@ public:
     bombIsOn = false;
   }
 
-  void agendarLigamento(int min) { timerParaLigar = RTC.now().unixtime() + min * 60; }
-  void agendarDesligamento(int min) { timerParaDesligar = RTC.now().unixtime() + min * 60; }
+  void setOnTimer(int min) { onTimer = RTC.now().unixtime() + min * 60; }
+  void setOffTimer(int min) { offTimer = RTC.now().unixtime() + min * 60; }
 
   int getSensor() { return analogRead(pinSensor); }
 
@@ -65,13 +65,13 @@ public:
     DateTime now = RTC.now();
 
     // Verificar Timers
-    if (now.unixtime() > timerParaLigar) {
+    if (now.unixtime() > onTimer) {
       ligarBomba();
-      timerParaLigar = INFINITO;
+      onTimer = INFINITO;
     }
-    if (now.unixtime() > timerParaDesligar) {
+    if (now.unixtime() > offTimer) {
       desligarBomba();
-      timerParaDesligar = INFINITO;
+      offTimer = INFINITO;
     }
 
     // Verificar Horarios

@@ -53,7 +53,7 @@ void loop() {
         bombas[selectedBomb].ligarBomba();
       } else {
         int time = textSms.substring(commandIndex + 4, 4).toInt();
-        bombas[selectedBomb].agendarLigamento(time);
+        bombas[selectedBomb].setOnTimer(time);
       }
     } else {
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
@@ -72,7 +72,7 @@ void loop() {
         bombas[selectedBomb].desligarBomba();
       } else {
         int time = textSms.substring(commandIndex + 4, 4).toInt();
-        bombas[selectedBomb].agendarDesligamento(time);
+        bombas[selectedBomb].setOffTimer(time);
       }
     } else {
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
