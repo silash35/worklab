@@ -4,9 +4,21 @@
 
 RTC_DS1307 RTC;
 
-struct Time {
-  int hour;
-  int minutes;
+class Schedule {
+public:
+  int onHour;
+  int onMinute;
+
+  int offHour;
+  int offMinute;
+
+  Schedule(int onH = 24, int onM = 60, int offH = 24, int offM = 60) {
+    onHour = onH;
+    onMinute = onM;
+
+    offHour = offH;
+    offMinute = offM;
+  }
 };
 
 class Bomba {
@@ -17,22 +29,20 @@ private:
 
   bool bombIsOn = false;
 
-  Time horarioParaLigar = {.hour = 0, .minutes = 0};
-  Time horarioParaDesligar = {.hour = 0, .minutes = 0};
+  Schedule schedule;
 
   uint32_t timerParaLigar = INFINITO;
   uint32_t timerParaDesligar = INFINITO;
 
 public:
-  Bomba(String n, int pb, int ps, Time hpl, Time hpd) {
+  Bomba(String n, int pb, int ps, Schedule schedule) {
     nome = n;
 
     pinBomba = pb;
     pinMode(pb, OUTPUT);
     pinSensor = ps;
 
-    horarioParaLigar = hpl;
-    horarioParaDesligar = hpd;
+    this->schedule = schedule;
 
     RTC.begin();
   }
@@ -65,11 +75,11 @@ public:
     }
 
     // Verificar Horarios
-    if (now.hour() == horarioParaLigar.hour && now.minute() == horarioParaLigar.minutes) {
+    if (now.hour() == schedule.onHour && now.minute() == schedule.onMinute) {
       ligarBomba();
     }
 
-    if (now.hour() == horarioParaDesligar.hour && now.minute() == horarioParaDesligar.minutes) {
+    if (now.hour() == schedule.offHour && now.minute() == schedule.offMinute) {
       desligarBomba();
     }
   }
