@@ -23,7 +23,8 @@ public:
     pinMode(pb, OUTPUT);
     pinSensor = ps;
 
-    RTC.begin();
+    Serial.print("Achou o RTC:");
+    Serial.println(RTC.begin());
   }
 
   void ligarBomba() {

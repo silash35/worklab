@@ -31,6 +31,12 @@ void loop() {
   // Ler SMS e executar comandos
   textSms = sim800l.readSms(1);
 
+  Serial.print("SMS:");
+  Serial.println(textSms);
+
+  Serial.print("Telefone mestre");
+  Serial.println(sim800l.getNumberSms(1));
+
   // Realizar Verificações antes de prosseguir
   if (textSms.indexOf("OK") == -1) {
     return; // Sair do código caso não tenha recebido mensagens validas
