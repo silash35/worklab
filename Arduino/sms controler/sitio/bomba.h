@@ -43,9 +43,6 @@ public:
     pinSensor = ps;
 
     this->schedule = schedule;
-
-    Serial.print("Achou o RTC:");
-    Serial.println(RTC.begin());
   }
 
   void ligarBomba() {

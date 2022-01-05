@@ -18,6 +18,9 @@ Bomba bombas[] = {Bomba("Bomba 0", 0, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 1, A
 void setup() {
   Serial.begin(9600);
 
+  // Adjust RTC time
+  // RTC.adjust(DateTime(F(__DATE__), F(__TIME__)));
+
   sim800l.begin();
   sim800l.delAllSms(); // Apaga SMS antigos
 }
