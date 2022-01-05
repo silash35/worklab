@@ -11,8 +11,9 @@ int selectedBomb = 0;
 String textSms = "";
 String numberSms = "";
 
-Bomba bombas[] = {Bomba("Bomba 0", 0, A0), Bomba("Bomba 1", 1, A1), Bomba("Bomba 2", 2, A2),
-                  Bomba("Bomba 3", 3, A3), Bomba("Bomba 4", 4, A4)};
+Bomba bombas[] = {Bomba("Bomba 0", 0, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 1, A1, (12, 0, 13, 0)),
+                  Bomba("Bomba 2", 2, A2, (12, 0, 13, 0)), Bomba("Bomba 3", 3, A3, (12, 0, 13, 0)),
+                  Bomba("Bomba 4", 4, A4, (12, 0, 13, 0))};
 
 void setup() {
   Serial.begin(9600);
@@ -58,7 +59,7 @@ void loop() {
         bombas[selectedBomb].ligarBomba();
       } else {
         int time = textSms.substring(commandIndex + 4, 4).toInt();
-        bombas[selectedBomb].agendarLigamento(time);
+        bombas[selectedBomb].setOnTimer(time);
       }
     } else {
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
@@ -77,7 +78,7 @@ void loop() {
         bombas[selectedBomb].desligarBomba();
       } else {
         int time = textSms.substring(commandIndex + 4, 4).toInt();
-        bombas[selectedBomb].agendarDesligamento(time);
+        bombas[selectedBomb].setOffTimer(time);
       }
     } else {
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {

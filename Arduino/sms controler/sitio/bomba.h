@@ -4,6 +4,23 @@
 
 RTC_DS1307 RTC;
 
+class Schedule {
+public:
+  int onHour;
+  int onMinute;
+
+  int offHour;
+  int offMinute;
+
+  Schedule(int onH = 24, int onM = 60, int offH = 24, int offM = 60) {
+    onHour = onH;
+    onMinute = onM;
+
+    offHour = offH;
+    offMinute = offM;
+  }
+};
+
 class Bomba {
 private:
   int pinBomba = 0;
@@ -12,16 +29,20 @@ private:
 
   bool bombIsOn = false;
 
-  uint32_t horarioParaDesligar = INFINITO;
-  uint32_t horarioParaLigar = INFINITO;
+  Schedule schedule;
+
+  uint32_t onTimer = INFINITO;
+  uint32_t offTimer = INFINITO;
 
 public:
-  Bomba(String n, int pb, int ps) {
+  Bomba(String n, int pb, int ps, Schedule schedule) {
     nome = n;
 
     pinBomba = pb;
     pinMode(pb, OUTPUT);
     pinSensor = ps;
+
+    this->schedule = schedule;
 
     Serial.print("Achou o RTC:");
     Serial.println(RTC.begin());
@@ -36,21 +57,31 @@ public:
     bombIsOn = false;
   }
 
-  void agendarLigamento(int min) { horarioParaLigar = RTC.now().unixtime() + min * 60; }
-  void agendarDesligamento(int min) { horarioParaDesligar = RTC.now().unixtime() + min * 60; }
+  void setOnTimer(int min) { onTimer = RTC.now().unixtime() + min * 60; }
+  void setOffTimer(int min) { offTimer = RTC.now().unixtime() + min * 60; }
 
   int getSensor() { return analogRead(pinSensor); }
 
   void verificarAgendamentos() {
-    uint32_t now = RTC.now().unixtime();
+    DateTime now = RTC.now();
 
-    if (now > horarioParaLigar) {
+    // Verificar Timers
+    if (now.unixtime() > onTimer) {
       ligarBomba();
-      horarioParaLigar = INFINITO;
+      onTimer = INFINITO;
     }
-    if (now > horarioParaDesligar) {
+    if (now.unixtime() > offTimer) {
       desligarBomba();
-      horarioParaDesligar = INFINITO;
+      offTimer = INFINITO;
+    }
+
+    // Verificar Horarios
+    if (now.hour() == schedule.onHour && now.minute() == schedule.onMinute) {
+      ligarBomba();
+    }
+
+    if (now.hour() == schedule.offHour && now.minute() == schedule.offMinute) {
+      desligarBomba();
     }
   }
 
