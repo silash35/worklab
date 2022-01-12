@@ -1,17 +1,11 @@
-#include "bibliotecas/Sim800l.h"
 #include "bomba.h"
 #include "codes.h"
-#include <SoftwareSerial.h>
 
-#define TELEFONE_MESTRE "99999999999"
-
-Sim800l sim800l;
 int commandIndex = 0;
 int selectedBomb = 0;
 String textSms = "";
-String numberSms = "";
 
-Bomba bombas[] = {Bomba("Bomba 0", 0, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 1, A1, (12, 0, 13, 0)),
+Bomba bombas[] = {Bomba("Bomba 0", 13, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 1, A1, (12, 0, 13, 0)),
                   Bomba("Bomba 2", 2, A2, (12, 0, 13, 0)), Bomba("Bomba 3", 3, A3, (12, 0, 13, 0)),
                   Bomba("Bomba 4", 4, A4, (12, 0, 13, 0))};
 
@@ -20,9 +14,6 @@ void setup() {
 
   // Adjust RTC time
   // RTC.adjust(DateTime(F(__DATE__), F(__TIME__)));
-
-  sim800l.begin();
-  sim800l.delAllSms(); // Apaga SMS antigos
 }
 
 void loop() {
@@ -32,22 +23,7 @@ void loop() {
     bombas[i].verificarAgendamentos();
   }
 
-  // Ler SMS e executar comandos
-  textSms = sim800l.readSms(1);
-
-  Serial.print("SMS:");
-  Serial.println(textSms);
-
-  Serial.print("Telefone mestre");
-  Serial.println(sim800l.getNumberSms(1));
-
-  // Realizar Verificações antes de prosseguir
-  if (textSms.indexOf("OK") == -1) {
-    return; // Sair do código caso não tenha recebido mensagens validas
-  }
-  if (sim800l.getNumberSms(1) != TELEFONE_MESTRE) {
-    return; // Sair do código caso o SMS não venha de um numero conhecido
-  }
+  textSms = Serial.readString();
 
   // Converter o texto para maiúsculas
   textSms.toUpperCase();
@@ -95,16 +71,13 @@ void loop() {
   if (commandIndex != -1) {
     if (isDigit(textSms[commandIndex + 2])) {
       selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
-      sim800l.sendSms(TELEFONE_MESTRE, bombas[selectedBomb].getMessage());
+      Serial.println(bombas[selectedBomb].getMessage());
     } else {
       String message = "";
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
         message = message + "\n \n" + bombas[i].getMessage();
       }
-      sim800l.sendSms(TELEFONE_MESTRE, message);
+      Serial.println(message);
     }
   }
-
-  // Apagar todas as mensagens da memoria
-  sim800l.delAllSms();
 }

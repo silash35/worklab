@@ -5,7 +5,6 @@
             "name": "Arduino",
             "compilerPath": "/home/silas/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
             "compilerArgs": [
-                "-w",
                 "-std=gnu++11",
                 "-fpermissive",
                 "-fno-exceptions",
@@ -18,7 +17,6 @@
             "includePath": [
                 "/home/silas/.arduino15/packages/arduino/hardware/avr/1.8.4/cores/arduino",
                 "/home/silas/.arduino15/packages/arduino/hardware/avr/1.8.4/variants/standard",
-                "/home/silas/.arduino15/packages/arduino/hardware/avr/1.8.4/libraries/SoftwareSerial/src",
                 "/home/silas/Arduino/libraries/RTClib/src",
                 "/home/silas/Arduino/libraries/Adafruit_BusIO",
                 "/home/silas/.arduino15/packages/arduino/hardware/avr/1.8.4/libraries/Wire/src",
