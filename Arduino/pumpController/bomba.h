@@ -6,11 +6,11 @@ RTC_DS1307 RTC;
 
 class Schedule {
 public:
-  int onHour;
-  int onMinute;
+  uint8_t onHour = 0;
+  uint8_t onMinute = 0;
 
-  int offHour;
-  int offMinute;
+  uint8_t offHour = 0;
+  uint8_t offMinute = 0;
 
   Schedule(int onH = 24, int onM = 60, int offH = 24, int offM = 60) {
     onHour = onH;
@@ -84,9 +84,9 @@ public:
 
   String getMessage() {
     String message = "A bomba '" + nome + "' está ";
-    message = message + bombIsOn ? "Funcionando" : "Desligada";
+    message = message + (bombIsOn ? "Funcionando" : "Desligada");
     message = message + "\n";
-    message = message + "E seu sensor está detectando o seguinte valor" + getSensor();
+    message = message + "E seu sensor está detectando o seguinte valor " + getSensor();
 
     return message;
   }

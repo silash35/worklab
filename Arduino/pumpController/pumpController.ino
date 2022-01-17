@@ -5,9 +5,11 @@ int commandIndex = 0;
 int selectedBomb = 0;
 String textSms = "";
 
-Bomba bombas[] = {Bomba("Bomba 0", 8, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 9, A0, (12, 0, 13, 0)),
-                  Bomba("Bomba 2", 10, A0, (12, 0, 13, 0)),
-                  Bomba("Bomba 3", 11, A0, (12, 0, 13, 0))};
+Schedule defaultSchedule(12, 03, 12, 04);
+
+Bomba bombas[] = {
+    Bomba("Bomba 0", 8, A0, defaultSchedule), Bomba("Bomba 1", 9, A0, defaultSchedule),
+    Bomba("Bomba 2", 10, A0, defaultSchedule), Bomba("Bomba 3", 11, A0, defaultSchedule)};
 
 void setup() {
   Serial.begin(115200);
@@ -17,7 +19,7 @@ void setup() {
   Serial.println(RTC.now().timestamp());
 
   // Adjust RTC time
-  // RTC.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  RTC.adjust(DateTime(F(__DATE__), F(__TIME__)));
 }
 
 void loop() {
