@@ -1,5 +1,5 @@
 {
-    "sketch": "sitio/sitio.ino",
+    "sketch": "pumpController.ino",
     "board": "arduino:avr:uno",
     "port": "/dev/ttyACM0",
     "programmer": "arduino:avrisp"

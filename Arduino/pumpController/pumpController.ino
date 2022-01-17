@@ -5,12 +5,16 @@ int commandIndex = 0;
 int selectedBomb = 0;
 String textSms = "";
 
-Bomba bombas[] = {Bomba("Bomba 0", 13, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 1, A1, (12, 0, 13, 0)),
-                  Bomba("Bomba 2", 2, A2, (12, 0, 13, 0)), Bomba("Bomba 3", 3, A3, (12, 0, 13, 0)),
-                  Bomba("Bomba 4", 4, A4, (12, 0, 13, 0))};
+Bomba bombas[] = {Bomba("Bomba 0", 8, A0, (12, 0, 13, 0)), Bomba("Bomba 1", 9, A0, (12, 0, 13, 0)),
+                  Bomba("Bomba 2", 10, A0, (12, 0, 13, 0)),
+                  Bomba("Bomba 3", 11, A0, (12, 0, 13, 0))};
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+
+  RTC.begin();
+  Serial.print("Horario do RTC: ");
+  Serial.println(RTC.now().timestamp());
 
   // Adjust RTC time
   // RTC.adjust(DateTime(F(__DATE__), F(__TIME__)));
@@ -28,16 +32,21 @@ void loop() {
   // Converter o texto para maiúsculas
   textSms.toUpperCase();
 
+  if (textSms != "") {
+    Serial.print("Comando: ");
+    Serial.println(textSms);
+  }
+
   // Caso receba LBX, Ligar a bomba X
   commandIndex = textSms.indexOf(LB);
   if (commandIndex != -1) {
     if (isDigit(textSms[commandIndex + 2])) {
-      selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
+      selectedBomb = textSms.substring(commandIndex + 2, commandIndex + 3).toInt();
 
       if (textSms[commandIndex + 3] != '-') {
         bombas[selectedBomb].ligarBomba();
       } else {
-        int time = textSms.substring(commandIndex + 4, 4).toInt();
+        int time = textSms.substring(commandIndex + 4, commandIndex + 8).toInt();
         bombas[selectedBomb].setOnTimer(time);
       }
     } else {
@@ -51,7 +60,7 @@ void loop() {
   commandIndex = textSms.indexOf(DB);
   if (commandIndex != -1) {
     if (isDigit(textSms[commandIndex + 2])) {
-      selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
+      selectedBomb = textSms.substring(commandIndex + 2, commandIndex + 3).toInt();
 
       if (textSms[commandIndex + 3] != '-') {
         bombas[selectedBomb].desligarBomba();
@@ -70,7 +79,7 @@ void loop() {
   commandIndex = textSms.indexOf(RS);
   if (commandIndex != -1) {
     if (isDigit(textSms[commandIndex + 2])) {
-      selectedBomb = textSms.substring(commandIndex + 2, 1).toInt();
+      selectedBomb = textSms.substring(commandIndex + 2, commandIndex + 3).toInt();
       Serial.println(bombas[selectedBomb].getMessage());
     } else {
       String message = "";

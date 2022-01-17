@@ -37,20 +37,20 @@ private:
 public:
   Bomba(String n, int pb, int ps, Schedule schedule) {
     nome = n;
-
     pinBomba = pb;
-    pinMode(pb, OUTPUT);
     pinSensor = ps;
 
+    pinMode(pb, OUTPUT);
+    desligarBomba();
     this->schedule = schedule;
   }
 
   void ligarBomba() {
-    digitalWrite(pinBomba, HIGH);
+    digitalWrite(pinBomba, LOW);
     bombIsOn = true;
   }
   void desligarBomba() {
-    digitalWrite(pinBomba, LOW);
+    digitalWrite(pinBomba, HIGH);
     bombIsOn = false;
   }
 
