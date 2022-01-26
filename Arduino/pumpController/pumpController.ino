@@ -1,5 +1,5 @@
-#include "bomba.h"
 #include "codes.h"
+#include "pump.h"
 
 int commandIndex = 0;
 int selectedBomb = 0;
@@ -7,9 +7,9 @@ String textSms = "";
 
 Schedule defaultSchedule(12, 03, 12, 04);
 
-Bomba bombas[] = {
-    Bomba("Bomba 0", 8, A0, 1, defaultSchedule), Bomba("Bomba 1", 9, A0, 1, defaultSchedule),
-    Bomba("Bomba 2", 10, A0, 1, defaultSchedule), Bomba("Bomba 3", 11, A0, 1, defaultSchedule)};
+Pump bombas[] = {
+    Pump("Bomba 0", 8, A0, 1, defaultSchedule), Pump("Bomba 1", 9, A0, 1, defaultSchedule),
+    Pump("Bomba 2", 10, A0, 1, defaultSchedule), Pump("Bomba 3", 11, A0, 1, defaultSchedule)};
 
 void setup() {
   Serial.begin(115200);
@@ -26,7 +26,7 @@ void loop() {
 
   // Verficar Agendamentos
   for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
-    bombas[i].verificarAgendamentos();
+    bombas[i].checkSchedule();
   }
 
   textSms = Serial.readString();
@@ -46,14 +46,14 @@ void loop() {
       selectedBomb = textSms.substring(commandIndex + 2, commandIndex + 3).toInt();
 
       if (textSms[commandIndex + 3] != '-') {
-        bombas[selectedBomb].ligarBomba();
+        bombas[selectedBomb].turnOn();
       } else {
         int time = textSms.substring(commandIndex + 4, commandIndex + 8).toInt();
         bombas[selectedBomb].setOnTimer(time);
       }
     } else {
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
-        bombas[i].ligarBomba();
+        bombas[i].turnOn();
       }
     }
   }
@@ -65,14 +65,14 @@ void loop() {
       selectedBomb = textSms.substring(commandIndex + 2, commandIndex + 3).toInt();
 
       if (textSms[commandIndex + 3] != '-') {
-        bombas[selectedBomb].desligarBomba();
+        bombas[selectedBomb].turnOff();
       } else {
         int time = textSms.substring(commandIndex + 4, 4).toInt();
         bombas[selectedBomb].setOffTimer(time);
       }
     } else {
       for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
-        bombas[i].desligarBomba();
+        bombas[i].turnOff();
       }
     }
   }

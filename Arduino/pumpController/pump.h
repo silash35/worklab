@@ -22,9 +22,9 @@ public:
   }
 };
 
-class Bomba {
+class Pump {
 private:
-  int pinBomba = 0;
+  int pinPump = 0;
   int pinSensor = 0;
   int eepromAddress = 0;
   String nome = "";
@@ -38,9 +38,9 @@ private:
   uint32_t offTimer = INFINITO;
 
 public:
-  Bomba(String n, int pb, int ps, int eepromAddress, Schedule schedule) {
+  Pump(String n, int pb, int ps, int eepromAddress, Schedule schedule) {
     nome = n;
-    pinBomba = pb;
+    pinPump = pb;
     pinSensor = ps;
 
     this->eepromAddress = eepromAddress;
@@ -48,32 +48,32 @@ public:
     isLocked = bitRead(value, 0);
 
     pinMode(pb, OUTPUT);
-    desligarBomba();
+    turnOff();
     this->schedule = schedule;
   }
 
-  void ligarBomba() {
+  void turnOn() {
     if (!isLocked) {
-      digitalWrite(pinBomba, LOW);
+      digitalWrite(pinPump, LOW);
       bombIsOn = true;
     }
   }
-  void desligarBomba() {
-    digitalWrite(pinBomba, HIGH);
+  void turnOff() {
+    digitalWrite(pinPump, HIGH);
     bombIsOn = false;
   }
 
-  void lockBomba() {
+  void lock() {
     if (!isLocked) {
       isLocked = false;
-      desligarBomba();
+      turnOff();
 
       int val = 0;
       EEPROM.update(eepromAddress, val);
     }
   }
 
-  void unlockBomba() {
+  void unlock() {
     if (isLocked) {
       isLocked = false;
 
@@ -88,26 +88,26 @@ public:
 
   int getSensor() { return analogRead(pinSensor); }
 
-  void verificarAgendamentos() {
+  void checkSchedule() {
     DateTime now = RTC.now();
 
     // Verificar Timers
     if (now.unixtime() > onTimer) {
-      ligarBomba();
+      turnOn();
       onTimer = INFINITO;
     }
     if (now.unixtime() > offTimer) {
-      desligarBomba();
+      turnOff();
       offTimer = INFINITO;
     }
 
     // Verificar Horarios
     if (now.hour() == schedule.onHour && now.minute() == schedule.onMinute) {
-      ligarBomba();
+      turnOn();
     }
 
     if (now.hour() == schedule.offHour && now.minute() == schedule.offMinute) {
-      desligarBomba();
+      turnOff();
     }
   }
 
@@ -121,17 +121,17 @@ public:
   }
 };
 
-void checkPumps(Bomba pumps[]) {
-  for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
-    bombas[i].desligarBomba();
+void checkPumps(Pump pumps[]) {
+  for (int i = 0; i < sizeof(pumps) / sizeof(pumps[0]); i++) {
+    pumps[i].turnOff();
   }
-  for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
-    bombas[i].ligarBomba();
+  for (int i = 0; i < sizeof(pumps) / sizeof(pumps[0]); i++) {
+    pumps[i].turnOn();
     delay(2000);
 
     if (analogRead(A0) > 3) {
-      bombas[i].lockBomba();
+      pumps[i].lock();
     }
-    bombas[i].desligarBomba();
+    pumps[i].turnOff();
   }
 }
