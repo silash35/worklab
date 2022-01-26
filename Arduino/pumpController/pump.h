@@ -24,12 +24,11 @@ public:
 
 class Pump {
 private:
-  int pinPump = 0;
-  int pinSensor = 0;
+  int pin = 0;
   int eepromAddress = 0;
-  String nome = "";
+  String name = "";
 
-  bool bombIsOn = false;
+  bool isOn = false;
   bool isLocked = false;
 
   Schedule schedule;
@@ -38,29 +37,26 @@ private:
   uint32_t offTimer = INFINITO;
 
 public:
-  Pump(String n, int pb, int ps, int eepromAddress, Schedule schedule) {
-    nome = n;
-    pinPump = pb;
-    pinSensor = ps;
-
+  Pump(String name, int pin, int eepromAddress, Schedule schedule) {
+    this->name = name;
+    this->pin = pin;
     this->eepromAddress = eepromAddress;
+    this->schedule = schedule;
+
     byte value = EEPROM.read(eepromAddress);
     isLocked = bitRead(value, 0);
-
-    pinMode(pb, OUTPUT);
     turnOff();
-    this->schedule = schedule;
   }
 
   void turnOn() {
     if (!isLocked) {
-      digitalWrite(pinPump, LOW);
-      bombIsOn = true;
+      digitalWrite(pin, LOW);
+      isOn = true;
     }
   }
   void turnOff() {
-    digitalWrite(pinPump, HIGH);
-    bombIsOn = false;
+    digitalWrite(pin, HIGH);
+    isOn = false;
   }
 
   void lock() {
@@ -86,8 +82,6 @@ public:
   void setOnTimer(int min) { onTimer = RTC.now().unixtime() + min * 60; }
   void setOffTimer(int min) { offTimer = RTC.now().unixtime() + min * 60; }
 
-  int getSensor() { return analogRead(pinSensor); }
-
   void checkSchedule() {
     DateTime now = RTC.now();
 
@@ -112,10 +106,9 @@ public:
   }
 
   String getMessage() {
-    String message = "A bomba '" + nome + "' está ";
-    message = message + (bombIsOn ? "Funcionando" : "Desligada");
+    String message = "A bomba '" + name + "' está ";
+    message = message + (isOn ? "Funcionando" : "Desligada");
     message = message + "\n";
-    message = message + "E seu sensor está detectando o seguinte valor " + getSensor();
 
     return message;
   }
