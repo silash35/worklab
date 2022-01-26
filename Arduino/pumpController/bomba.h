@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include <RTClib.h>
 
 #define INFINITO UINT32_MAX
@@ -25,9 +26,11 @@ class Bomba {
 private:
   int pinBomba = 0;
   int pinSensor = 0;
+  int eepromAddress = 0;
   String nome = "";
 
   bool bombIsOn = false;
+  bool isLocked = false;
 
   Schedule schedule;
 
@@ -35,10 +38,14 @@ private:
   uint32_t offTimer = INFINITO;
 
 public:
-  Bomba(String n, int pb, int ps, Schedule schedule) {
+  Bomba(String n, int pb, int ps, int eepromAddress, Schedule schedule) {
     nome = n;
     pinBomba = pb;
     pinSensor = ps;
+
+    this->eepromAddress = eepromAddress;
+    byte value = EEPROM.read(eepromAddress);
+    isLocked = bitRead(value, 0);
 
     pinMode(pb, OUTPUT);
     desligarBomba();
@@ -46,12 +53,34 @@ public:
   }
 
   void ligarBomba() {
-    digitalWrite(pinBomba, LOW);
-    bombIsOn = true;
+    if (!isLocked) {
+      digitalWrite(pinBomba, LOW);
+      bombIsOn = true;
+    }
   }
   void desligarBomba() {
     digitalWrite(pinBomba, HIGH);
     bombIsOn = false;
+  }
+
+  void lockBomba() {
+    if (!isLocked) {
+      isLocked = false;
+      desligarBomba();
+
+      int val = 0;
+      EEPROM.update(eepromAddress, val);
+    }
+  }
+
+  void unlockBomba() {
+    if (isLocked) {
+      isLocked = false;
+
+      int val = 0;
+      val = bitSet(val, 0);
+      EEPROM.update(eepromAddress, val);
+    }
   }
 
   void setOnTimer(int min) { onTimer = RTC.now().unixtime() + min * 60; }
@@ -91,3 +120,18 @@ public:
     return message;
   }
 };
+
+void checkPumps(Bomba pumps[]) {
+  for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
+    bombas[i].desligarBomba();
+  }
+  for (int i = 0; i < sizeof(bombas) / sizeof(bombas[0]); i++) {
+    bombas[i].ligarBomba();
+    delay(2000);
+
+    if (analogRead(A0) > 3) {
+      bombas[i].lockBomba();
+    }
+    bombas[i].desligarBomba();
+  }
+}
