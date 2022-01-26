@@ -28,6 +28,12 @@ void loop() {
     bombas[i].checkSchedule();
   }
 
+  // Verificar Saúde das bombas quando der o meio dia
+  DateTime now = RTC.now();
+  if (now.hour() == 12 && now.minute() == 0) {
+    checkPumps(bombas);
+  }
+
   textSms = Serial.readString();
 
   // Converter o texto para maiúsculas
