@@ -43,6 +43,7 @@ public:
     this->eepromAddress = eepromAddress;
     this->schedule = schedule;
 
+    pinMode(pin, OUTPUT);
     byte value = EEPROM.read(eepromAddress);
     isLocked = bitRead(value, 0);
     turnOff();

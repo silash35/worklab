@@ -72,7 +72,7 @@ void loop() {
       if (textSms[commandIndex + 3] != '-') {
         bombas[selectedBomb].turnOff();
       } else {
-        int time = textSms.substring(commandIndex + 4, 4).toInt();
+        int time = textSms.substring(commandIndex + 4, commandIndex + 8).toInt();
         bombas[selectedBomb].setOffTimer(time);
       }
     } else {
