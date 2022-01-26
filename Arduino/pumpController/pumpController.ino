@@ -7,8 +7,8 @@ String textSms = "";
 
 Schedule defaultSchedule(12, 03, 12, 04);
 
-Pump bombas[] = {Pump("Bomba 0", 8, 1, defaultSchedule), Pump("Bomba 1", 9, 1, defaultSchedule),
-                 Pump("Bomba 2", 10, 1, defaultSchedule), Pump("Bomba 3", 11, 1, defaultSchedule)};
+Pump bombas[] = {Pump("Bomba 0", 8, 0, defaultSchedule), Pump("Bomba 1", 9, 1, defaultSchedule),
+                 Pump("Bomba 2", 10, 2, defaultSchedule), Pump("Bomba 3", 11, 3, defaultSchedule)};
 
 void setup() {
   Serial.begin(115200);
