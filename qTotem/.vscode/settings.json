@@ -1,4 +1,5 @@
 {
+  "python.venvPath": "~/.local/share/virtualenvs",
   "python.linting.enabled": true,
   "python.linting.pylamaEnabled": true
 }

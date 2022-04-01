@@ -18,9 +18,9 @@ Foto da interface Web, onde o medico ira visualizar todos os pacientes em espera
 
 ## Execução
 
-Para rodar o aplicativo, primeiro vc irá precisar instalar as dependências Python que estão no arquivo "requirements.txt". Para fazer isso basta rodar o comando:
+Para rodar o aplicativo, primeiro vc irá precisar instalar as dependências Python que estão no arquivo "Pipfile". Para fazer isso basta rodar o comando:
 
-    pip install -r requirements.txt
+    pipenv install
 
 Também é recomendado instalar os seguintes pacotes:
 
