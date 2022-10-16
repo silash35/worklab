@@ -1,5 +1,5 @@
 *.user
 *__pycache__*
-qTotem/web/templates/users/*.html
+*/qTotem/web/templates/users/*.html
 
 */build
