@@ -1,7 +1,7 @@
 {
     "sketch": "WMS.ino",
     "board": "arduino:avr:nano",
-    "port": "/dev/ttyS0",
+    "port": "/dev/ttyUSB0",
     "programmer": "arduino:avrisp",
-    "configuration": "cpu=atmega328"
+    "configuration": "cpu=atmega328old"
 }

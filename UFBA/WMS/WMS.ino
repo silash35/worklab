@@ -17,6 +17,8 @@ void setup() {
 
 void loop() {
 
+  Serial.print("Testando 1 2 3\n");
+
   bool containerEmpty = true;
   bool containerHalf = true;
   bool containerFull = true;
@@ -27,7 +29,7 @@ void loop() {
     int state = sections[i].getState();
 
     if (state == 2) {
-      Serial.println("mat: Seção " + String(i) + " Cheia");
+      Serial.print("mat: Seção " + String(i) + " Cheia\n");
     }
 
     if (state != 0) {
@@ -61,7 +63,7 @@ void loop() {
     digitalWrite(LED_RED, HIGH);
 
     if (!alreadyWarned) {
-      Serial.println("truck: Container Cheio");
+      Serial.print("truck: Container Cheio\n");
       alreadyWarned = true;
     }
   }
