@@ -2,12 +2,11 @@
   "name": "waste-monitoring-system",
   "version": "1.0.0",
   "repository": "https://github.com/silash35/labrob.git",
-  "type": "module",
   "author": "Silas Henrique <silash35@gmail.com>",
   "license": "Unlicense",
   "private": false,
   "scripts": {
-    "start": "node ./daemon.js"
+    "start": "node ./daemon.mjs"
   },
   "devDependencies": {
     "eslint-config-silash35": "^1.0.1"
