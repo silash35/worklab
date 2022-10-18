@@ -47,6 +47,7 @@ public:
       if (alreadyWarned) {
         return 3;
       }
+      alreadyWarned = true;
       return 2;
     } else if (percentage >= 50) {
       alreadyWarned = false;
