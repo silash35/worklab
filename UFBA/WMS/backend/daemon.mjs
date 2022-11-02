@@ -28,40 +28,60 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 // Executar rotina sempre que dados novos chegarem no serial
-parser.on("data", (text) => {
+parser.on("data", async (text) => {
   // Imprimir na tela mensagem recebida
   console.log("[Arduino] ", text);
 
+  // Variável de controle para repetir o envio de email caso ocorra algum erro
+  let retry = false;
+
   if (text.startsWith("mat:")) {
     // Se a mensagem for pro operador da esteira industrial (mat)
-    transporter
-      .sendMail({
-        from: `"Arduino" <${process.env.EMAIL_USER}>`,
-        to: `${process.env.EMAIL_USER}, ${"silash35@gmail.com"}`,
-        subject: "A esteira transportadora de resíduos precisa de sua atenção",
-        text: text.slice(5),
-      })
-      .then(() => {
+
+    do {
+      try {
+        await transporter.sendMail({
+          from: `"Arduino" <${process.env.EMAIL_USER}>`,
+          to: `${process.env.EMAIL_USER}, ${"silash35@gmail.com"}`,
+          subject: "A esteira transportadora de resíduos precisa de sua atenção",
+          text: text.slice(5),
+        });
+
         console.log("Email enviado com sucesso para o operador da esteira");
-      })
-      .catch(() => {
-        console.log("Um Erro ocorreu ao enviar Email para o operador da esteira");
-      });
+        retry = false;
+      } catch (error) {
+        console.log(
+          "Um Erro ocorreu ao enviar Email para o operador da esteira. Tentando novamente..."
+        );
+        retry = true;
+        await delay(2000);
+      }
+    } while (retry);
   } else if (text.startsWith("truck: ")) {
     // Se a mensagem for pro operador do caminhão (truck)
-    transporter
-      .sendMail({
-        from: `"Arduino" <${process.env.EMAIL_USER}>`,
-        to: `${process.env.EMAIL_USER}, ${"silash35@gmail.com"}`,
-        subject: "Container cheio",
-        text: text.slice(7),
-      })
-      .then(() => {
+
+    do {
+      try {
+        await transporter.sendMail({
+          from: `"Arduino" <${process.env.EMAIL_USER}>`,
+          to: `${process.env.EMAIL_USER}, ${"silash35@gmail.com"}`,
+          subject: "Container cheio",
+          text: text.slice(7),
+        });
         console.log("Email enviado com sucesso para o motorista do caminhão");
-      })
-      .catch(() => {
-        console.log("Um Erro ocorreu ao enviar Email para o motorista do caminhão");
-      });
+        retry = false;
+      } catch (error) {
+        console.log(
+          "Um Erro ocorreu ao enviar Email para o motorista do caminhão. Tentando novamente..."
+        );
+        retry = true;
+        await delay(2000);
+      }
+    } while (retry);
   }
 });
