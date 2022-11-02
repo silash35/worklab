@@ -1,10 +1,10 @@
 {
-  "name": "waste-monitoring-system",
+  "name": "wms-daemon",
   "version": "1.0.0",
   "repository": "https://github.com/silash35/labrob.git",
   "author": "Silas Henrique <silash35@gmail.com>",
   "license": "Unlicense",
-  "private": false,
+  "private": true,
   "scripts": {
     "start": "node ./daemon.mjs"
   },
