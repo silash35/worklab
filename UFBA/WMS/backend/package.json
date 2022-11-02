@@ -9,7 +9,7 @@
     "start": "node ./daemon.mjs"
   },
   "devDependencies": {
-    "eslint-config-silash35": "^1.0.1"
+    "eslint-config-silash35": "^1.1.0"
   },
   "dependencies": {
     "@serialport/parser-readline": "^10.3.0",
