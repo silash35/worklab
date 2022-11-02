@@ -15,12 +15,14 @@ long readUltrasonicDistance(int triggerPin, int echoPin) {
   return 0.01723 * pulseIn(echoPin, HIGH);
 }
 
-// Class to control a section of a container
+// Classe para gerenciar uma seção do container
 class Section {
 private:
   int pinTrigger = 0;
   int pinEcho = 0;
 
+  // Variável que guarda a informação se os operadores já foram avisados sobre o status dessa seção
+  // do container em especifico
   bool alreadyWarned = false;
 
 public:
@@ -32,12 +34,13 @@ public:
     pinEcho = pe;
   }
 
+  // Ler estado atual da seção
   int getState() {
     /*
-      0: Empty
-      1: Half
-      2: Full (And needs to notify the mat operator)
-      3: Full (And the mat operator was already notified)
+      0: Vazio
+      1: Cheio pela metade
+      2: Cheio (E precisa notificar o operador da esteira)
+      3: Cheio (E o operador já foi notificado)
     */
 
     int distance = readUltrasonicDistance(pinTrigger, pinEcho);
