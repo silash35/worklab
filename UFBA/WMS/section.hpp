@@ -1,5 +1,5 @@
-#define EMPTY_BOX_VALUE 335
-#define FULL_BOX_VALUE 4
+#define EMPTY_BOX_VALUE 100
+#define FULL_BOX_VALUE 5
 #define MAX_BOX_PERCENTAGE 90
 
 long readUltrasonicDistance(int triggerPin, int echoPin) {
@@ -45,6 +45,12 @@ public:
 
     int distance = readUltrasonicDistance(pinTrigger, pinEcho);
     int percentage = map(distance, EMPTY_BOX_VALUE, FULL_BOX_VALUE, 0, 100);
+
+    /*
+      Serial.print("Porcentagem: ");
+      Serial.print(percentage);
+      Serial.print("\n");
+    */
 
     if (percentage >= MAX_BOX_PERCENTAGE) {
       if (alreadyWarned) {

@@ -19,6 +19,9 @@ void setup() {
 }
 
 void loop() {
+  // Sempre aguardar alguns segundos antes de verificar
+  delay(2000);
+
   // Realizar rotina de verificação do container
   container.verify();
 }
