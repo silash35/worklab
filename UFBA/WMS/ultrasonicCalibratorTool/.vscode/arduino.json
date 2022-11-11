@@ -1,0 +1,7 @@
+{
+    "board": "arduino:avr:nano",
+    "port": "/dev/ttyUSB0",
+    "sketch": "ultrasonicCalibratorTool.ino",
+    "programmer": "arduino:avrisp",
+    "configuration": "cpu=atmega328old"
+}
