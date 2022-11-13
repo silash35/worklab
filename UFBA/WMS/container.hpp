@@ -9,14 +9,14 @@ private:
   // Cada seção do container é um objeto separado.
   // Ao criar um Array de objetos, fica mais fácil iterar por seus elementos e modificar a
   // quantidade de seções conforme o necessário
-  Section sections[1];
+  Section sections[3];
 
   // Variável que guarda a informação se os operadores já foram avisados sobre o status do container
   // como um todo
   bool alreadyWarned = false;
 
 public:
-  Container() : sections{Section(A1, A0)} {
+  Container() : sections{Section(A0, A1), Section(A2, A3), Section(A4, A5)} {
     // Setar pins de LED como saída.
     pinMode(LED_GREEN, OUTPUT);
     pinMode(LED_YELLOW, OUTPUT);

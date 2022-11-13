@@ -1,4 +1,4 @@
-#define EMPTY_BOX_VALUE 100
+#define EMPTY_BOX_VALUE 50
 #define FULL_BOX_VALUE 5
 #define MAX_BOX_PERCENTAGE 90
 
