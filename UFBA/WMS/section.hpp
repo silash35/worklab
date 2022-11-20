@@ -1,6 +1,6 @@
-#define EMPTY_BOX_VALUE 12
+#define EMPTY_BOX_VALUE 10
 #define FULL_BOX_VALUE 2
-#define MAX_BOX_PERCENTAGE 90
+#define MAX_BOX_PERCENTAGE 80
 
 long readUltrasonicDistance(int triggerPin, int echoPin) {
   pinMode(triggerPin, OUTPUT); // Clear the trigger

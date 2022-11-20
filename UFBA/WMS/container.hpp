@@ -16,7 +16,7 @@ private:
   bool alreadyWarned = false;
 
 public:
-  Container() : sections{Section(A0, A1), Section(A2, A3), Section(A4, A5)} {
+  Container() : sections{Section(A0, A1), Section(A4, A5), Section(A2, A3)} {
     // Setar pins de LED como saída.
     pinMode(LED_GREEN, OUTPUT);
     pinMode(LED_YELLOW, OUTPUT);
@@ -32,6 +32,7 @@ public:
 
     for (int i = 0; i < sizeof(sections) / sizeof(sections[0]); i++) {
       int state = sections[i].getState();
+      delay(100);
 
       if (state == 2) {
         Serial.print("mat: Seção " + String(i) + " Cheia, por favor mude a esteira para outra\n");
