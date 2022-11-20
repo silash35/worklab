@@ -1,5 +1,5 @@
-#define EMPTY_BOX_VALUE 50
-#define FULL_BOX_VALUE 5
+#define EMPTY_BOX_VALUE 12
+#define FULL_BOX_VALUE 2
 #define MAX_BOX_PERCENTAGE 90
 
 long readUltrasonicDistance(int triggerPin, int echoPin) {
