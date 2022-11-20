@@ -59,7 +59,6 @@ public:
       alreadyWarned = true;
       return 2;
     } else if (percentage >= 50) {
-      alreadyWarned = false;
       return 1;
     } else {
       alreadyWarned = false;

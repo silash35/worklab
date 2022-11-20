@@ -61,8 +61,6 @@ public:
       digitalWrite(LED_GREEN, LOW);
       digitalWrite(LED_YELLOW, HIGH);
       digitalWrite(LED_RED, LOW);
-
-      alreadyWarned = false;
     } else if (containerFull) {
       digitalWrite(LED_GREEN, LOW);
       digitalWrite(LED_YELLOW, LOW);
