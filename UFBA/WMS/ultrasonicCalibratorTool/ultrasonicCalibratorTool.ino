@@ -1,6 +1,6 @@
 // Ultrasonic Calibrator Tool
-#define PIN_TRIGGER A1
-#define PIN_ECHO A0
+#define PIN_TRIGGER A0
+#define PIN_ECHO A1
 
 long readUltrasonicDistance(int triggerPin, int echoPin) {
   pinMode(triggerPin, OUTPUT); // Clear the trigger
@@ -28,5 +28,7 @@ void loop() {
 
   Serial.print("Distancia: ");
   Serial.print(distance);
-  Serial.print("\n");
+  Serial.print(" cm\n");
+
+  delay(1000);
 }
