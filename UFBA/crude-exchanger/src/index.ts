@@ -1,3 +1,6 @@
+import { combinations , range} from "./generators";
+
+
 function hasRepeatedDigits(text: string) {
   const digits = text.split("");
   const seen = new Set();
@@ -9,7 +12,8 @@ function hasRepeatedDigits(text: string) {
 }
 
 // Create an array with all the possible combinations (0 to 5555)
-let array = Array.from({ length: 5555 }, (_, i) => i);
+let array = range(0, 5555);
+// let array = combinations(["0", "1", "2", "3", "4", "5"], 4);
 
 // Filter the combinations that do not match the requirements of the problem
 array = array.filter((item) => {
