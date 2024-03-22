@@ -8,11 +8,14 @@ package-mode = false
 
 [tool.taskipy.tasks]
 main = "python engg03/main.py"
+newton = "python engg03/raiz-por-newton.py"
+linear = "python engg03/sistemas-lineares.py"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
 matplotlib = "^3.8.3"
 numpy = "^1.26.4"
+sympy = "^1.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.2.0"
