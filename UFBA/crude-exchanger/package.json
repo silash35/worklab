@@ -1,0 +1,18 @@
+{
+  "name": "crude-exchanger",
+  "version": "1.0.0",
+  "repository": "https://github.com/silash35/labrob.git",
+  "author": "Silas Henrique <silash35@gmail.com>",
+  "license": "Unlicense",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "eslint-config-silash35": "^3.4.0",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.1"
+  }
+}
