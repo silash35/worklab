@@ -6,7 +6,12 @@ authors = ["Silas Henrique <silash35@gmail.com>"]
 readme = "README.md"
 package-mode = false
 
+[tool.mypy]
+strict = true
+disallow_untyped_calls = false
+
 [tool.taskipy.tasks]
+lint = "black . --check && mypy ."
 main = "python engg03/main.py"
 newton = "python engg03/raiz-por-newton.py"
 linear = "python engg03/sistemas-lineares.py"
@@ -20,6 +25,7 @@ sympy = "^1.12"
 [tool.poetry.group.dev.dependencies]
 black = "^24.2.0"
 taskipy = "^1.12.2"
+mypy = "^1.9.0"
 
 [build-system]
 requires = ["poetry-core"]
