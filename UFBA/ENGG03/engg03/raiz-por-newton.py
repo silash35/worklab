@@ -4,12 +4,9 @@ from typing import cast
 x: sp.Symbol = sp.symbols("x")
 
 
-def printFunção(f: sp.Expr):
-    print("Função:")
-    print(sp.latex(f))
-
-
-def newton(f: sp.Expr, x0: float, tol=0.00000000001):
+# 1e-4 = 1*10^-4 = 0.0001
+# 1e-11 = 1*10^-11 = 0.00000000001
+def newton(f: sp.Expr, x0: float, tol=10e-11):
     df = sp.diff(f, x)
 
     def função(xValue: float):
@@ -30,12 +27,12 @@ def newton(f: sp.Expr, x0: float, tol=0.00000000001):
 
 print("E 3.4.1:")
 F = sp.sympify("cos(x)-x**2")
-printFunção(F)
+print("Função:", F)
 print("{:.5f}".format(newton(F, 1)))
 print()
 
 print("E 3.4.3:")
 F = sp.sympify("exp(-(x**2)) - x")
-printFunção(F)
+print("Função:", F)
 print("{:.8f}".format(newton(F, 1)))
 print()
