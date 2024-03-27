@@ -1,12 +1,12 @@
 import sympy as sp
 from typing import cast
 
-x: sp.Symbol = sp.symbols("x")
+x: sp.Symbol = sp.symbols("x", real=True)
 
 
 # 1e-4 = 1*10^-4 = 0.0001
 # 1e-11 = 1*10^-11 = 0.00000000001
-def newton(f: sp.Expr, x0: float, tol=10e-11):
+def newton(f: sp.Expr, xn: float, tol=10e-11):
     """
     Função de Newton para encontrar a raiz de uma função f(x).
 
@@ -43,11 +43,10 @@ def newton(f: sp.Expr, x0: float, tol=10e-11):
 
     maxIter = 100  # máximo de iterações
     for i in range(maxIter):  # loop de iteração
-        print(f"x{i}:", x0)  # imprime valor atual de x
-        x1: float = x0 - (função(x0) / derivada(x0))  # iteração de Newton
-        x0 = x1  # atualiza valor de x para o próximo loop
-        if abs(função(x1)) < tol:  # condição de parada
-            return x1  # retorna a raiz encontrada
+        print(f"x{i}:", xn)  # imprime valor atual de x
+        xn = xn - (função(xn) / derivada(xn))  # iteração de Newton
+        if abs(função(xn)) < tol:  # condição de parada
+            return xn  # retorna a raiz encontrada
     raise Exception("Falha ao encontrar a raiz")  # erro de falha em encontrar a raiz
 
 
@@ -59,7 +58,21 @@ F = (
     sp.exp((x * t) / (2 * L)) * sp.cos(t * sp.sqrt((1 / (L * C)) - (x / (2 * L)) ** 2))
     - 0.01
 )
-
 print("Função:", F)
 print("{:.5f}".format(newton(F, 200)))
+print()
+
+
+print("Fator de Fricção:")
+rho = 1.23
+mu = 1.79e-5
+D = 0.005
+epsilon = 1.5e-6
+v = 40
+Re = (rho * v * D) / mu
+F = -2 * sp.log((epsilon / (3.7 * D)) + (2.51 / (Re * sp.sqrt(x))), 10) - (
+    1 / sp.sqrt(x)
+)
+print("Função:", F)
+print("{:.5f}".format(newton(F, 0.001)))
 print()

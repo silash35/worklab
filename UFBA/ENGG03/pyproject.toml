@@ -14,6 +14,7 @@ venv = ".venv"
 lint = "black . --check && pyright -p ."
 main = "python engg03/main.py"
 newton = "python engg03/raiz-por-newton.py"
+newton2 = "python engg03/raiz-por-newton2.py"
 linear = "python engg03/sistemas-lineares.py"
 
 [tool.poetry.dependencies]
@@ -21,6 +22,7 @@ python = ">=3.11,<3.13"
 matplotlib = "^3.8.3"
 numpy = "^1.26.4"
 sympy = "^1.12"
+scipy = "^1.12.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.2.0"
