@@ -17,6 +17,7 @@ visualize = "python engg03/visualize.py"
 newton = "python engg03/raiz-por-newton.py"
 newton2 = "python engg03/raiz-por-newton2.py"
 linear = "python engg03/sistemas-lineares.py"
+nlinear = "python engg03/sistemas-não-lineares.py"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
