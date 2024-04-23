@@ -1,5 +1,4 @@
-import { combinations , range} from "./generators";
-
+import { combinations, range } from "./generators";
 
 function hasRepeatedDigits(text: string) {
   const digits = text.split("");
@@ -20,12 +19,7 @@ array = array.filter((item) => {
   const sItem = String(item);
 
   // The combination must not contain any of the numbers 6, 7, 8 or 9. Only the digits 0, 1, 2, 3, 4, 5 are allowed
-  if (
-    sItem.includes("6") ||
-    sItem.includes("7") ||
-    sItem.includes("8") ||
-    sItem.includes("9")
-  ) {
+  if (sItem.includes("6") || sItem.includes("7") || sItem.includes("8") || sItem.includes("9")) {
     return false;
   }
 
