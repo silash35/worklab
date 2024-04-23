@@ -18,6 +18,10 @@ newton = "python engg03/raiz-por-newton.py"
 newton2 = "python engg03/raiz-por-newton2.py"
 linear = "python engg03/sistemas-lineares.py"
 nlinear = "python engg03/sistemas-não-lineares.py"
+derivada = "python engg03/derivada.py"
+derivada2 = "python engg03/derivada2.py"
+
+
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
@@ -26,6 +30,7 @@ numpy = "^1.26.4"
 sympy = "^1.12"
 scipy = "^1.12.0"
 pyside6 = "^6.6.3"
+pandas = "^2.2.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.2.0"
