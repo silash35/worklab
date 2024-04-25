@@ -9,27 +9,26 @@ def f2(x0, x1):
     return x0**2 + (x1**2) / 4 - 1
 
 
-def derivada_x0(f, x0, x1, h=0.00000001):
-    return (f(x0 + h, x1) - f(x0 - h, x1)) / (2 * h)
-
-
-def derivada_x1(f, x0, x1, h=0.00000001):
-    return (f(x0, x1 + h) - f(x0, x1 - h)) / (2 * h)
+def derivadas(f, x0, x1, h=0.00000001):
+    dfdx0 = (f(x0 + h, x1) - f(x0 - h, x1)) / (2 * h)
+    dfdx1 = (f(x0, x1 + h) - f(x0, x1 - h)) / (2 * h)
+    return np.array([dfdx0, dfdx1])
 
 
 Ki = [[1], [1]]  # Chute inicial
-tol = 1e-8  # Tolerância
-erro = 1
-
-while abs(erro) > tol:
+while True:
     fKi = np.array([[f1(Ki[0][0], Ki[1][0]), f2(Ki[0][0], Ki[1][0])]]).T
 
-    erro = fKi.T.dot(fKi)[0, 0]
+    # Critério de parada
+    if abs(fKi.T.dot(fKi)[0, 0]) < 1e-8:
+        break
 
-    # Matriz Jacobiana
+    # Montando a Jacobiana
+    df1dx0, df1dx1 = derivadas(f1, Ki[0][0], Ki[1][0])
+    df2dx0, df2dx1 = derivadas(f2, Ki[0][0], Ki[1][0])
     JKi = [
-        [derivada_x0(f1, Ki[0][0], Ki[1][0]), derivada_x1(f1, Ki[0][0], Ki[1][0])],
-        [derivada_x0(f2, Ki[0][0], Ki[1][0]), derivada_x1(f2, Ki[0][0], Ki[1][0])],
+        [df1dx0, df1dx1],
+        [df2dx0, df2dx1],
     ]
 
     # Newton-Raphson
