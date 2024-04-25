@@ -20,6 +20,7 @@ linear = "python engg03/sistemas-lineares.py"
 nlinear = "python engg03/sistemas-não-lineares.py"
 derivada = "python engg03/derivada.py"
 derivada2 = "python engg03/derivada2.py"
+nderivada = "python engg03/derivada-newton.py"
 
 
 
