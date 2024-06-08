@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "LLMs"
+version = "0.1.0"
+description = ""
+authors = ["Silas Henrique <silash35@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.taskipy.tasks]
+main = "python LLMs/main.py"
+chat = "python LLMs/chat.py"
+watch = "watchmedo shell-command --patterns='*.py' --recursive --command='python LLMs/main.py'"
+login = "huggingface-cli login --add-to-git-credential"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+langchain = "^0.2.2"
+langchain-huggingface = "^0.0.3"
+langchain-community = "^0.2.3"
+python-dotenv = "^1.0.1"
+langchain-openai = "^0.1.8"
+pypdf = "^4.2.0"
+youtube-transcript-api = "^0.6.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.2.0"
+taskipy = "^1.12.2"
+watchdog = "^4.0.1"
+huggingface-cli = "^0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
