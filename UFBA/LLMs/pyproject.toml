@@ -9,8 +9,8 @@ package-mode = false
 [tool.taskipy.tasks]
 main = "python LLMs/main.py"
 chat = "python LLMs/chat.py"
-watch = "watchmedo shell-command --patterns='*.py' --recursive --command='python LLMs/main.py'"
-login = "huggingface-cli login --add-to-git-credential"
+filter = "python LLMs/filter.py"
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -21,6 +21,7 @@ python-dotenv = "^1.0.1"
 langchain-openai = "^0.1.8"
 pypdf = "^4.2.0"
 youtube-transcript-api = "^0.6.2"
+langchain-text-splitters = "^0.2.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.2.0"

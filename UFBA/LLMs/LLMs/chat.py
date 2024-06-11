@@ -20,7 +20,7 @@ def get_link_info(url):
     return "\n".join(pages)  # converto a lista de strings para uma única string
 
 
-model = ChatOpenAI(model="gpt-4o")
+model = ChatOpenAI(model="gpt-3.5-turbo")
 
 prompt = ChatPromptTemplate.from_messages(
     [
