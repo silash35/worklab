@@ -56,21 +56,6 @@ def print_chunks(chunks):
 
 # Generate chunks
 for file in files:
-    if file.endswith(".js") or file.endswith(".jsx"):
-        with open(file, "r") as f:
-            content = f.read()
-            print_chunks(javascript_splitter.split_text(content))
-
-    if file.endswith(".ts") or file.endswith(".tsx"):
-        with open(file, "r") as f:
-            content = f.read()
-            print_chunks(typescript_splitter.split_text(content))
-
-    if file.endswith(".css") or file.endswith(".scss"):
-        with open(file, "r") as f:
-            content = f.read()
-            print_chunks(css_splitter.split_text(content))
-
     if file.endswith(".json"):
         with open(file, "r") as f:
             content = json.load(f)
