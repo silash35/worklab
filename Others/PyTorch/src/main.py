@@ -25,19 +25,27 @@ train_loss_values, test_loss_values, epoch_count = trainer(
 
 
 # Test the model
-
-
 def accuracy_fn(y_true: torch.Tensor, y_pred: torch.Tensor) -> float:
     correct = torch.eq(y_true, y_pred).sum().item()
     acc = (correct / len(y_pred)) * 100
     return acc
 
 
-y_preds = []
 with torch.inference_mode():
     y_preds_probs = model(X_test)
     y_preds = y_preds_probs.argmax(dim=1)
+    print(f"Predictions: {y_preds[:10]}\nLabels     : {y_test[:10]}")
+    print(f"Test accuracy: {accuracy_fn(y_test, y_preds)}%")
 
+# Visualize the decision boundaries
+from visualize import plot_decision_boundary
 
-print(f"Predictions: {y_preds[:10]}\nLabels     : {y_test[:10]}")
-print(f"Test accuracy: {accuracy_fn(y_test, y_preds)}%")
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+plt.title("Train")
+plot_decision_boundary(model, X_train, y_train)
+plt.subplot(1, 2, 2)
+plt.title("Test")
+plot_decision_boundary(model, X_test, y_test)
+
+plt.show()

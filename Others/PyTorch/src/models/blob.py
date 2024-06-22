@@ -6,9 +6,9 @@ class BlobModel(nn.Module):
         super().__init__()
         self.linear_layer_stack = nn.Sequential(
             nn.Linear(in_features=input_features, out_features=hidden_units),
-            # nn.ReLU(),
+            nn.ReLU(),
             nn.Linear(in_features=hidden_units, out_features=hidden_units),
-            # nn.ReLU(),
+            nn.ReLU(),
             nn.Linear(in_features=hidden_units, out_features=output_features),
             nn.Softmax(dim=1),
         )
