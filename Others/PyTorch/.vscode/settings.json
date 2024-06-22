@@ -1,0 +1,17 @@
+{
+  "cSpell.words": [
+    "arange",
+    "figsize",
+    "histplot",
+    "imshow",
+    "imwrite",
+    "meshgrid",
+    "optim",
+    "preds",
+    "randn",
+    "unsqueeze",
+    "xlabel",
+    "ylabel",
+    "zlabel"
+  ]
+}
