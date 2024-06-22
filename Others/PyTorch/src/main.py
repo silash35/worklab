@@ -17,37 +17,24 @@ X_train, y_train = X[:train_split], y[:train_split]
 X_test, y_test = X[train_split:], y[train_split:]
 
 
-# plot_predictions(X_train, y_train, X_test, y_test)
-
-
 # Create a linear model
 class LinearRegressionModel(nn.Module):
-    def __init__(self):
+    def __init__(self, in_size: int = 1, out_size: int = 1):
         super().__init__()
-        self.linear_layer = nn.Linear(in_features=1, out_features=1)
+        self.linear_layer = nn.Linear(in_size, out_size)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.linear_layer(x)
 
 
-torch.manual_seed(42)
+torch.manual_seed(42)  # For reproducibility
 model_0 = LinearRegressionModel()
 
 
-# Test out the model (goes wrong)
-
-
-# print((model_0.state_dict())) # Check the parameters of the model
-# with torch.inference_mode():
-#     y_preds = model_0(X_test)
-# plot_predictions(X_train, y_train, X_test, y_test, y_preds)
-
 # Train the model
 
-loss_fn = nn.MSELoss(reduction="sum")  # MAE loss is same as L1Loss
+loss_fn = nn.MSELoss(reduction="sum")
 optimizer = torch.optim.SGD(params=model_0.parameters(), lr=0.01)
-
-torch.manual_seed(42)
 epochs = 100
 
 train_loss_values = []
@@ -73,9 +60,10 @@ for epoch in range(epochs):
             train_loss_values.append(loss.detach().numpy())
             test_loss_values.append(test_loss.detach().numpy())
             print(
-                f"Epoch: {epoch} | MAE Train Loss: {loss} | MAE Test Loss: {test_loss} "
+                f"Epoch: {epoch} | MSE Train Loss: {loss} | MSE Test Loss: {test_loss} "
             )
 
+# Plot the loss curves and test the model
 
 plt.plot(epoch_count, train_loss_values, label="Train loss")
 plt.plot(epoch_count, test_loss_values, label="Test loss")
