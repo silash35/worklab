@@ -1,17 +1,26 @@
 {
   "cSpell.words": [
     "arange",
+    "argmax",
+    "cmap",
+    "contourf",
     "figsize",
     "histplot",
     "imshow",
     "imwrite",
     "meshgrid",
+    "mutli",
+    "ndarray",
     "optim",
     "preds",
+    "probs",
     "randn",
+    "softmax",
     "unsqueeze",
     "xlabel",
+    "xlim",
     "ylabel",
+    "ylim",
     "zlabel"
   ]
 }

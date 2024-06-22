@@ -34,7 +34,7 @@ def trainer(
 
         with torch.inference_mode():
             test_pred = model(X_test)
-            test_loss = loss_fn(test_pred, y_test.type(torch.float))
+            test_loss = loss_fn(test_pred, y_test)
             if epoch % 10 == 0:
                 epoch_count.append(epoch)
                 train_loss_values.append(loss.detach().numpy())
