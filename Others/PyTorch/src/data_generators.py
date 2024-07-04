@@ -1,6 +1,8 @@
 import numpy as np
 import torch
 from typing import cast
+from sklearn.datasets import make_blobs
+from sklearn.model_selection import train_test_split
 
 
 def linear(weight, bias):
@@ -8,10 +10,6 @@ def linear(weight, bias):
     y = weight * X + bias
 
     return train_test_split(X, y, test_size=0.2, random_state=42)
-
-
-from sklearn.datasets import make_blobs
-from sklearn.model_selection import train_test_split
 
 
 def blobs(n_features: int, n_classes: int):
