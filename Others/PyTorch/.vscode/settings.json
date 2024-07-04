@@ -16,6 +16,7 @@
     "probs",
     "randn",
     "softmax",
+    "Softplus",
     "unsqueeze",
     "xlabel",
     "xlim",
