@@ -9,7 +9,7 @@ t = 0.05
 C = 10**-4
 L = 5
 funçãoAnalítica = (
-    sp.exp((x * t) / (2 * L)) * sp.cos(t * sp.sqrt((1 / (L * C)) - (x / (2 * L)) ** 2))
+    sp.exp((x * t) / (2 * L)) * sp.cos(t * sp.sqrt((1 / (L * C)) - (x / (2 * L)) ** 2))  # type: ignore
     - 0.01
 )
 
