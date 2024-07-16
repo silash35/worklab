@@ -23,6 +23,7 @@ derivada2 = "python engg03/derivada2.py"
 nderivada = "python engg03/derivada-newton.py"
 integral = "python engg03/integral.py"
 edo = "python engg03/edo.py"
+eda = "python engg03/eda.py"
 
 
 [tool.poetry.dependencies]
