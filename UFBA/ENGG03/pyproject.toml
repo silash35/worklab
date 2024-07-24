@@ -22,7 +22,10 @@ derivada = "python engg03/derivada.py"
 derivada2 = "python engg03/derivada2.py"
 nderivada = "python engg03/derivada-newton.py"
 integral = "python engg03/integral.py"
-edo = "python engg03/edo.py"
+ivp = "python engg03/ivp.py"
+bvp = "python engg03/bvp.py"
+carga = "python engg03/carga.py"
+descarga = "python engg03/descarga.py"
 
 
 [tool.poetry.dependencies]
