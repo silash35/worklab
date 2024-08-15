@@ -24,6 +24,7 @@ nderivada = "python engg03/derivada-newton.py"
 integral = "python engg03/integral.py"
 ivp = "python engg03/ivp.py"
 bvp = "python engg03/bvp.py"
+pde = "python engg03/pde.py"
 carga = "python engg03/carga.py"
 descarga = "python engg03/descarga.py"
 
