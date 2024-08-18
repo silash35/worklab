@@ -1,5 +1,7 @@
 {
   "cSpell.words": [
+    "cmap",
+    "colorbar",
     "CSTR",
     "dfdx",
     "dhdt",
@@ -7,8 +9,11 @@
     "ENGG",
     "figsize",
     "Galan",
+    "imshow",
     "popt",
     "Tcdt",
+    "vmax",
+    "vmin",
     "xlabel",
     "ylabel"
   ]
