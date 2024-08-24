@@ -28,6 +28,7 @@ pde = "python engg03/pde.py"
 pde2 = "python engg03/pde2.py"
 carga = "python engg03/carga.py"
 descarga = "python engg03/descarga.py"
+max = "python engg03/maximize.py"
 
 
 [tool.poetry.dependencies]
