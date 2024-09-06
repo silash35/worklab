@@ -1,6 +1,9 @@
 {
   "cSpell.words": [
+    "axvline",
+    "BFGS",
     "cmap",
+    "COBYLA",
     "colorbar",
     "CSTR",
     "dfdx",
@@ -11,7 +14,9 @@
     "Galan",
     "imshow",
     "ineq",
+    "linestyle",
     "popt",
+    "rtol",
     "Tcdt",
     "vmax",
     "vmin",
