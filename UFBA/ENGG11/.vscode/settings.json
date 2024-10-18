@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "arange",
     "argmax",
     "cmap",
     "colorbar",
@@ -8,6 +9,7 @@
     "logspace",
     "mcolors",
     "meshgrid",
+    "vazao",
     "vmax",
     "vmin",
     "xlabel",
