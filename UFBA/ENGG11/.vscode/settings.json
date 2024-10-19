@@ -1,4 +1,10 @@
 {
+  "material-icon-theme.files.associations": {
+    "*.hkl": "Pkl"
+  },
+  "material-icon-theme.folders.associations": {
+    "media": "images"
+  },
   "cSpell.words": [
     "arange",
     "argmax",
@@ -7,10 +13,12 @@
     "colorbar",
     "contourf",
     "figsize",
+    "libx",
     "logspace",
     "mcolors",
     "meshgrid",
     "vazao",
+    "vcodec",
     "vmax",
     "vmin",
     "xlabel",

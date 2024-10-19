@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
 from typings import Population
 
@@ -49,15 +48,12 @@ def plot_population(Cv1, Cv2, Z, population: Population, filename: str | None = 
     plt.ylabel("$Cv_2$")
     plt.title("Posição dos indivíduos da população")
 
-    best_fitness = np.max([individual["fitness"] for individual in population])
-    for individual in population:
-        if individual["fitness"] == best_fitness:
-            plt.scatter(
-                individual["chromosome"][0], individual["chromosome"][1], color="green"
-            )
-        else:
-            plt.scatter(
-                individual["chromosome"][0], individual["chromosome"][1], color="red"
-            )
+    best_ind = max(population, key=lambda ind: ind["fitness"])
+    population = [ind for ind in population if ind["fitness"] != best_ind["fitness"]]
+
+    for ind in population:
+        plt.scatter(ind["chromosome"][0], ind["chromosome"][1], color="red")
+
+    plt.scatter(best_ind["chromosome"][0], best_ind["chromosome"][1], color="green")
 
     save_or_show(filename)
