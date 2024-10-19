@@ -3,7 +3,7 @@ import numpy as np
 
 from typings import Population
 
-save_folder = "../images/"
+save_folder = "../media/"
 default_dpi = 96
 
 
