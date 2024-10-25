@@ -12,16 +12,27 @@
     "cmap",
     "colorbar",
     "contourf",
+    "cxpb",
+    "deap",
     "figsize",
+    "halloffame",
+    "indpb",
     "libx",
     "logspace",
     "mcolors",
     "meshgrid",
+    "mutpb",
+    "ngen",
+    "rastrigin",
+    "Rastrigin",
+    "tournsize",
     "vazao",
     "vcodec",
+    "viridis",
     "vmax",
     "vmin",
     "xlabel",
-    "ylabel"
+    "ylabel",
+    "zlabel"
   ]
 }

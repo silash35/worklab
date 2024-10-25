@@ -5,6 +5,7 @@ authors = [ {name = "Silas Henrique", email = "silash35@gmail.com"}, ]
 requires-python = ">=3.13"
 
 dependencies = [
+    "deap>=1.4.1",
     "hickle>=5.0.3",
     "ipykernel>=6.29.5",
     "matplotlib>=3.9.2",
