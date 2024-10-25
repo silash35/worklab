@@ -11,6 +11,7 @@
     "cbar",
     "cmap",
     "colorbar",
+    "colorscale",
     "contourf",
     "cxpb",
     "deap",
@@ -23,6 +24,7 @@
     "meshgrid",
     "mutpb",
     "ngen",
+    "plotly",
     "rastrigin",
     "Rastrigin",
     "tournsize",
@@ -31,8 +33,11 @@
     "viridis",
     "vmax",
     "vmin",
+    "xaxis",
     "xlabel",
+    "yaxis",
     "ylabel",
+    "zaxis",
     "zlabel"
   ]
 }
