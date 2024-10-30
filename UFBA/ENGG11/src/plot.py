@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from typings import Population
 
@@ -57,3 +58,22 @@ def plot_population(Cv1, Cv2, Z, population: Population, filename: str | None = 
     plt.scatter(best_ind["chromosome"][0], best_ind["chromosome"][1], color="green")
 
     save_or_show(filename)
+
+
+def plot_density(values, labels, metric, title):
+    plt.figure(figsize=(10, 5))
+
+    for i in range(len(values)):
+        sns.histplot(
+            values[i],
+            kde=True,
+            label=labels[i],
+            stat="density",
+            bins=15,
+        )
+
+    plt.xlabel(metric)
+    plt.ylabel("Densidade")
+    plt.title(title)
+    plt.legend()
+    plt.show()
