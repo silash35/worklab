@@ -28,6 +28,7 @@
     "plotly",
     "rastrigin",
     "Rastrigin",
+    "showscale",
     "tournsize",
     "vazao",
     "vcodec",

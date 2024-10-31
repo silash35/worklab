@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 import seaborn as sns
 
 from typings import Population
@@ -16,15 +17,17 @@ def save_or_show(filename: str | None = None):
         plt.close()
 
 
-def plot_tanks(t, tanks, labels=None, filename: str | None = None):
+def plot_tanks(t, tanks, labels=None, filename: str | None = None, scatter=0):
     plt.figure(figsize=(10, 4), layout="constrained", dpi=default_dpi)
-    plt.title("Níveis dos tanques pelo tempo")
 
     for i, tank in enumerate(tanks):
         label = labels[i] if (type(labels) is list) else labels
-        plt.plot(t, tank, label=label)
-    plt.xlabel("Tempo (s)")
-    plt.ylabel("Nível (cm)")
+        if i < scatter:
+            plt.scatter(t, tank, label=label, s=8)
+        else:
+            plt.plot(t, tank, label=label)
+    plt.xlabel("Tempo / s")
+    plt.ylabel("Nível / cm")
     plt.legend()
 
     save_or_show(filename)
@@ -36,9 +39,30 @@ def plot_space(Cv1, Cv2, Z, filename: str | None = None):
     plt.colorbar()
     plt.xlabel("$Cv_1$")
     plt.ylabel("$Cv_2$")
-    plt.title("Visualização gráfica da função objetivo")
 
     save_or_show(filename)
+
+
+def plot_space_3d(Cv1, Cv2, Z, filename: str | None = None):
+    fig = go.Figure(
+        data=[go.Surface(z=Z ** (1 / 8), x=Cv1, y=Cv2)],
+    )
+    fig.update_traces(showscale=False)
+    fig.update_layout(
+        scene=dict(
+            xaxis_title="Cv1",
+            yaxis_title="Cv2",
+            zaxis_title="Fitness",
+        ),
+        width=1080,
+        height=720,
+        margin=dict(r=20, l=10, b=10, t=10),
+    )
+
+    if filename is not None:
+        fig.write_image(save_folder + filename)
+    else:
+        fig.show()
 
 
 def plot_population(Cv1, Cv2, Z, population: Population, filename: str | None = None):
@@ -47,7 +71,6 @@ def plot_population(Cv1, Cv2, Z, population: Population, filename: str | None = 
 
     plt.xlabel("$Cv_1$")
     plt.ylabel("$Cv_2$")
-    plt.title("Posição dos indivíduos da população")
 
     best_ind = max(population, key=lambda ind: ind["fitness"])
     population = [ind for ind in population if ind["fitness"] != best_ind["fitness"]]
@@ -60,7 +83,7 @@ def plot_population(Cv1, Cv2, Z, population: Population, filename: str | None = 
     save_or_show(filename)
 
 
-def plot_density(values, labels, metric, title):
+def plot_density(values, labels, metric):
     plt.figure(figsize=(10, 5))
 
     for i in range(len(values)):
@@ -74,6 +97,5 @@ def plot_density(values, labels, metric, title):
 
     plt.xlabel(metric)
     plt.ylabel("Densidade")
-    plt.title(title)
     plt.legend()
     plt.show()
