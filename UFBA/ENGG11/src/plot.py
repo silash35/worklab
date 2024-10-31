@@ -83,7 +83,7 @@ def plot_population(Cv1, Cv2, Z, population: Population, filename: str | None = 
     save_or_show(filename)
 
 
-def plot_density(values, labels, metric):
+def plot_density(values, labels, metric, filename: str | None = None):
     plt.figure(figsize=(10, 5))
 
     for i in range(len(values)):
@@ -98,4 +98,5 @@ def plot_density(values, labels, metric):
     plt.xlabel(metric)
     plt.ylabel("Densidade")
     plt.legend()
-    plt.show()
+
+    save_or_show(filename)
