@@ -7,6 +7,8 @@ from typings import Population
 save_folder = "../media/"
 default_dpi = 96
 
+plt.rcParams.update({"font.size": 12})
+
 
 def save_or_show(filename: str | None = None):
     if filename is None:
