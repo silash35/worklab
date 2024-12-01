@@ -9,7 +9,7 @@ def plot_density(values, label, unit, unit_first=False):
         values,
         kde=True,
         stat="density",
-        bins=15,
+        bins=50,
         color="tab:blue",
     )
     plt.axvline(
