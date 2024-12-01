@@ -3,11 +3,12 @@ import numpy as np
 import seaborn as sns
 
 
-def plot_density(values, label, unit, unit_first=False):
+def plot_density(values, label, unit, unit_first=False, kde=True):
+    plt.figure(figsize=(8, 5), layout="constrained")
     mean_value = np.mean(values)
     sns.histplot(
         values,
-        kde=True,
+        kde=kde,
         stat="density",
         bins=50,
         color="tab:blue",
