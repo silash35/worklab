@@ -1,0 +1,30 @@
+{
+  "cSpell.words": [
+    "axvline",
+    "darkred",
+    "drawarrow",
+    "figsize",
+    "gridspec",
+    "hiperparâmetros",
+    "histplot",
+    "interp",
+    "makecell",
+    "mcolors",
+    "pinn",
+    "pygad",
+    "setp",
+    "supxlabel",
+    "supylabel",
+    "tabularx",
+    "textwidth",
+    "torchga",
+    "wspace",
+    "xlabel",
+    "xticks",
+    "yticks"
+  ],
+  "material-icon-theme.folders.associations": {
+    "studies": "target",
+    "results": "benchmark"
+  }
+}
