@@ -1,0 +1,246 @@
+\section{Respostas Padrão}
+
+\begin{frame}{Fundamentos e Fatoração do Sistema}
+  \footnotesize
+
+  \textbf{Relação de Integração entre Entradas Padrão:}
+  \begin{equation*}
+    \text{Impulso}
+    \xrightarrow{\int}
+    \text{Degrau}
+    \xrightarrow{\int}
+    \text{Rampa}
+  \end{equation*}
+
+  \textbf{FT Simplificada (7ª Ordem):}
+  \begin{equation*}
+    G_{1,1}(s) = \frac{-73{,}30s^2 - 6039{,}92s - 107263{,}56}
+    {s^3 + 13{,}24s^2 + 2872{,}57s + 12017{,}90}
+  \end{equation*}
+
+  \textbf{Polos do Denominador:}
+\begin{itemize}\itemsep2pt
+    \item $p_1 = -4{,}24~\text{h}^{-1}$ — polo real, decaimento exponencial puro
+      ($\tau_1 \approx 0{,}24$ h)
+    \item $p_{2,3} = -4{,}50 \pm 53{,}05j~\text{h}^{-1}$ — par complexo,
+      oscilação amortecida ($\omega_n \approx 53{,}24~\text{h}^{-1}$,
+      $\zeta \approx 0{,}085$)
+  \end{itemize}
+
+  \begin{block}{Interpretação Física}
+    O baixo fator de amortecimento ($\zeta \approx 0{,}085$) indica dinâmica
+    \textbf{subamortecida} gerada pelo acoplamento da corrente de reciclo.
+    O polo real define o envelope lento; o par complexo impõe oscilações
+    rápidas de pequena amplitude sobre ele.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{Validação Gráfica: Resposta ao Impulso}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{figuras/impulso.png}
+    \caption{Resposta ao Impulso Unitário.}
+  \end{figure}
+
+  \footnotesize
+\begin{itemize}\itemsep3pt
+    \item \textbf{9ª ordem:} pico de $\approx{-0{,}78}~\text{K\,h}^{-1}$
+      em $t\approx 0{,}05$ h e inversão positiva (${\approx+0{,}07}~\text{K\,h}^{-1}$)
+      — comportamento de \textbf{fase não-mínima} dos zeros rápidos eliminados.
+
+    \item \textbf{7ª ordem:} pico de apenas $\approx{-0{,}06}~\text{K\,h}^{-1}$,
+      atenuação de mais de uma ordem de magnitude.
+
+    \item \textbf{Regime:} ambos retornam a $\Delta T_1 = 0$ em $t\approx 1{,}5$ h,
+      com $\int_0^\infty y_{\text{imp}}\,dt = G(0) = -8{,}91$ K.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cálculo Analítico: Resposta ao Impulso}
+  \footnotesize
+
+  \textbf{Entrada:} $U(s)=1 \;\Rightarrow\; Y_{\text{imp}}(s) = G_{1,1}(s)$
+
+  \begin{block}{Identidade de Euler — Par Complexo Conjugado}
+    \vspace{-4pt}
+    \begin{align*}
+      R\,e^{p_2 t}+R^*e^{p_3 t}
+      &= |R|e^{\alpha t}\!\left(e^{j(\beta t+\theta)}+e^{-j(\beta t+\theta)}\right)
+      = 2|R|\,e^{\alpha t}\cos(\beta t+\theta)
+    \end{align*}
+    \vspace{-6pt}
+  \end{block}
+
+  \begin{alertblock}{Equação Temporal — $y_{\text{imp}}(t)$}
+    \centering
+    $y(t) = \underbrace{-34{,}054\,e^{-4{,}24t}}_{\text{decaimento lento}}
+    + \underbrace{48{,}432\,e^{-4{,}50t}\cos(53{,}05\,t + 2{,}515)}_{\text{oscilação amortecida}}$
+  \end{alertblock}
+
+  \textbf{Análise dos termos:}
+\begin{itemize}\itemsep2pt
+    \item Cosseno ($2|R|=48{,}432$): domina para $t<0{,}2$ h, causando o pico e a inversão de sinal.
+    \item Exponencial ($-34{,}054$): controla o decaimento lento para $t>0{,}2$ h.
+    \item $t\to\infty$: ambos $\to 0$ $\Rightarrow$ $y_{\text{imp}}(\infty)=0$. \checkmark
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cálculo Analítico: Degrau (Laplace)}
+  \footnotesize
+
+  \textbf{Entrada:} $U(s)=1/s \;\Rightarrow\;
+  Y_{\text{deg}}(s) = \dfrac{G_{1,1}(s)}{s}
+  = \dfrac{K}{s} + \dfrac{A'}{s+4{,}24} + \dfrac{R'}{s-p_2} + \dfrac{R'^*}{s-p_3}$
+
+  \begin{block}{Regime Permanente — Teorema do Valor Final}
+    \vspace{-2pt}
+    \begin{equation*}
+      K = \lim_{s\to 0}s\,Y(s) = G(0)
+      = \frac{-107263{,}56}{12017{,}90} = \mathbf{-8{,}9131}~\text{K}
+    \end{equation*}
+    \vspace{-4pt}
+    \small Redução térmica de $8{,}91$ K por unidade de $F_R$ em regime. \textbf{Nota:}
+    na janela de simulação ($t\leq 2{,}5$ h) o regime ainda não foi atingido.
+  \end{block}
+
+  \textbf{Resíduos dos Modos Transitórios:}
+\begin{itemize}\itemsep2pt
+    \item Polo real: $A' = +8{,}0319$ \quad(opõe $K$, garante $y(0)=0$)
+    \item Par complexo: $2|R'| = 0{,}9093$,\; $\angle R' = 0{,}249~\text{rad}$
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Validação Gráfica: Resposta ao Degrau}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{figuras/degrau.png}
+    \caption{Resposta ao Degrau Unitário.}
+  \end{figure}
+
+  \footnotesize
+\begin{itemize}\itemsep3pt
+    \item \textbf{9ª ordem:} \textit{undershoot} de $\approx{-0{,}032}$ K em
+      $t\approx 0{,}07$ h, reflexo dos zeros de fase não-mínima eliminados
+      na simplificação.
+
+    \item \textbf{7ª ordem:} resposta monotônica — pequena oscilação
+      ($2|R'|=0{,}9093$ K) amortecida, sem inversão de sinal.
+
+    \item \textbf{Convergência:} ambos alinham-se em $t\approx 1{,}5$ h,
+      confirmando preservação de $K=-8{,}9131$ K na redução de ordem.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cálculo Analítico: Resposta ao Degrau}
+  \footnotesize
+
+  \begin{alertblock}{Equação Temporal — $y_{\text{deg}}(t)$}
+    \centering
+    $y(t) = \underbrace{-8{,}9131}_{\text{regime}}
+    + \underbrace{8{,}0319\,e^{-4{,}24t}}_{\text{transitório real}}
+    + \underbrace{0{,}9093\,e^{-4{,}50t}\cos(53{,}05\,t+0{,}249)}_{\text{oscilação amortecida}}$
+  \end{alertblock}
+
+  \textbf{Verificação em $t=0$:}
+  \begin{equation*}
+    y(0) = -8{,}9131 + 8{,}0319 + 0{,}9093\cos(0{,}249)
+    = -8{,}9131 + 8{,}0319 + 0{,}8816 \approx 0 \;\checkmark
+  \end{equation*}
+
+  \textbf{Análise dos termos:}
+\begin{itemize}\itemsep2pt
+    \item $8{,}0319\,e^{-4{,}24t}$: contrabalança $K$ no início, forçando $y(0)=0$.
+    \item $0{,}9093\,e^{-4{,}50t}\cos(\cdots)$: oscilação pequena, amortece em
+      $\approx 0{,}3$ h.
+    \item Para $t\to\infty$: $y\to -8{,}9131$ K. \checkmark
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cálculo Analítico: Rampa (Laplace)}
+  \footnotesize
+
+  \textbf{Entrada:} $U(s)=1/s^2 \;\Rightarrow\;
+  Y_{\text{ram}}(s) = \dfrac{G_{1,1}(s)}{s^2}
+  = \dfrac{C_1}{s^2} + \dfrac{C_2}{s}
+  + \dfrac{A''}{s+4{,}24} + \dfrac{R''}{s-p_2} + \dfrac{R''^*}{s-p_3}$
+
+  \begin{block}{Coeficientes de Regime via Derivação na Origem}
+    \vspace{-2pt}
+  \begin{itemize}\itemsep2pt
+      \item \textbf{Inclinação:}\;
+        $C_1 = G(0) = -8{,}9131~\text{K\,h}^{-1}$
+        \quad — resfriamento de $8{,}91$ K por hora acumulada.
+      \item \textbf{Deslocamento:}\;
+        $C_2 = G'(0) = \dfrac{b_1 a_0 - b_0 a_1}{a_0^2} = +1{,}9113~\text{K}$
+        \quad — atrasa o início do resfriamento.
+    \end{itemize}
+    \vspace{-2pt}
+  \end{block}
+
+  \textbf{Resíduos transitórios:}
+\begin{itemize}\itemsep2pt
+    \item $A'' = -1{,}8944$ \quad — decaimento real que compensa $C_2$ em $t=0$.
+    \item $2|R''| = 0{,}0171$ \quad — oscilação desprezível (3 ordens abaixo de $C_1$).
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Validação Gráfica: Resposta à Rampa}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{figuras/rampa.png}
+    \caption{Resposta à Rampa Unitária.}
+  \end{figure}
+
+  \footnotesize
+\begin{itemize}\itemsep3pt
+    \item \textbf{Atraso inicial (7ª ordem):} permanece próxima de zero
+      por $t\lesssim 0{,}2$ h antes de inclinar — modos rápidos eliminados
+      na simplificação.
+
+    \item \textbf{Paralelismo assintótico:} a partir de $t\approx 0{,}5$ h
+      ambas as curvas têm inclinação $C_1=-8{,}9131~\text{K\,h}^{-1}$;
+      o deslocamento residual $\Delta C_2\approx 0{,}011$ K é aceitável.
+
+    \item \textbf{Implicação para controle:} a deriva linear exige
+      \textbf{ação integral} (PI/PID) para manter $\Delta T_1$ limitado
+      sob perturbação tipo rampa em $F_R$.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cálculo Analítico: Resposta à Rampa}
+  \footnotesize
+
+  \begin{alertblock}{Equação Temporal — $y_{\text{ram}}(t)$}
+    \centering
+    $y(t) = \underbrace{1{,}9113}_{{C_2}}
+    - \underbrace{8{,}9131\,t}_{{C_1 t}}
+    - \underbrace{1{,}8944\,e^{-4{,}24t}}_{\text{transitório real}}
+    + \underbrace{0{,}0171\,e^{-4{,}50t}\cos(53{,}05\,t+3{,}013)}_{\approx\,0\text{ (desprezível)}}$
+  \end{alertblock}
+
+  \textbf{Verificação em $t=0$:}
+  \begin{equation*}
+    y(0)=1{,}9113 - 1{,}8944 + 0{,}0171\cos(3{,}013)
+    \approx 0{,}017 - 0{,}017 \approx 0 \;\checkmark
+  \end{equation*}
+
+  \textbf{Análise dos termos:}
+\begin{itemize}\itemsep2pt
+    \item Para $t\gg\tau_1$: $y(t)\approx 1{,}9113 - 8{,}9131\,t$
+      — reta de resfriamento divergente.
+    \item $C_2=+1{,}9113$ K atrasa a queda; $A''=-1{,}8944$ quase cancela $C_2$
+      em $t=0$, garantindo a condição inicial nula.
+  \end{itemize}
+
+\end{frame}

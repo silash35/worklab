@@ -1,0 +1,344 @@
+\appendix
+
+\appendixpage
+\addappheadtotoc
+
+\section{Modelo fenomenológico do sistema reator-separador}
+\label{sec:apendice_modelo}
+
+As equações diferenciais do modelo fenomenológico completo do sistema reator-separador, conforme propostas por \textcite{pourkargar_2017}, são apresentadas a seguir.
+O modelo é composto por doze estados e foi obtido a partir de balanços de massa e energia aplicados aos reatores e ao separador:
+\begin{align}
+  \frac{dV_1}{dt} &= F_{f1} + F_R - F_1 \\
+  \frac{dV_2}{dt} &= F_{f2} + F_1 - F_2 \\
+  \frac{dV_3}{dt} &= F_2 - F_P - F_R - F_3 \\
+  \frac{dT_1}{dt} &= \frac{F_{f1}}{V_1}(T_0 - T_1) + \frac{F_R}{V_1}(T_3 - T_1) + \frac{Q_1}{\rho C_p V_1} - \frac{m}{C_p}(k_{11} x_{A1} \Delta H_{r1} + k_{21} x_{B1} \Delta H_{r2}) \\
+  \frac{dT_2}{dt} &= \frac{F_{f2}}{V_2}(T_0 - T_2) + \frac{F_1}{V_2}(T_1 - T_2) + \frac{Q_2}{\rho C_p V_2} - \frac{m}{C_p}(k_{12} x_{A2} \Delta H_{r1} + k_{22} x_{B2} \Delta H_{r2}) \\
+  \frac{dT_3}{dt} &= \frac{F_2}{V_3}(T_2 - T_3) + \frac{Q_3}{\rho C_p V_3} \\
+  \frac{dx_{A1}}{dt} &= \frac{F_{f1}}{V_1}(x_{A0} - x_{A1}) + \frac{F_R}{V_1}(x_{AR} - x_{A1}) - k_{11} x_{A1} \\
+  \frac{dx_{B1}}{dt} &= \frac{F_R}{V_1}(x_{BR} - x_{B1}) - \frac{F_{f1}}{V_1} x_{B1} + k_{11} x_{A1} - k_{21} x_{B1} \\
+  \frac{dx_{A2}}{dt} &= \frac{F_{f2}}{V_2}(x_{A0} - x_{A2}) + \frac{F_1}{V_2}(x_{A1} - x_{A2}) - k_{12} x_{A2} \\
+  \frac{dx_{B2}}{dt} &= \frac{F_1}{V_2}(x_{B1} - x_{B2}) - \frac{F_{f2}}{V_2} x_{B2} + k_{12} x_{A2} - k_{22} x_{B2} \\
+  \frac{dx_{A3}}{dt} &= \frac{F_2}{V_3}(x_{A2} - x_{A3}) - \frac{F_P + F_R}{V_3}(x_{AR} - x_{A3}) \\
+  \frac{dx_{B3}}{dt} &= \frac{F_2}{V_3}(x_{B2} - x_{B3}) - \frac{F_P + F_R}{V_3}(x_{BR} - x_{B3})
+\end{align}
+em que $V_i$ representa o volume da unidade $i$, sendo $i=1$ para o primeiro reator, $i=2$ para o segundo reator e $i=3$ para o separador.
+$F_{f1}$ e $F_{f2}$ representam as vazões de alimentação, $F_1$ e $F_2$ correspondem às vazões de saída dos reatores, $F_3$ é a vazão de saída do separador, $F_R$ é a vazão de reciclo e $F_P$ a vazão de purga.
+As temperaturas das unidades são representadas por $T_i$, enquanto $T_0$ denota a temperatura da alimentação.
+$Q_i$ representa a taxa de calor fornecida, $\rho$ a densidade do fluido, $C_p$ o calor específico, $m$ a molalidade e $\Delta H_{rj}$ o calor de reação $j$.
+As variáveis $x_{Ai}$ e $x_{Bi}$ representam as frações molares dos componentes $A$ e $B$ na unidade $i$, respectivamente.
+Já $x_{A0}$ denota a fração molar de $A$ na alimentação, $x_{AR}$ e $x_{BR}$ denotam as frações molares na corrente de reciclo, e $k_{ij}$ as constantes de reação.
+
+\clearpage
+
+\section{Tabela qualitativa de interações}
+\label{sec:apendice_interacoes}
+
+A Tabela~\ref{tab:interacoes} apresenta qualitativamente os efeitos observados em cada estado após a aplicação de perturbações individuais.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{c|ccccccc}
+    \hline
+    $\mathbf{y} / \mathbf{u}$ & $F_{f1}$ & $F_{f2}$ & $F_R$ & $Q_1$ & $Q_2$ & $Q_3$ & $T_0$ \\
+    \hline
+    $T_1$    & \da & \da & \da\ua & \ua & \ua    & \ua    & \ua    \\
+    $x_{A1}$ & \ua & \ua & \ua\da & \da & \da    & \da    & \da    \\
+    $x_{B1}$ & \da & \da & \da\ua & \ua & \ua    & \ua    & \ua\ua \\
+    \hline
+    $T_2$    & \da & \da & \ua    & \ua & \ua    & \ua    & \ua    \\
+    $x_{A2}$ & \ua & \ua & \ua\da & \da & \da    & \da    & \da    \\
+    $x_{B2}$ & \da & \da & \da\ua & \ua & \ua    & \ua    & \ua\ua \\
+    \hline
+    $T_3$    & \da & \da & \da\ua & \ua    & \ua    & \ua    & \ua    \\
+    $x_{A3}$ & \ua & \ua & \da    & \da    & \da    & \da    & \da    \\
+    $x_{B3}$ & \da & \da & \ua    & \ua    & \ua    & \ua    & \ua\da \\
+    \hline
+  \end{tabular}
+  \caption{Interação qualitativa entre entradas e estados do sistema. Os símbolos \ua\ e \da\ indicam ganhos positivo e negativo, respectivamente; \da\ua\ e \ua\da\ representam respostas inversas com ganho positivo e negativo; e \ua\ua\ e \da\da\ representam respostas com sobressinal e ganhos positivo e negativo.}
+  \label{tab:interacoes}
+\end{table}
+
+\clearpage
+
+\section{Ponto de Operação do Modelo}
+\label{sec:apendice_ponto_operacao}
+
+O ponto de estado estacionário utilizado para a linearização do sistema foi obtido de \textcite{pourkargar_2017}. As entradas e os estados nesse ponto são apresentados nas Tabelas~\ref{tab:us_ponto_operacao} e \ref{tab:ys_ponto_operacao}, respectivamente.
+
+\begin{table}[h]
+  \caption{Valores das variáveis de entrada no ponto de operação em regime estacionário ($u_{ss}$).}
+  \label{tab:us_ponto_operacao}
+  \centering
+  \begin{tabular}{lll}
+    \hline
+    Variável & Valor & Unidade \\
+    \hline
+    $F_{f1}$ & 5{,}04   & m³/h \\
+    $F_{f2}$ & 5{,}04   & m³/h \\
+    $F_R$    & 17{,}00  & m³/h \\
+    $Q_1$    & 715{,}3  & MJ/h \\
+    $Q_2$    & 579{,}8  & MJ/h \\
+    $Q_3$    & 568{,}7  & MJ/h \\
+    $T_0$    & 359{,}1  & K    \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[h]
+  \caption{Valores dos estados do sistema no ponto de operação em regime estacionário ($y_{ss}$).}
+  \label{tab:ys_ponto_operacao}
+  \centering
+  \begin{tabular}{lll}
+    \hline
+    Variável  & Valor & Unidade \\
+    \hline
+    $T_1$     & 432{,}4 & K  \\
+    $T_2$     & 427{,}1 & K  \\
+    $T_3$     & 432{,}1 & K  \\
+    $x_{A1}$  & 0{,}536 & -- \\
+    $x_{B1}$  & 0{,}448 & -- \\
+    $x_{A2}$  & 0{,}545 & -- \\
+    $x_{B2}$  & 0{,}438 & -- \\
+    $x_{A3}$  & 0{,}298 & -- \\
+    $x_{B3}$  & 0{,}670 & -- \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\clearpage
+
+\section{Comparação das respostas da variável $x_{B1}$ entre os modelos linear e não linear}
+\label{sec:apendice_linearizacao}
+
+A Figura~\ref{fig:linear_vs_nonlinear} apresenta a comparação entre as respostas do modelo linearizado e do modelo não linear do sistema reator-separador.
+A análise é realizada considerando perturbações na temperatura de alimentação $T_0$.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figuras/linear_vs_nonlinear-xB1_T0.png}
+  \caption{Comparação entre as respostas da variável $x_{B1}$ entre os modelos linear e não linear para perturbações na entrada $T_0$.}
+  \label{fig:linear_vs_nonlinear}
+\end{figure}
+
+\clearpage
+
+\begin{landscape}
+  \pagestyle{paisagem}
+  \section{Diagrama de blocos do sistema reator-separador}
+
+  \label{sec:apendice_diagrama_blocos}
+
+  A Figura~\ref{fig:diagrama_blocos} apresenta o diagrama de blocos que descreve a estrutura do sistema reator-separador.
+
+  \begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figuras/blocks.png}
+    \caption{Diagrama de blocos do sistema reator-separador, ilustrando o acoplamento e as interações dinâmicas entre as unidades do processo.}
+    \label{fig:diagrama_blocos}
+  \end{figure}
+
+  \allowdisplaybreaks
+
+  Os valores dos parâmetros $\theta$ do diagrama, são apresentados abaixo:
+  \begin{align}
+    \theta_{T_1,T_1} &= -15{,}39 & \theta_{T_1,T_3} &= 17 & \theta_{T_1,x_{A1}} &= 362{,}2 & \theta_{T_1,x_{B1}} &= 23{,}62 & \theta_{T_1,F_{f1}} &= -73{,}3 \\
+    \theta_{T_1,F_R} &= -0{,}3 & \theta_{T_1,Q_1} &= 0{,}0002381 & \theta_{T_1,T_0} &= 5{,}04 & \theta_{T_2,T_1} &= 44{,}08 & \theta_{T_2,T_2} &= -48{,}35 \\
+    \theta_{T_2,x_{A2}} &= 304{,}8 & \theta_{T_2,x_{B2}} &= 19{,}2 & \theta_{T_2,F_{f1}} &= 10{,}6 & \theta_{T_2,F_{f2}} &= -136 & \theta_{T_2,F_R} &= 10{,}6 \\
+    \theta_{T_2,Q_2} &= 0{,}0004762 & \theta_{T_2,T_0} &= 10{,}08 & \theta_{T_3,T_2} &= 27{,}08 & \theta_{T_3,T_3} &= -27{,}08 & \theta_{T_3,F_{f1}} &= -5 \\
+    \theta_{T_3,F_{f2}} &= -5 & \theta_{T_3,F_R} &= -5 & \theta_{T_3,Q_3} &= 0{,}0002381 & \theta_{x_{A1},T_1} &= -0{,}1567 & \theta_{x_{A1},x_{A1}} &= -31{,}13 \\
+    \theta_{x_{A1},x_{A3}} &= 14{,}99 & \theta_{x_{A1},x_{B3}} &= -2{,}675 & \theta_{x_{A1},F_{f1}} &= 0{,}464 & \theta_{x_{A1},F_R} &= 0{,}1487 & \theta_{x_{B1},T_1} &= 0{,}1479 \\
+    \theta_{x_{B1},x_{A1}} &= 9{,}088 & \theta_{x_{B1},x_{B1}} &= -22{,}55 & \theta_{x_{B1},x_{A3}} &= -10{,}82 & \theta_{x_{B1},x_{B3}} &= 6{,}61 & \theta_{x_{B1},F_{f1}} &= -0{,}448 \\
+    \theta_{x_{B1},F_R} &= -0{,}1401 & \theta_{x_{A2},T_2} &= -0{,}1374 & \theta_{x_{A2},x_{A1}} &= 44{,}08 & \theta_{x_{A2},x_{A2}} &= -61{,}81 & \theta_{x_{A2},F_{f1}} &= -0{,}018 \\
+    \theta_{x_{A2},F_{f2}} &= 0{,}91 & \theta_{x_{A2},F_R} &= -0{,}018 & \theta_{x_{B2},T_2} &= 0{,}1303 & \theta_{x_{B2},x_{B1}} &= 44{,}08 & \theta_{x_{B2},x_{A2}} &= 7{,}648 \\
+    \theta_{x_{B2},x_{B2}} &= -54{,}57 & \theta_{x_{B2},F_{f1}} &= 0{,}02 & \theta_{x_{B2},F_{f2}} &= -0{,}876 & \theta_{x_{B2},F_R} &= 0{,}02 & \theta_{x_{A3},x_{A2}} &= 27{,}08 \\
+    \theta_{x_{A3},x_{A3}} &= -25{,}03 & \theta_{x_{A3},x_{B3}} &= 2{,}728 & \theta_{x_{A3},F_{f1}} &= 0{,}247 & \theta_{x_{A3},F_{f2}} &= 0{,}247 & \theta_{x_{A3},F_R} &= -0{,}1475 \\
+    \theta_{x_{B3},x_{B2}} &= 27{,}08 & \theta_{x_{B3},x_{A3}} &= 11{,}04 & \theta_{x_{B3},x_{B3}} &= -16{,}48 & \theta_{x_{B3},F_{f1}} &= -0{,}232 & \theta_{x_{B3},F_{f2}} &= -0{,}232 \\
+    \theta_{x_{B3},F_R} &= 0{,}1373
+  \end{align}
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+  \pagestyle{paisagem}
+
+  \section{Matriz de Funções de Transferência}
+  \label{sec:apendice_gs}
+
+  A matriz de funções de transferência do sistema reator-separador, denotada por $G(s)$, possui dimensão $9 \times 7$ e é composta por elementos $g_{i,j}(s)$, em que o índice $i$ corresponde às variáveis de saída e o índice $j$ às variáveis de entrada do sistema.
+  O vetor de saídas ($i$) segue a ordenação dada por $[T_1, T_2, T_3, x_{A1}, x_{B1}, x_{A2}, x_{B2}, x_{A3}, x_{B3}]$, enquanto o vetor de entradas ($j$) é definido por $[F_{f1}, F_{f2}, F_R, Q_1, Q_2, Q_3, T_0]$.
+  Todos os elementos $g_{i,j}(s)$ que compõem a matriz são apresentados a seguir:
+
+  \allowdisplaybreaks
+
+  \begin{align}
+    g_{1,1}(s) &= \frac{- 4{,}66 \cdot 10^{3} s - 1{,}22 \cdot 10^{5}}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \\
+    g_{1,2}(s) &= - \frac{7{,}72 \cdot 10^{4}}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \\
+    g_{1,3}(s) &= \frac{2{,}28 \cdot 10^{3} - 92{,}1 s}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \label{eq:g13} \\
+    g_{1,4}(s) &= \frac{0{,}000273 s^{3} + 0{,}0231 s^{2} + 0{,}551 s + 3{,}38}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{1,5}(s) &= \frac{0{,}249 s + 2{,}23}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{1,6}(s) &= \frac{0{,}00464 s^{2} + 0{,}268 s + 2{,}12}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{1,7}(s) &= \frac{5{,}56 s^{3} + 481{,}0 s^{2} + 1{,}69 \cdot 10^{4} s + 1{,}19 \cdot 10^{5}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{2,1}(s) &= \frac{- 3{,}6 \cdot 10^{3} s - 1{,}01 \cdot 10^{5}}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \\
+    g_{2,2}(s) &= \frac{- 170{,}0 s^{2} - 7{,}68 \cdot 10^{3} s - 8{,}83 \cdot 10^{4}}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \\
+    g_{2,3}(s) &= \frac{11{,}8 s^{3} + 645{,}0 s^{2} + 7{,}32 \cdot 10^{3} s + 2{,}7 \cdot 10^{4}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{2,4}(s) &= \frac{0{,}0119 s^{2} + 0{,}43 s + 2{,}9}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{2,5}(s) &= \frac{0{,}000532 s^{3} + 0{,}028 s^{2} + 0{,}461 s + 2{,}49}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{2,6}(s) &= \frac{0{,}203 s + 1{,}82}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{2,7}(s) &= \frac{11{,}5 s^{3} + 852{,}0 s^{2} + 1{,}89 \cdot 10^{4} s + 1{,}14 \cdot 10^{5}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{3,1}(s) &= \frac{- 5{,}92 s^{2} - 61{,}6 s - 1{,}03 \cdot 10^{5}}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \\
+    g_{3,2}(s) &= \frac{- 4{,}96 \cdot 10^{3} s - 8{,}98 \cdot 10^{4}}{1{,}0 s^{3} + 99{,}3 s^{2} + 3{,}0 \cdot 10^{3} s + 8{,}56 \cdot 10^{3}} \\
+    g_{3,3}(s) &= \frac{- 5{,}63 s^{3} - 109{,}0 s^{2} + 1{,}25 \cdot 10^{3} s + 1{,}6 \cdot 10^{4}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{3,4}(s) &= \frac{0{,}323 s + 2{,}9}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{3,5}(s) &= \frac{0{,}0144 s^{2} + 0{,}369 s + 2{,}49}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{3,6}(s) &= \frac{0{,}000268 s^{3} + 0{,}0199 s^{2} + 0{,}377 s + 2{,}34}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{3,7}(s) &= \frac{310{,}0 s^{2} + 1{,}47 \cdot 10^{4} s + 1{,}14 \cdot 10^{5}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{4,1}(s) &= \frac{0{,}701 s^{3} + 59{,}4 s^{2} + 1{,}56 \cdot 10^{3} s + 1{,}03 \cdot 10^{4}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{4,2}(s) &= \frac{735{,}0 s + 6{,}95 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{4,3}(s) &= \frac{0{,}156 s^{5} + 25{,}4 s^{4} + 1{,}52 \cdot 10^{3} s^{3} + 3{,}7 \cdot 10^{4} s^{2} + 2{,}2 \cdot 10^{5} s - 8{,}84 \cdot 10^{4}}{1{,}0 s^{6} + 212{,}0 s^{5} + 1{,}81 \cdot 10^{4} s^{4} + 7{,}59 \cdot 10^{5} s^{3} + 1{,}49 \cdot 10^{7} s^{2} + 1{,}0 \cdot 10^{8} s + 1{,}9 \cdot 10^{8}} \\
+    g_{4,4}(s) &= \frac{- 9{,}08 \cdot 10^{-7} s^{3} - 8{,}19 \cdot 10^{-5} s^{2} - 0{,}0028 s - 0{,}0337}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{4,5}(s) &= \frac{- 2{,}12 \cdot 10^{-5} s^{3} - 0{,}00215 s^{2} - 0{,}0719 s - 0{,}792}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{4,6}(s) &= \frac{- 1{,}54 \cdot 10^{-5} s^{2} - 0{,}000975 s - 0{,}0211}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{4,7}(s) &= \frac{- 0{,}000269 s^{4} - 0{,}0439 s^{3} - 3{,}06 s^{2} - 101{,}0 s - 1{,}21 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{5,1}(s) &= \frac{- 0{,}679 s^{3} - 55{,}7 s^{2} - 1{,}43 \cdot 10^{3} s - 9{,}31 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{5,2}(s) &= \frac{- 664{,}0 s - 6{,}27 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{5,3}(s) &= \frac{- 0{,}133 s^{5} - 21{,}8 s^{4} - 1{,}31 \cdot 10^{3} s^{3} - 3{,}18 \cdot 10^{4} s^{2} - 1{,}85 \cdot 10^{5} s + 1{,}09 \cdot 10^{5}}{1{,}0 s^{6} + 212{,}0 s^{5} + 1{,}81 \cdot 10^{4} s^{4} + 7{,}59 \cdot 10^{5} s^{3} + 1{,}49 \cdot 10^{7} s^{2} + 1{,}0 \cdot 10^{8} s + 1{,}9 \cdot 10^{8}} \\
+    g_{5,4}(s) &= \frac{8{,}23 \cdot 10^{-7} s^{3} + 7{,}33 \cdot 10^{-5} s^{2} + 0{,}0025 s + 0{,}0302}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{5,5}(s) &= \frac{1{,}96 \cdot 10^{-5} s^{3} + 0{,}00196 s^{2} + 0{,}0646 s + 0{,}711}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{5,6}(s) &= \frac{1{,}4 \cdot 10^{-5} s^{2} + 0{,}000868 s + 0{,}019}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{5,7}(s) &= \frac{0{,}0117 s^{4} + 1{,}73 s^{3} + 113{,}0 s^{2} + 3{,}36 \cdot 10^{3} s + 3{,}67 \cdot 10^{4}}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{6,1}(s) &= \frac{1{,}3 \cdot 10^{3} s^{2} + 5{,}96 \cdot 10^{4} s + 4{,}43 \cdot 10^{5}}{1{,}0 s^{5} + 156{,}0 s^{4} + 8{,}96 \cdot 10^{3} s^{3} + 2{,}12 \cdot 10^{5} s^{2} + 1{,}52 \cdot 10^{6} s + 2{,}96 \cdot 10^{6}} \\
+    g_{6,2}(s) &= \frac{1{,}15 s^{3} + 59{,}8 s^{2} + 1{,}17 \cdot 10^{3} s + 7{,}2 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{6,3}(s) &= \frac{4{,}41 s^{4} + 442{,}0 s^{3} + 1{,}47 \cdot 10^{4} s^{2} + 7{,}34 \cdot 10^{4} s - 3{,}1 \cdot 10^{5}}{1{,}0 s^{6} + 212{,}0 s^{5} + 1{,}81 \cdot 10^{4} s^{4} + 7{,}59 \cdot 10^{5} s^{3} + 1{,}49 \cdot 10^{7} s^{2} + 1{,}0 \cdot 10^{8} s + 1{,}9 \cdot 10^{8}} \\
+    g_{6,4}(s) &= \frac{- 9{,}7 \cdot 10^{-7} s^{3} - 9{,}37 \cdot 10^{-5} s^{2} - 0{,}00295 s - 0{,}0305}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{6,5}(s) &= \frac{- 1{,}16 \cdot 10^{-6} s^{3} - 5{,}52 \cdot 10^{-5} s^{2} - 0{,}00146 s - 0{,}0222}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{6,6}(s) &= \frac{- 1{,}65 \cdot 10^{-5} s^{2} - 0{,}00115 s - 0{,}0191}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{6,7}(s) &= \frac{- 0{,}0305 s^{3} - 2{,}5 s^{2} - 86{,}6 s - 1{,}12 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{7,1}(s) &= \frac{- 25{,}5 s^{4} - 3{,}19 \cdot 10^{3} s^{3} - 1{,}4 \cdot 10^{5} s^{2} - 2{,}48 \cdot 10^{6} s - 1{,}33 \cdot 10^{7}}{1{,}0 s^{6} + 190{,}0 s^{5} + 1{,}42 \cdot 10^{4} s^{4} + 5{,}16 \cdot 10^{5} s^{3} + 8{,}71 \cdot 10^{6} s^{2} + 5{,}44 \cdot 10^{7} s + 1{,}0 \cdot 10^{8}} \\
+    g_{7,2}(s) &= \frac{- 1{,}04 s^{4} - 89{,}1 s^{3} - 2{,}92 \cdot 10^{3} s^{2} - 4{,}28 \cdot 10^{4} s - 2{,}19 \cdot 10^{5}}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{7,3}(s) &= \frac{- 3{,}71 s^{5} - 485{,}0 s^{4} - 2{,}36 \cdot 10^{4} s^{3} - 4{,}27 \cdot 10^{5} s^{2} - 1{,}21 \cdot 10^{6} s + 1{,}08 \cdot 10^{7}}{1{,}0 s^{7} + 246{,}0 s^{6} + 2{,}53 \cdot 10^{4} s^{5} + 1{,}37 \cdot 10^{6} s^{4} + 4{,}06 \cdot 10^{7} s^{3} + 6{,}06 \cdot 10^{8} s^{2} + 3{,}58 \cdot 10^{9} s + 6{,}44 \cdot 10^{9}} \\
+    g_{7,4}(s) &= \frac{9{,}36 \cdot 10^{-7} s^{4} + 0{,}000118 s^{3} + 0{,}0056 s^{2} + 0{,}117 s + 0{,}916}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{7,5}(s) &= \frac{1{,}03 \cdot 10^{-6} s^{4} + 8{,}37 \cdot 10^{-5} s^{3} + 0{,}00299 s^{2} + 0{,}0641 s + 0{,}67}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{7,6}(s) &= \frac{1{,}59 \cdot 10^{-5} s^{3} + 0{,}00158 s^{2} + 0{,}0523 s + 0{,}575}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{7,7}(s) &= \frac{0{,}0272 s^{4} + 3{,}14 s^{3} + 152{,}0 s^{2} + 3{,}59 \cdot 10^{3} s + 3{,}36 \cdot 10^{4}}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{8,1}(s) &= \frac{0{,}3 s^{3} + 18{,}6 s^{2} + 1{,}1 \cdot 10^{3} s + 9{,}42 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{8,2}(s) &= \frac{45{,}2 s^{2} + 1{,}1 \cdot 10^{3} s + 7{,}69 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{8,3}(s) &= \frac{- 12{,}7 s^{4} - 1{,}33 \cdot 10^{3} s^{3} - 4{,}79 \cdot 10^{4} s^{2} - 4{,}01 \cdot 10^{5} s - 1{,}32 \cdot 10^{6}}{1{,}0 s^{6} + 212{,}0 s^{5} + 1{,}81 \cdot 10^{4} s^{4} + 7{,}59 \cdot 10^{5} s^{3} + 1{,}49 \cdot 10^{7} s^{2} + 1{,}0 \cdot 10^{8} s + 1{,}9 \cdot 10^{8}} \\
+    g_{8,4}(s) &= \frac{- 2{,}72 \cdot 10^{-5} s^{2} - 0{,}00186 s - 0{,}0303}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{8,5}(s) &= \frac{- 3{,}14 \cdot 10^{-5} s^{2} - 0{,}000639 s - 0{,}0221}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{8,6}(s) &= \frac{- 0{,}000462 s - 0{,}019}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{8,7}(s) &= \frac{- 0{,}822 s^{2} - 45{,}2 s - 1{,}11 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{9,1}(s) &= \frac{- 0{,}238 s^{3} - 14{,}9 s^{2} - 901{,}0 s - 7{,}57 \cdot 10^{3}}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{9,2}(s) &= \frac{- 37{,}1 s^{3} - 2{,}15 \cdot 10^{3} s^{2} - 3{,}8 \cdot 10^{4} s - 2{,}14 \cdot 10^{5}}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{9,3}(s) &= \frac{9{,}81 s^{5} + 1{,}36 \cdot 10^{3} s^{4} + 7{,}26 \cdot 10^{4} s^{3} + 1{,}63 \cdot 10^{6} s^{2} + 1{,}36 \cdot 10^{7} s + 4{,}14 \cdot 10^{7}}{1{,}0 s^{7} + 246{,}0 s^{6} + 2{,}53 \cdot 10^{4} s^{5} + 1{,}37 \cdot 10^{6} s^{4} + 4{,}06 \cdot 10^{7} s^{3} + 6{,}06 \cdot 10^{8} s^{2} + 3{,}58 \cdot 10^{9} s + 6{,}44 \cdot 10^{9}} \\
+    g_{9,4}(s) &= \frac{2{,}31 \cdot 10^{-5} s^{3} + 0{,}00229 s^{2} + 0{,}0753 s + 0{,}817}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{9,5}(s) &= \frac{2{,}44 \cdot 10^{-5} s^{2} + 0{,}000525 s + 0{,}0177}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}} \\
+    g_{9,6}(s) &= \frac{0{,}000392 s^{2} + 0{,}0283 s + 0{,}513}{1{,}0 s^{5} + 140{,}0 s^{4} + 7{,}28 \cdot 10^{3} s^{3} + 1{,}54 \cdot 10^{5} s^{2} + 1{,}06 \cdot 10^{6} s + 2{,}02 \cdot 10^{6}} \\
+    g_{9,7}(s) &= \frac{0{,}64 s^{2} + 35{,}7 s + 886{,}0}{1{,}0 s^{4} + 106{,}0 s^{3} + 3{,}69 \cdot 10^{3} s^{2} + 2{,}94 \cdot 10^{4} s + 5{,}96 \cdot 10^{4}}
+  \end{align}
+\end{landscape}
+\clearpage
+
+\section{Diagrama de Polos e Zeros do Canal \texorpdfstring{$T_1(s)/F_R(s)$}{T1/FR}}
+\label{sec:apendice_pzmap}
+
+O diagrama de polos e zeros da função de transferência $g_{1,3}(s)$ é apresentado na Figura~\ref{fig:pzmap_g13}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.75\linewidth]{figuras/pzmap_T1_FR_simplified.png}
+  \caption{Diagrama de polos e zeros da função de transferência $g_{1,3}(s)$.}
+  \label{fig:pzmap_g13}
+\end{figure}
+
+\clearpage
+
+\section{Resposta ao Degrau Unitário do Canal $T_1(s)/F_R(s)$}
+\label{sec:apendice_step_g13}
+
+A Figura~\ref{fig:step_g13} apresenta a resposta ao degrau unitário da função de transferência $g_{1,3}(s)$, comparando a solução analítica com a resposta simulada utilizando a biblioteca \texttt{Control} para Python.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.65\linewidth]{figuras/T1_FR_step.png}
+  \caption{Comparação entre a solução analítica e a resposta simulada da função de transferência $g_{1,3}(s)$ para um degrau unitário (valores em desvio).}
+  \label{fig:step_g13}
+\end{figure}
+
+\clearpage
+
+\section{Espectro da Resposta Ruidosa}
+\label{sec:apendice_fft_ruidosa}
+
+A Figura~\ref{fig:T3_FR_fft} apresenta o espectro da resposta temporal ruidosa de $T_{3}$ a um degrau unitário em $F_{R}$, tendo o ruído composto por uma distribuição normal de média 0 e desvio padrão $\sigma = 0{,}02$
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{figuras/T3_FR_fft.png}
+  \caption{FFT do sistema com sinal ruidoso.}
+  \label{fig:T3_FR_fft}
+\end{figure}
+
+\clearpage
+
+\section{Funções dos Filtros}
+\label{sec:apendice_filter}
+
+As funções de transferência dos filtros de primeira e segunda ordem utilizados para atenuar o ruído do sinal em $T_{3}$, a partir de um degrau unitário em $F_{R}$, são dadas por:
+
+\begin{align}
+  g_{F,1}(s) &= \frac{1}{\frac{1}{40}s+1}, \\
+  g_{F,2}(s) &= \frac{40^2}{s^2+\frac{80}{\sqrt{2}}s+40^2}.
+\end{align}
+
+\clearpage
+
+\section{Comparação dos Diagramas de Bode dos Filtros}
+\label{sec:apendice_bode_filter}
+
+A Figura~\ref{fig:Filtros_T3_FR} apresenta a comparação entre os diagramas de bode das funções dos filtros de 1ª ordem e de 2ª ordem com a frequência de corte destacada.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{figuras/T3_FR_bode_filter.png}
+  \caption{Comparação dos diagramas de bode dos filtros propostos.}
+  \label{fig:Filtros_T3_FR}
+\end{figure}
+
+\clearpage
+
+\section{Espectro da resposta de $x_{A1}$}
+\label{sec:apendice_fft}
+
+A Figura~\ref{fig:fft_xa1_fr} apresenta o espectro da resposta temporal de $x_{A1}$ a um degrau unitário aplicado na entrada $F_R$, obtido por meio da Transformada Rápida de Fourier (\textit{Fast Fourier Transform} — FFT).
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figuras/xA1_FR_fft.png}
+  \caption{Espectro da resposta de $x_{A1}$ a um degrau unitário em $F_R$.}
+  \label{fig:fft_xa1_fr}
+\end{figure}
+
+\clearpage
+
+\section{Polos da função de transferência entre $F_R$ e $x_{A1}$}
+\label{sec:apendice_polos}
+
+A Tabela~\ref{tab:polos_discretos} apresenta os polos da função de transferência que relaciona a vazão de reciclo $F_R$ com a fração molar do componente $A$ no primeiro reator, $x_{A1}$, nos domínios contínuo e discreto.
+Os polos discretos foram obtidos pelo mapeamento para o plano $z$ considerando o período de amostragem $T_s = 0{,}0209\ \mathrm{h}$.
+
+\begin{table}[h!]
+  \centering
+  \caption{Polos contínuos e polos discretos}
+  \label{tab:polos_discretos}
+  \begin{tabular}{c c}
+    \hline
+    Polo contínuo $s_i$ / $(\mathrm{h^{-1}})$ & Polo discreto $z_i$ \\
+    \hline
+    $-52{,}87 \pm j19{,}92$ & $0{,}3021 \pm j0{,}1339$ \\
+    $-48{,}04 \pm j19{,}62$ & $0{,}3352 \pm j0{,}1461$ \\
+    $-6{,}96$ & $0{,}8644$ \\
+    $-3{,}18$ & $0{,}9356$ \\
+    \hline
+  \end{tabular}
+\end{table}

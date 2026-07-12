@@ -1,0 +1,206 @@
+\section{Análise no Tempo Contínuo}
+
+\begin{frame}{Comportamento Dinâmico do Sistema}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figuras/step-FR-inputs.png}
+    \includegraphics[width=0.8\linewidth]{figuras/step-FR-outputs.png}
+    \caption{Entradas e saídas do sistema para um degrau em $F_R$.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \newcommand{\ua}{$\uparrow$}
+  \newcommand{\da}{$\downarrow$}
+  \newcommand{\nz}{$\approx 0$}
+  \newcommand{\nm}{$^{\text{nm}}$}
+  \begin{columns}
+    \column{0.6\textwidth}
+    \small
+    \begin{table}[h!]
+      \centering
+      \begin{tabular}{c|ccccccc}
+        \hline
+        $\mathbf{y} / \mathbf{u}$ & $F_{f1}$ & $F_{f2}$ & \textcolor{red}{$F_R$} & $Q_1$ & $Q_2$ & $Q_3$ & $T_0$ \\
+        \hline
+        $T_1$    & \da & \da & \textcolor{red}{\da\ua} & \ua    & \ua    & \ua    & \ua    \\
+        $x_{A1}$ & \ua & \ua & \textcolor{red}{\ua\da} & \da    & \da    & \da    & \da    \\
+        $x_{B1}$ & \da & \da & \textcolor{red}{\da\ua} & \ua    & \ua    & \ua    & \ua\ua \\
+        % $x_{C1}$ & \da & \da & \textcolor{red}{\da\da\nz & \ua\nz & \ua\nz & \ua\nz & \ua    \\
+        \hline
+        $T_2$    & \da & \da & \textcolor{red}{\ua}    & \ua    & \ua    & \ua    & \ua    \\
+        $x_{A2}$ & \ua & \ua & \textcolor{red}{\ua\da} & \da    & \da    & \da    & \da    \\
+        $x_{B2}$ & \da & \da & \textcolor{red}{\da\ua} & \ua    & \ua    & \ua    & \ua\ua \\
+        % $x_{C2}$ & \da & \da & \textcolor{red}{\da\da\nz} & \ua\nz & \ua\nz & \ua\nz & \ua    \\
+        \hline
+        $T_3$    & \da & \da & \textcolor{red}{\da\ua}    & \ua    & \ua    & \ua    & \ua    \\
+        $x_{A3}$ & \ua & \ua & \textcolor{red}{\da}       & \da    & \da    & \da    & \da    \\
+        $x_{B3}$ & \da & \da & \textcolor{red}{\ua}       & \ua    & \ua    & \ua    & \ua\da \\
+        % $x_{C3}$ & \da & \da & \textcolor{red}{\ua\nm\nz} & \ua\nz & \ua\nz & \ua\nz & \ua    \\
+        \hline
+      \end{tabular}
+      \caption{Interação entre entradas e estados.}
+    \end{table}
+    \column{0.4\textwidth}
+    \begin{itemize}
+      \item \ua: ganho positivo;
+      \item \da: ganho negativo;
+      \item \da\ua: ganho positivo com resposta inversa;
+      \item \ua\da: ganho negativo com resposta inversa;
+      \item \ua\ua: ganho positivo com sobressinal;
+      \item \da\da: ganho negativo com sobressinal;
+        % \item \nm: resposta não monotônica;
+        % \item \nz: ganho muito pequeno.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Linearização}
+  O modelo foi linearizado em torno do ponto de operação de
+  \citeonline{pourkargar_2017}, permitindo sua análise por técnicas lineares.
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \begin{table}
+      \caption{Entradas $u_{ss}$}
+      \begin{tabular}{lll}
+        \hline
+        Variável & Valor & Unidade \\
+        \hline
+        $F_{f1}$ & 5{,}04   & m³/h \\
+        $F_{f2}$ & 5{,}04   & m³/h \\
+        $F_R$    & 17{,}00  & m³/h \\
+        $Q_1$    & 715{,}3  & MJ/h \\
+        $Q_2$    & 579{,}8  & MJ/h \\
+        $Q_3$    & 568{,}7  & MJ/h \\
+        $T_0$    & 359{,}1  & K    \\
+        \hline
+      \end{tabular}
+    \end{table}
+    \column{0.5\textwidth}
+    \begin{table}
+      \caption{Estados $y_{ss}$}
+      \begin{tabular}{lll}
+        \hline
+        Variável  & Valor & Unidade \\
+        \hline
+        $T_1$     & 432{,}4 & K  \\
+        $T_2$     & 427{,}1 & K  \\
+        $T_3$     & 432{,}1 & K  \\
+        $x_{A1}$  & 0{,}536 & -- \\
+        $x_{B1}$  & 0{,}448 & -- \\
+        $x_{A2}$  & 0{,}545 & -- \\
+        $x_{B2}$  & 0{,}438 & -- \\
+        $x_{A3}$  & 0{,}298 & -- \\
+        $x_{B3}$  & 0{,}670 & -- \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Comparação entre o modelo linear e não linear}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/linear_vs_nonlinear-xB1_T0.png}
+      \caption{Resposta da variável $x_{B1}$ a perturbações na entrada $T_0$.}
+    \end{figure}
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item Boa concordância próxima ao ponto de linearização.
+      \item As respostas divergem à medida que o sistema se afasta desse ponto.
+      \item Inclusive o modelo não linear deixa de exibir uma resposta típica de primeira ordem.
+      \item E o modelo linear prevê $x_{B1}>1$, sem significado físico, mostrando que a linearização é válida apenas localmente.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Diagrama de Blocos Completo}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{figuras/blocks.png}
+    \caption{Diagrama de blocos completo.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Obtenção das Funções de Transferência}
+  Para uma análise mais detalhada da dinâmica do processo, o modelo linearizado é convertido em um conjunto de funções de transferência.
+  \begin{equation}
+    G(s)=(sI-A)^{-1}B
+  \end{equation}
+  onde $A$ e $B$ são as matrizes do modelo linearizado.
+  \vspace{0.3cm}
+  \begin{block}{Procedimento de simplificação}
+    \begin{enumerate}
+      \item Cancelamento de polos e zeros coincidentes.
+      \item Remoção de polos e zeros associados a dinâmicas rápidas.
+      \item Ajuste do ganho estático para preservar a resposta em regime permanente.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Estrutura da Matriz de Transferência}
+  A dinâmica linearizada em torno do estado estacionário é representada pela matriz $G(s)$, relacionando o vetor de saídas $\mathbf{Y}(s)$ ao vetor de entradas $\mathbf{U}(s)$:
+
+  \begin{equation}
+    \underbrace{
+      \begin{bmatrix} T_1(s) \\ T_2(s) \\ \vdots \\ x_{B3}(s)
+    \end{bmatrix}_{9 \times 1}}_{\mathbf{Y}(s)} =
+    \begin{bmatrix}
+      g_{1,1}(s) & \dots & g_{1,7}(s) \\
+      \vdots & \ddots & \vdots \\
+      g_{9,1}(s) & \dots & g_{9,7}(s)
+    \end{bmatrix}_{9 \times 7}
+    \underbrace{
+      \begin{bmatrix} F_{f1}(s) \\ F_{f2}(s) \\ F_R(s) \\ Q_1(s) \\ Q_2(s) \\ Q_3(s) \\ T_0(s)
+    \end{bmatrix}_{7 \times 1}}_{\mathbf{U}(s)}
+  \end{equation}
+
+  \begin{itemize}
+    \item Cada elemento $g_{i,j}(s)$ representa a contribuição individual de uma entrada $j$ sobre uma variável de estado $i$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Análise do Canal $T_1(s)/F_R(s)$}
+  Como exemplo, isolamos a resposta da temperatura do primeiro reator ($T_1$) em relação à vazão de reciclo ($F_{R}$):
+  \vskip 0.1cm
+  \begin{block}{Função de Transferência $g_{1,3}(s)$}
+    \begin{equation}
+      \frac{- 92{,}1 s + 2282{,}0}{s^{3} + 99{,}3 s^{2} + 2998{,}0 s + 8560{,}7}
+    \end{equation}
+  \end{block}
+  \textbf{Ganho Positivo:} O aumento da vazão de reciclo aumenta $T_1$
+  \vskip 0.1cm
+  $K = 0{,}27 \;\frac{\mathrm{K}}{\mathrm{m^3/h}}$
+\end{frame}
+
+\begin{frame}{Resposta ao Degrau Unitário $u(t)$}
+  \begin{alertblock}{Equação Temporal}
+    \vspace{-0.5cm}
+    \begin{equation*}
+      y(t) = 0{,}267 + 0{,}12 e^{- 48{,}038 t} \sin{\left(19{,}62 t \right)} + 0{,}071 e^{- 48{,}038 t} \cos{\left(19{,}62 t \right)} - 0{,}338 e^{- 3{,}179 t}
+    \end{equation*}
+  \end{alertblock}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.65\linewidth]{figuras/T1_FR_step.png}
+    \caption{Comparação entre a solução analítica e a resposta simulada pela biblioteca \texttt{Control} para a função de transferência (valores em desvio).}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Diagrama de Polos e Zeros do Canal $T_1(s)/F_R(s)$}
+  \begin{columns}
+    \column{0.4\textwidth}
+    \begin{itemize}
+      \item Todos os polos possuem parte real negativa, logo o canal apresenta comportamento estável;
+      \item A presença de um zero no semiplano direito explica o comportamento de resposta inversa observado.
+    \end{itemize}
+    \column{0.6\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/pzmap_T1_FR_simplified.png}
+      \caption{Diagrama de polos e zeros da função de transferência $g_{1,3}(s)$.}
+    \end{figure}
+  \end{columns}
+\end{frame}

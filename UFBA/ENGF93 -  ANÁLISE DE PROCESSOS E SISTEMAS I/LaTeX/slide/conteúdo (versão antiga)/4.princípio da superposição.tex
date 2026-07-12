@@ -1,0 +1,38 @@
+\section{Avaliação da não-linearidade através do princípio da superposição}
+
+\begin{frame}{O Princípio da Superposição}
+  Para determinar a natureza do sistema, aplicamos o \textbf{Princípio da Superposição}, que define um sistema linear se:
+  \begin{equation}
+    y(u_1 + u_2) = y(u_1) + y(u_2)
+  \end{equation}
+
+  A não-linearidade é devido a:
+  \begin{itemize}
+    \item \textbf{Cinética de Arrhenius:} O termo $k = k_0 \exp(-E/RT)$ introduz dependência exponencial da temperatura.
+    \item \textbf{Balanços de Energia:} Interações entre fluxos e temperaturas nos denominadores e produtos de estados.
+  \end{itemize}
+  \vspace{0.5cm}
+
+\end{frame}
+
+\begin{frame}{Metodologia de Avaliação}
+  O teste foi realizado no código através de três cenários de perturbação:
+  \begin{itemize}
+    \item \textbf{Teste 1 ($\Delta y_1$):} Degrau de $+10\%$ no calor do reator 1 ($Q_1$).
+    \item \textbf{Teste 2 ($\Delta y_2$):} Degrau de $+10\%$ no fluxo de alimentação ($F_{f1}$).
+    \item \textbf{Teste Combinado ($\Delta y_{total}$):} Aplicação simultânea de $Q_1$ e $F_{f1}$ ($+10\%$).
+  \end{itemize}
+  \vspace{0.3cm}
+  O \textbf{Erro de Superposição} mede o desvio do comportamento linear:
+  \begin{equation}
+    \text{Erro}(t) = \Delta y_{total}(t) - (\Delta y_1(t) + \Delta y_2(t))
+  \end{equation}
+\end{frame}
+
+\begin{frame}{Resultado da Avaliação de Não Linearidade}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figuras/Grafico.png}
+    \caption{Colocar legenda aqui}
+  \end{figure}
+\end{frame}

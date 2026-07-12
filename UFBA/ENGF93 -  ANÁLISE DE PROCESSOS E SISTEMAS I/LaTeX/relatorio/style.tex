@@ -1,0 +1,82 @@
+% Modelo LaTeX para a matéria ENGF93.
+% Desenvolvido por Silas Henrique (silash35@gmail.com),
+% com contribuições de Daniel Diniz Santana (daniel.diniz@ufba.br).
+% Versão 2026.06.28
+
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage{amssymb,amsfonts,amsmath}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{indentfirst}
+
+\usepackage{pdflscape}
+
+\usepackage[titletoc,title]{appendix}
+\renewcommand{\appendixname}{Apêndice}
+\renewcommand{\appendixpagename}{Apêndices}
+\renewcommand{\appendixtocname}{Apêndices}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=3cm,
+  right=2cm,
+  top=3cm,
+  bottom=2cm,
+  footskip=0cm
+}
+
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{paisagem}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{%
+    \tikz[remember picture,overlay]
+    \node[rotate=90] at ([xshift=-2cm, yshift=-2cm]current page.north east) {\thepage};
+  }
+}
+
+\usepackage[backend=biber,style=abnt]{biblatex}
+\addbibresource{referencias.bib}
+\addbibresource{referencias2.bib}
+
+\newcommand{\ua}{$\uparrow$}
+\newcommand{\da}{$\downarrow$}
+
+\makeatletter
+\renewcommand{\maketitle}{
+  \begin{center}
+    \textbf{UNIVERSIDADE FEDERAL DA BAHIA}\\
+    \textbf{ESCOLA POLITÉCNICA}\\
+    \textbf{ENGENHARIA DE CONTROLE E AUTOMAÇÃO DE PROCESSOS}\\
+    \textbf{ENGF93 – ANÁLISE DE PROCESSOS E SISTEMAS I}
+
+    \vspace{9cm}
+
+    \textbf{\LARGE \@title}
+
+    \vfill
+
+    \begin{flushleft}
+      \@author
+    \end{flushleft}
+
+    \vspace{2cm}
+
+    Salvador, \@date
+  \end{center}
+
+  \thispagestyle{empty}
+  \newpage
+}
+\makeatother

@@ -1,0 +1,55 @@
+\section{Descrição do Sistema}
+
+\begin{frame}{Sistema Reator-Separador}
+  \begin{columns}
+    \column{0.3\textwidth}
+    O sistema estudado é baseado no processo proposto por \citeonline{pourkargar_2017}.
+    O processo é composto por:
+    \begin{itemize}
+      \item Dois reatores contínuos (CSTRs)
+      \item Um separador
+    \end{itemize}
+    \vspace{3mm}
+    O processo envolve reações em série:
+    $$A \rightarrow B \rightarrow C$$
+    \column{0.6\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\textwidth]{figuras/diagram_simplified.png}
+      \caption{Diagrama do sistema integrado reator-separador. As entradas do sistema estão em vermelho e as saídas em azul.}
+    \end{figure}
+  \end{columns}
+\end{frame}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+\begin{frame}{Equações do Modelo Fenomenológico}
+  \textbf{🌡 Balanços de Energia:}
+  \vspace{-2mm}
+  {\small
+    \begin{flalign*}
+      \frac{d\blue{T_1}}{dt} &= \frac{\red{F_{f1}}}{V_1}(\red{T_0} - \blue{T_1}) + \frac{\red{F_R}}{V_1}(\blue{T_3} - \blue{T_1}) + \frac{\blue{Q_1}}{\rho C_p V_1} - \frac{m}{C_p}(k_{11} \blue{x_{A1}} \Delta H_{r1} + k_{21} \blue{x_{B1}} \Delta H_{r2}) \\
+      \frac{d\blue{T_2}}{dt} &= \frac{\red{F_{f2}}}{V_2}(\red{T_0} - \blue{T_2}) + \frac{F_1}{V_2}(\blue{T_1} - \blue{T_2}) + \frac{\blue{Q_2}}{\rho C_p V_2} - \frac{m}{C_p}(k_{12} \blue{x_{A2}} \Delta H_{r1} + k_{22} \blue{x_{B2}} \Delta H_{r2}) \\
+      \frac{d\blue{T_3}}{dt} &= \frac{F_2}{V_3}(\blue{T_2} - \blue{T_3}) + \frac{\red{Q_3}}{\rho C_p V_3}
+    \end{flalign*}
+  }
+  \vspace{-2mm}
+  \textbf{🧪 Balanços de Massa por Componente:}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \small
+    \begin{flalign*}
+      \frac{d\blue{x_{A1}}}{dt} &= \frac{\red{F_{f1}}}{V_1}(x_{A0} - \blue{x_{A1}}) + \frac{\red{F_R}}{V_1}(x_{AR} - \blue{x_{A1}}) - k_{11} \blue{x_{A1}} \\
+      \frac{d\blue{x_{B1}}}{dt} &= \frac{\red{F_R}}{V_1}(x_{BR} - \blue{x_{B1}}) - \frac{\red{F_{f1}}}{V_1} \blue{x_{B1}} + k_{11} \blue{x_{A1}} - k_{21} \blue{x_{B1}} \\
+      \frac{d\blue{x_{A2}}}{dt} &= \frac{\red{F_{f2}}}{V_2}(x_{A0} - \blue{x_{A2}}) + \frac{F_1}{V_2}(\blue{x_{A1}} - \blue{x_{A2}}) - k_{12} \blue{x_{A2}}
+    \end{flalign*}
+    \column{0.5\textwidth}
+    \small
+    \begin{flalign*}
+      \frac{d\blue{x_{B2}}}{dt} &= \frac{F_1}{V_2}(\blue{x_{B1}} - \blue{x_{B2}}) - \frac{\red{F_{f2}}}{V_2} x_{B2} + k_{12} x_{A2} - k_{22} \blue{x_{B2}} \\
+      \frac{d\blue{x_{A3}}}{dt} &= \frac{F_2}{V_3}(\blue{x_{A2}} - \blue{x_{A3}}) - \frac{F_P + \red{F_R}}{V_3}(x_{AR} - \blue{x_{A3}}) \\
+      \frac{d\blue{x_{B3}}}{dt} &= \frac{F_2}{V_3}(\blue{x_{B2}} - \blue{x_{B3}}) - \frac{F_P + \red{F_R}}{V_3}(x_{BR} - \blue{x_{B3}})
+    \end{flalign*}
+  \end{columns}
+\end{frame}

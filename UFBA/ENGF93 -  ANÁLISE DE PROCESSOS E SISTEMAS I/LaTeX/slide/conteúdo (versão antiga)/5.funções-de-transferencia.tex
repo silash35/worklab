@@ -1,0 +1,124 @@
+\section{Ensaio sobre as Funções de Transferência}
+
+\begin{frame}{Cálculo Analítico e Ordem Sistêmica}
+  As funções de transferência são obtidas através da matriz de estados $(A, B)$:
+  \begin{equation}
+    G(s) = (sI - A)^{-1}B
+  \end{equation}
+
+  % \textbf{Propriedades observadas no ensaio:}
+  % \begin{itemize}
+  %   \item \textbf{Ordem Global:} O denominador comum (equação característica) é de \textbf{9ª ordem}.
+  %   \item \textbf{Acoplamento por Reciclo:} A presença de $F_R$ faz com que quase todos os elementos $g_{i,j}(s)$ possuam numeradores complexos, evidenciando que uma perturbação no Separador retorna aos Reatores 1 e 2.
+  % \end{itemize}
+
+  \vspace{0.3cm}
+
+  \begin{block}{Simplificação}
+    Em alguns casos, polos e zeros comuns podem ser cancelados,
+    simplificando algumas funções de transferência e reduzindo
+    suas ordens efetivas.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Estrutura da Matriz de Transferência}
+  A dinâmica linearizada em torno do estado estacionário é representada pela matriz $G(s)$, relacionando o vetor de saídas $\mathbf{Y}(s)$ ao vetor de entradas $\mathbf{U}(s)$:
+
+  \begin{equation}
+    \underbrace{
+      \begin{bmatrix} T_1(s) \\ T_2(s) \\ \vdots \\ x_{B3}(s)
+    \end{bmatrix}_{9 \times 1}}_{\mathbf{Y}(s)} =
+    \begin{bmatrix}
+      g_{1,1}(s) & \dots & g_{1,7}(s) \\
+      \vdots & \ddots & \vdots \\
+      g_{9,1}(s) & \dots & g_{9,7}(s)
+    \end{bmatrix}_{9 \times 7}
+    \underbrace{
+      \begin{bmatrix} F_{f1}(s) \\ F_{f2}(s) \\ F_R(s) \\ Q_1(s) \\ Q_2(s) \\ Q_3(s) \\ T_0(s)
+    \end{bmatrix}_{7 \times 1}}_{\mathbf{U}(s)}
+  \end{equation}
+
+  \begin{itemize}
+    \item Cada elemento $g_{i,j}(s)$ representa a contribuição individual de uma entrada $j$ sobre uma variável de estado $i$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Análise do um Canal $T_1(s)/F_R(s)$}
+  Como exemplo, isolamos a resposta da temperatura do primeiro reator ($T_1$) em relação à vazão de reciclo ($F_{R}$):
+
+  \vskip 0.1cm
+  \begin{block}{Função de Transferência $g_{1,3}(s)$}
+    \scriptsize
+    \begin{equation}
+      \dfrac{-0.3 s^6 - 95.46 s^5 - 7183 s^4 - 1.288 \times 10^{5} s^3 + 4.995 \times 10^{6} s^2 + 8.909 \times 10^{7} s + 3.523 \times 10^{8}}{s^7 + 218.9 s^6 + 1.959 \times 10^{4} s^5 + 8.847 \times 10^{5} s^4 + 2.023 \times 10^{7} s^3 + 2.043 \times 10^{8} s^2 + 8.89 \times 10^{8} s + 1.327 \times 10^{9}}
+    \end{equation}
+  \end{block}
+
+  \textbf{Ganho Positivo:} O aumento da vazão de reciclo aumenta $T_1$
+
+  \vskip 0.1cm
+
+  $K = 0.26 \;\frac{\mathrm{K}}{\mathrm{m^3/h}}$
+
+  %   \begin{itemize}
+  %     \item \textbf{Ganho Negativo:} O aumento de $F_{f1}$ reduz $T_1$. Devido à: $K=-8.913$ $\frac{Kh}{m^3}$.
+  %   \end{itemize}
+
+  %   \begin{block}{Função de Transferência $g_{1,1}(s)$ Simplificada}
+  %     \footnotesize
+  %     \centering
+  %     $g_{1,1} \approx\frac{-73.30s^2 - 6039.92s - 107263.56}{1s^3 + 13.24s^2 + 2872.57s + 12017.90}$
+  %     \normalsize
+  %   \end{block}
+  %   \begin{itemize}
+  %     \item \textbf{Ganho Próximo:} O ganho após a simplificação é de $K=-8.925$ $\frac{Kh}{m^3}$.
+  %   \end{itemize}
+\end{frame}
+
+\begin{frame}{Diagrama de Polos e Zeros do Canal $T_1(s)/F_R(s)$}
+  \begin{columns}
+    \column{0.4\textwidth}
+    \begin{itemize}
+      \item Todos os polos possuem parte real negativa, logo o canal apresenta comportamento estável;
+      \item A presença de um zero no semiplano direito explica o comportamento de resposta inversa observado.
+    \end{itemize}
+    \column{0.6\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/pzmap_g13.png}
+      \caption{Diagrama de polos e zeros da função de transferência $g_{1,3}(s)$.}
+    \end{figure}
+  \end{columns}
+\end{frame}
+
+% \begin{frame}{Análise do um Canal $T_1(s)/F_{f1}(s)$}
+%   Como exemplo, isolamos a resposta da temperatura do primeiro reator ($T_1$) em relação à vazão de entrada ($F_{f1}$):
+
+%   \vskip 0.1cm
+%   \begin{block}{Função de Transferência $g_{1,1}(s)$}
+%     \footnotesize
+%     $g_{1,1} \approx\frac{ -73s^8 - 20253s^7 - 2370836s^6 -151456069s^5 - 5660397976s^4 - 123022968671s^3 -1450504225347s^2 -7909029893941s - 15146296383540.4}{s^9 + 297 s^8 + 38187s^7 + 2737361s^6+117873281s^5+3055694675s^4+45281436690s^3+345896902949s^2 +1251696032467s+1699323599348.6}$
+%   \end{block}
+
+%   \begin{itemize}
+%     \item \textbf{Ganho Negativo:} O aumento de $F_{f1}$ reduz $T_1$. Devido à: $K=-8.913$ $\frac{Kh}{m^3}$.
+%   \end{itemize}
+
+%   \begin{block}{Função de Transferência $g_{1,1}(s)$ Simplificada}
+%     \footnotesize
+%     \centering
+%     $g_{1,1} \approx\frac{-73.30s^2 - 6039.92s - 107263.56}{1s^3 + 13.24s^2 + 2872.57s + 12017.90}$
+%     \normalsize
+%   \end{block}
+%   \begin{itemize}
+%     \item \textbf{Ganho Próximo:} O ganho após a simplificação é de $K=-8.925$ $\frac{Kh}{m^3}$.
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Análise de um Canal Específico: $T_1(s)/F_{f1}(s)$}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=0.8\linewidth]{figuras/Comparar_TFs.png}
+%     \caption{Análise comparativa da respostas ao degrau unitário.}
+%   \end{figure}
+% \end{frame}

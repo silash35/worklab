@@ -1,0 +1,73 @@
+\section{Análise no Domínio da Frequência}
+
+Para avaliar, de forma gráfica, como o sistema reage a diferentes frequências de excitação, emprega-se a análise por meio do diagrama de Bode.
+Por meio da análise da resposta em frequência, é possível identificar regiões de atenuação e amplificação, além de inferir a influência de polos e zeros na dinâmica do sistema, analisando seus efeitos separadamente \cite{ogata_2010}.
+Adicionalmente, através dessa análise é possível desenvolver filtros para atenuar possíveis sinais ruidosos.
+
+\subsection{Diagrama de Bode}
+
+A construção do Diagrama de Bode requer a avaliação das funções de transferência em $jw$, onde $w$ é a frequência de excitação em rad/h e $j$ é o número complexo. Essa avaliação resulta na função de transferência senoidal, que descreve a resposta do sistema no domínio da frequência. Para o sistema analisado, foi utilizada a função de transferência senoidal que relaciona a temperatura do separador, $T_3$, com a vazão de reciclo, $F_R$, dada por:
+\begin{align}
+  g_{3,3}(jw) \approx \frac{5{,}63 j w^{3} + 108{,}67 w^{2} + 1249{,}82 j w + 15969{,}47}{w^{4} - 106{,}22 j w^{3} - 3688{,}84 w^{2} + 29427{,}61 j w + 59584{,}61}.
+  \label{Equacao_Bode}
+\end{align}
+A partir dessa função, foram obtidas a magnitude $|g_{3,3}(jw)|$ e a fase $\angle g_{3,3}(jw)$, utilizadas na construção do Diagrama de Bode.
+
+Utilizando a biblioteca \textit{Control} para Python \cite{python-control2021} foi possível gerar o diagrama de bode apresentado na Figura~\ref{fig:T3_FR_bode}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{figuras/T3_FR_bode.png}
+  \caption{Diagrama de Bode da função de transferência entre a vazão de reciclo ($F_R$) e a temperatura do separador ($T_3$).}
+  \label{fig:T3_FR_bode}
+\end{figure}
+
+Com o diagrama, observa-se que a magnitude permanece aproximadamente constante, preservando o ganho estático até cerca de 1 rad/h.
+Em contraste, a fase apresenta variações em frequências inferiores.
+
+Em diagramas de Bode, a inclinação da curva de magnitude resulta da combinação das contribuições de todos os polos e zeros do sistema.
+Em geral, cada polo reduz a inclinação em 20 dB por década a partir de sua frequência de canto, enquanto cada zero a aumenta em 20 dB por década.
+No sistema analisado, entretanto, as frequências de canto de polos e zeros encontram-se muito próximas, fazendo com que seus efeitos se sobreponham, dificultando a identificação de suas contribuições individuais na curva de magnitude.
+
+Entretanto, a análise do comportamento assintótico em alta frequência permite inferir que a resposta apresenta uma inclinação de aproximadamente -20 dB por década, indicando predominância de um polo sobre os zeros da função de transferência.
+
+% A partir do gráfico de fase, pode-se deduzir que o sistema é de no mínimo 2ª ordem com um zero no semi-plano direito (Fase Não-Mínima), por conta do seu máximo de 270º e o aumento da defasagem na área de influência de zero.
+% Em relação à influência de polos e zeros na fase, os zeros reduzem, mesmo que pouco, o atraso do sistema, sendo assim, o efeito resultante é praticamente em função dos polos.
+
+Devido à proximidade entre as frequências de canto dos polos e dos zeros, a aplicação do método das assíntotas não permite identificar com precisão cada contribuição individual.
+Assim, as frequências de canto foram determinadas a partir da fatoração do denominador da função de transferência, resultando em valores aproximados de 3 rad/h e 7 rad/h, além da frequência natural de 50 rad/h associada ao fator de segunda ordem. A fatoração completa da função de transferência também permitiu identificar a presença de um zero no semiplano direito, caracterizando o comportamento de fase não mínima do sistema.
+
+Para os termos de primeira ordem, é possível obter as constantes de tempo  ($\tau = 1/w_d$), sendo elas respectivamente: 0,33h e 0,14h.
+Por fim, a parcela da segunda ordem tem a frequência natural de 50 rad/h, como o termo de segunda ordem tem polos complexos conjugados pode-se dizer que o fator de amortecimento está no seguinte intervalo: 0 < $\xi$ < 1. Além disso, a ausência de pico de ressonância no diagrama de Bode indica que $\xi > 1/\sqrt{2}$. % , fazendo com que a constante de tempo dessa parcela se limita ao seguinte intervalo: $0{,}03 < \tau < 0{,}02$.
+
+\subsection{Desenvolvimento de Filtro}
+
+Para o desenvolvimento do filtro, adicionou-se ruído ao sinal de resposta a um degrau unitário no sistema não linear em desvio.
+O ruído é descrito por uma distribuição gaussiana com média zero e desvio padrão $\sigma = 0{,}02$ K.
+
+Em seguida, foi feita a análise do espectro de frequência do sinal ruidoso por meio da Transformada Rápida de Fourier (\textit{Fast Fourier Transform} — FFT), representado pela figura contida no Apêndice~\ref{sec:apendice_fft_ruidosa}, onde é possível observar duas dinâmicas distintas de energia.
+Na região de baixas frequências (menores do que 30 rad/h) observa-se uma queda acentuada e monotônica da magnitude espectral, sendo esse comportamento característico do conteúdo que representa a dinâmica real do processo.
+Enquanto isso, a partir de frequências maiores o espectro assume um comportamento aproximadamente plano, com amplitude pequena e oscilações irregulares, sendo esse comportamento característico do ruído.
+
+Para atenuar este ruído, a frequência de corte foi definida em $\omega_{c} = 40$ rad/h, posicionada acima da faixa das componentes dinâmicas relevantes do sinal e abaixo da região predominantemente associada ao ruído.
+
+Tendo a frequência de corte devidamente determinada, é necessário definir as funções de transferência dos filtros.
+Para isso, são projetados dois filtros, um de primeira ordem e outro de segunda ordem.
+As equações correspondentes às suas funções de transferência são apresentadas no Apêndice~\ref{sec:apendice_filter}.
+
+Na figura destacada no Apêndice~\ref{sec:apendice_bode_filter} é possível observar a comparação entre o diagrama de bode de cada um dos filtros, onde a inclinação do filtro de 2ª ordem (-40dB/década) é o dobro do filtro de 1ª ordem, oferecendo o dobro de atenuação na banda de rejeição, sendo, portanto, mais eficaz para suprimir componentes de alta frequência, como o ruído.
+
+Entretanto, essa maior atenuação tem como custo uma
+defasagem mais elevada, gerando um maior atraso temporal na resposta do sinal filtrado.
+
+Por fim, na Figura~\ref{fig:Compare_Filter_T3_FR} é possível observar o quanto os filtros conseguem atenuar o ruído, fazendo com que o sinal filtrado se aproxime do sinal original do sistema.
+
+Ademais, a diferença entre os dois filtros é dada majoritariamente pela maior suavidade do filtro de 2ª ordem no regime permanente.
+Sendo assim, pelo princípio da parcimônia, seria preferível utilizar o filtro de 1ª ordem.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{figuras/T3_FR_compare.png}
+  \caption{Simulação da eficiência dos filtros de 1ª ordem e de 2ª ordem.}
+  \label{fig:Compare_Filter_T3_FR}
+\end{figure}

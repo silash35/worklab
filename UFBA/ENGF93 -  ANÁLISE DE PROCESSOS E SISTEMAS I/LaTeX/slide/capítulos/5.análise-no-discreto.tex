@@ -1,0 +1,79 @@
+\section{Análise no Tempo Discreto}
+
+\begin{frame}{Escolha do Período de Amostragem}
+  \begin{columns}
+    \begin{column}{0.62\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{figuras/xA1_FR_fft.png}
+        \caption{Espectro da resposta de $x_{A1}$ a um degrau em $F_R$.}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.34\textwidth}
+      \begin{block}{Critério de Shannon}
+        \[
+          \omega_{\mathrm{amost}} \geq 2\omega_{\max}
+        \]
+      \end{block}
+      \begin{block}{Período de amostragem}
+        \[
+          T_s = \frac{2\pi}{\omega_{\mathrm{amost}}}
+        \]
+      \end{block}
+      \begin{block}{Valor adotado}
+        \[
+          \omega_{\mathrm{amost}} = 300 \ \mathrm{rad/h}
+        \]
+        \[
+          T_s \approx 0{,}0209 \ \mathrm{h}
+        \]
+        \[
+          T_s \approx 75{,}4 \ \mathrm{s}
+        \]
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Resposta Contínua e Amostrada}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.70\textwidth]{figuras/amostragem.png}
+    \caption{Resposta contínua e amostrada de $x_{A1}$.}
+  \end{figure}
+
+  \vspace{-0.15cm}
+
+  \begin{itemize}
+    \item A resposta amostrada acompanha a resposta contínua.
+    \item O período escolhido captura a variação inicial e a acomodação do sistema.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Estabilidade no Plano $z$}
+  \begin{columns}
+    \begin{column}{0.56\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.78\textwidth]{figuras/pzplot.png}
+        \caption{Polos discretos no plano $z$.}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \begin{block}{Obtendo os polos discretos}
+        $$z_i = e^{s_i T_s}$$
+      \end{block}
+      \begin{block}{Critério de estabilidade}
+        $$|z_i|<1$$
+      \end{block}
+      \vspace{0.15cm}
+      \begin{itemize}
+        \item Todos os polos estão dentro do círculo unitário.
+        \item A representação discreta permanece estável.
+        \item O polo mais próximo do círculo unitário domina a resposta.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

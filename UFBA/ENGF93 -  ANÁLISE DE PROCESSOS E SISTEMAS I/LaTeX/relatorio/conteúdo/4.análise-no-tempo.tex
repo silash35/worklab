@@ -1,0 +1,60 @@
+\section{Análise no Tempo Contínuo}
+
+\subsection{Comportamento Dinâmico do Sistema}
+
+A análise inicial do sistema foi realizada por meio da aplicação de perturbações em malha aberta nas variáveis de entrada.
+As respostas temporais foram obtidas por integração numérica do modelo não linear utilizando a biblioteca \textit{SciPy} para Python \cite{virtanen_2020}.
+O objetivo dessa etapa é identificar qualitativamente a influência de cada entrada sobre os estados do processo.
+
+A Figura~\ref{fig:step_fr} apresenta a resposta temporal dos estados para uma perturbação do tipo degrau aplicada à vazão de reciclo $F_R$.
+Observa-se que essa alteração provoca, em regime permanente, uma elevação nas temperaturas do sistema e um aumento na fração molar do componente $B$ nas três unidades do processo.
+Esse comportamento é fisicamente coerente, pois a recirculação de reagente não convertido aumenta a formação de $B$ e intensifica a taxa global de reação, elevando as temperaturas em todas as unidades.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figuras/step-FR-outputs.png}
+  \caption{Resposta temporal dos estados do sistema a uma perturbação do tipo degrau aplicada à vazão de reciclo $F_R$, cujo valor é alterado de 17 $\mathrm{m^3 \cdot h^{-1}}$ para 25,5 $\mathrm{m^3 \cdot h^{-1}}$ em $t =$ 0,2 h.}
+  \label{fig:step_fr}
+\end{figure}
+
+Para sintetizar os efeitos de todas as entradas sobre os estados do sistema, a Tabela~\ref{tab:interacoes}, apresentada no Apêndice~\ref{sec:apendice_interacoes}, reúne qualitativamente os efeitos observados em cada estado após a aplicação de perturbações individuais.
+
+\subsection{Linearização}
+
+O modelo não linear do sistema reator-separador foi linearizado por meio de expansão em série de Taylor de primeira ordem em torno do ponto de operação em regime estacionário apresentado no Apêndice~\ref{sec:apendice_ponto_operacao}.
+A linearização tem como objetivo viabilizar a análise das interações entre entradas e saídas por meio de funções de transferência, bem como o estudo da estabilidade e da resposta dinâmica do sistema no domínio linear.
+
+A validade da aproximação linear é restrita à vizinhança do ponto de operação, sendo adequada apenas para pequenas perturbações em torno desse regime.
+A Figura~\ref{fig:linear_vs_nonlinear}, apresentada no Apêndice~\ref{sec:apendice_linearizacao}, ilustra esse comportamento ao comparar a resposta do modelo linearizado e do modelo não linear.
+Observa-se boa concordância entre os modelos apenas para variações próximas ao ponto de operação.
+Em particular, nota-se que a variável $x_{B1}$ assume valores superiores a 1 no modelo linearizado, o que não possui significado físico.
+
+\subsection{Obtenção das Funções de Transferência}
+
+O diagrama de blocos do sistema reator-separador, apresentado no Apêndice~\ref{sec:apendice_diagrama_blocos}, evidencia o forte acoplamento entre as variáveis do processo.
+Nesse cenário, a obtenção das funções de transferência traduz essa rede interconectada em relações diretas de entrada e saída, facilitando sua análise.
+
+As funções de transferência foram obtidas no domínio de Laplace, a partir do modelo linearizado, por meio da relação matricial:
+\begin{equation}
+  G(s) = (sI - A)^{-1}B,
+\end{equation}
+em que $A$ e $B$ são, respectivamente, as matrizes de estado e de entrada do modelo linearizado em torno do ponto de operação, $I$ é a matriz identidade e $s$ é a variável de Laplace.
+A matriz $G(s)$ representa a matriz de funções de transferência do sistema, na qual cada elemento $g_{i,j}(s)$ descreve a relação dinâmica entre a entrada $j$ e a saída $i$.
+
+Em seguida, foi aplicado um procedimento de simplificação visando tornar a representação mais compacta e adequada à análise, incluindo o cancelamento de polos e zeros coincidentes, a remoção de dinâmicas de alta frequência pouco relevantes e o ajuste do ganho estático para preservação do comportamento em regime permanente.
+Todos os elementos $g_{i,j}(s)$ resultantes são apresentados no Apêndice~\ref{sec:apendice_gs}.
+
+\subsection{Análise do canal $T_1(s)/F_R(s)$}
+
+Como exemplo, considera-se o canal que relaciona a temperatura do primeiro reator $T_1$ à vazão de reciclo $F_R$.
+A função de transferência correspondente é a $g_{1,3}(s)$, dada pela Equação~\ref{eq:g13} no Apêndice~\ref{sec:apendice_gs}.
+
+O ganho estático positivo desse canal indica que um aumento na vazão de reciclo resulta, em regime permanente, em um aumento da temperatura do primeiro reator. Além disso, o diagrama de polos e zeros apresentado no Apêndice~\ref{sec:apendice_pzmap} mostra que todos os polos possuem parte real negativa, indicando que o canal é estável. Observa-se também a presença de um zero no semiplano direito, característica associada à ocorrência de resposta inversa.
+
+A resposta temporal, em desvio, foi obtida a partir da aplicação da transformada inversa de Laplace à função de transferência, considerando uma entrada degrau unitário. Dessa forma, a solução analítica é expressa por:
+\begin{equation}
+  y(t)=0{,}267 + 0{,}12 e^{- 48{,}038 t} \sin{\left(19{,}62 t \right)} + 0{,}071 e^{- 48{,}038 t} \cos{\left(19{,}62 t \right)} - 0{,}338 e^{- 3{,}179 t}.
+  \label{eq:step_g13}
+\end{equation}
+
+A comparação entre essa solução e a resposta simulada por meio da biblioteca \textit{Control} para Python \cite{python-control2021} é apresentada no Apêndice~\ref{sec:apendice_step_g13}, evidenciando a concordância entre ambas. Embora os termos senoidais sejam rapidamente amortecidos pelo fator exponencial $e^{-48{,}038t}$, a presença de um zero no semiplano direito torna inadequada a aproximação por um modelo de primeira ordem, pois sua eliminação compromete a representação da resposta transitória. Nesse contexto, uma aproximação que substitua apenas o par de polos complexos conjugados por um polo real equivalente pode ser mais viável para preservar as principais características da resposta dinâmica do sistema.

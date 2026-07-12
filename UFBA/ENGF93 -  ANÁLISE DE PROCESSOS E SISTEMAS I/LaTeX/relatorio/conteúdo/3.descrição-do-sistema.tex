@@ -1,0 +1,32 @@
+\section{Descrição do Sistema}
+
+O sistema analisado neste trabalho é baseado em um processo químico composto por dois reatores contínuos de tanque agitado (CSTRs) conectados a um separador, conforme apresentado por \textcite{pourkargar_2017} e ilustrado na Figura~\ref{fig:diagram}.
+Nesse sistema, ocorrem duas reações exotérmicas consecutivas, representadas por $A \rightarrow B \rightarrow C$, em que $B$ é o produto de interesse e $C$ um subproduto.
+Além disso, o processo possui uma corrente de reciclo proveniente do separador para o primeiro reator e uma corrente de purga destinada a evitar o acúmulo de subprodutos.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figuras/diagram.png}
+  \caption{Diagrama do sistema integrado reator-separador utilizado neste trabalho.} % As variáveis em vermelho representam as entradas manipuladas do sistema, as variáveis em azul correspondem aos estados dinâmicos do modelo e as variáveis em preto representam variáveis algébricas.}
+  \label{fig:diagram}
+\end{figure}
+
+Na Figura~\ref{fig:diagram}, as variáveis destacadas em vermelho representam as entradas manipuladas do sistema, incluindo as vazões de alimentação $F_{f1}$ e $F_{f2}$, a vazão de reciclo $F_R$, as vazões internas $F_i$ e as taxas de calor fornecidas às unidades $Q_i$.
+Adicionalmente, o sistema conta com a temperatura de alimentação $T_0$ como variável de entrada.
+As variáveis em azul correspondem aos estados dinâmicos do modelo, representados pelos volumes $V_i$, pelas temperaturas $T_i$ e pelas frações molares dos componentes $A$ e $B$ ($x_{Ai}$ e $x_{Bi}$).
+Já as variáveis em preto correspondem às relações algébricas do modelo, associadas à vazão de purga $F_P$ e às frações molares do componente $C$ ($x_{Ci}$).
+Para todas as notações apresentadas, o índice subscrito $i = 1, 2, 3$ indica a respectiva unidade do processo (primeiro reator, segundo reator e separador).
+
+A dinâmica desse sistema é descrita por um conjunto de equações diferenciais não lineares obtidas a partir de balanços de massa e energia aplicados aos reatores e ao separador.
+O modelo fenomenológico completo, proposto por \textcite{pourkargar_2017}, é composto por doze estados e suas equações diferenciais são apresentadas no Apêndice~\ref{sec:apendice_modelo}.
+
+As equações do modelo indicam que os estados $V_1$, $V_2$ e $V_3$ possuem comportamento integrador, uma vez que sua dinâmica é descrita exclusivamente pelo desbalanço entre as vazões de entrada e saída de cada unidade.
+A fim de eliminar esses modos integradores, assume-se volume constante em todas as unidades do processo.
+Sob essa hipótese, as equações de balanço volumétrico são substituídas pelas seguintes relações algébricas:
+\begin{align}
+  F_1 &= F_{f1} + F_R \\
+  F_2 &= F_{f2} + F_1 \\
+  F_3 &= F_2 - F_P - F_R
+\end{align}
+
+Assim, as vazões $F_1$, $F_2$ e $F_3$ deixam de ser consideradas entradas independentes, passando a ser determinadas a partir das demais vazões manipuladas do sistema. Dessa forma, obtém-se um modelo dinâmico com nove estados, que será utilizado nas análises desenvolvidas neste trabalho.

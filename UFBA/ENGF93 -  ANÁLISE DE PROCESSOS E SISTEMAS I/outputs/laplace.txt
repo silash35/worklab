@@ -1,0 +1,27 @@
+T1(s) =
+(FR_s*\theta_{T_1,F_R} + Ff1_s*\theta_{T_1,F_{f1}} + Q1_s*\theta_{T_1,Q_1} + T0_s*\theta_{T_1,T_0} + T3_s*\theta_{T_1,T_3} + \theta_{T_1,x_{A1}}*xA1_s + \theta_{T_1,x_{B1}}*xB1_s)/(-\theta_{T_1,T_1} + s)
+
+T2(s) =
+(FR_s*\theta_{T_2,F_R} + Ff1_s*\theta_{T_2,F_{f1}} + Ff2_s*\theta_{T_2,F_{f2}} + Q2_s*\theta_{T_2,Q_2} + T0_s*\theta_{T_2,T_0} + T1_s*\theta_{T_2,T_1} + \theta_{T_2,x_{A2}}*xA2_s + \theta_{T_2,x_{B2}}*xB2_s)/(-\theta_{T_2,T_2} + s)
+
+T3(s) =
+(FR_s*\theta_{T_3,F_R} + Ff1_s*\theta_{T_3,F_{f1}} + Ff2_s*\theta_{T_3,F_{f2}} + Q3_s*\theta_{T_3,Q_3} + T2_s*\theta_{T_3,T_2})/(-\theta_{T_3,T_3} + s)
+
+xA1(s) =
+(FR_s*\theta_{x_{A1},F_R} + Ff1_s*\theta_{x_{A1},F_{f1}} + T1_s*\theta_{x_{A1},T_1} + \theta_{x_{A1},x_{A3}}*xA3_s + \theta_{x_{A1},x_{B3}}*xB3_s)/(-\theta_{x_{A1},x_{A1}} + s)
+
+xB1(s) =
+(FR_s*\theta_{x_{B1},F_R} + Ff1_s*\theta_{x_{B1},F_{f1}} + T1_s*\theta_{x_{B1},T_1} + \theta_{x_{B1},x_{A1}}*xA1_s + \theta_{x_{B1},x_{A3}}*xA3_s + \theta_{x_{B1},x_{B3}}*xB3_s)/(-\theta_{x_{B1},x_{B1}} + s)
+
+xA2(s) =
+(FR_s*\theta_{x_{A2},F_R} + Ff1_s*\theta_{x_{A2},F_{f1}} + Ff2_s*\theta_{x_{A2},F_{f2}} + T2_s*\theta_{x_{A2},T_2} + \theta_{x_{A2},x_{A1}}*xA1_s)/(-\theta_{x_{A2},x_{A2}} + s)
+
+xB2(s) =
+(FR_s*\theta_{x_{B2},F_R} + Ff1_s*\theta_{x_{B2},F_{f1}} + Ff2_s*\theta_{x_{B2},F_{f2}} + T2_s*\theta_{x_{B2},T_2} + \theta_{x_{B2},x_{A2}}*xA2_s + \theta_{x_{B2},x_{B1}}*xB1_s)/(-\theta_{x_{B2},x_{B2}} + s)
+
+xA3(s) =
+(FR_s*\theta_{x_{A3},F_R} + Ff1_s*\theta_{x_{A3},F_{f1}} + Ff2_s*\theta_{x_{A3},F_{f2}} + \theta_{x_{A3},x_{A2}}*xA2_s + \theta_{x_{A3},x_{B3}}*xB3_s)/(-\theta_{x_{A3},x_{A3}} + s)
+
+xB3(s) =
+(FR_s*\theta_{x_{B3},F_R} + Ff1_s*\theta_{x_{B3},F_{f1}} + Ff2_s*\theta_{x_{B3},F_{f2}} + \theta_{x_{B3},x_{A3}}*xA3_s + \theta_{x_{B3},x_{B2}}*xB2_s)/(-\theta_{x_{B3},x_{B3}} + s)
+

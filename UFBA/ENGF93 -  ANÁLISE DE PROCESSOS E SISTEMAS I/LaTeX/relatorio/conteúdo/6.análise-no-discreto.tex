@@ -1,0 +1,66 @@
+\section{Análise no Tempo Discreto}
+
+A análise no tempo discreto foi realizada com o objetivo de avaliar como a dinâmica contínua do sistema pode ser representada por amostras tomadas em instantes definidos de tempo.
+Essa etapa é relevante porque, em aplicações industriais, mesmo que o processo físico seja contínuo, as medições e as ações de controle são normalmente executadas por sistemas digitais.
+Assim, variáveis como temperatura, fração molar e vazão são lidas em intervalos de amostragem e utilizadas por controladores digitais, sistemas supervisórios ou algoritmos de controle avançado.
+
+Para as análises apresentadas a seguir, foi considerada a função de transferência que relaciona a vazão de reciclo $F_R$ com a fração molar do componente $A$ no primeiro reator, $x_{A1}$.
+% Essa relação é representada por:
+
+% \begin{equation}
+% G_{x_{A1},F_R}(s)=\frac{X_{A1}(s)}{F_R(s)}
+% \end{equation}
+
+% Essa escolha é coerente com o comportamento dinâmico observado nas etapas anteriores, pois a vazão de reciclo possui influência direta sobre a composição do primeiro reator.
+%Além disso, a resposta de $x_{A1}$ a uma perturbação em $F_R$ apresenta comportamento transitório relevante, incluindo resposta inversa, o que torna essa combinação entre entrada e saída adequada para discutir a escolha do período de amostragem e a estabilidade no plano discreto.
+
+\subsection{Amostragem da resposta temporal}
+
+A escolha do período de amostragem ($T_s$) é uma etapa fundamental na representação discreta de um sistema dinâmico.
+Quando $T_s$ é muito elevado, a resposta passa a ser descrita por poucos pontos, podendo haver perda de informações importantes sobre o comportamento transitório.
+Além disso, a frequência de amostragem pode tornar-se insuficiente para representar adequadamente as componentes de alta frequência do sinal, ocasionando o fenômeno de \textit{aliasing}, que resulta em uma representação incorreta da dinâmica do sistema.
+Por outro lado, um período de amostragem excessivamente pequeno eleva a quantidade de dados a serem processados e o esforço computacional, sem resultar em ganhos significativos na representação da dinâmica do sistema.
+
+Dessa forma, o período de amostragem foi definido a partir da análise do espectro da resposta temporal, obtido por meio da Transformada Rápida de Fourier (\textit{Fast Fourier Transform} — FFT).
+O espectro da resposta de $x_{A1}$ a um degrau unitário aplicado na entrada $F_R$, utilizado nessa análise, é apresentado no Apêndice~\ref{sec:apendice_fft}.
+A partir desse espectro, estimou-se uma frequência máxima relevante de aproximadamente $\omega_{\max}=150\ \mathrm{rad/h}$.
+Com base no Teorema de Amostragem de Shannon, adotou-se uma frequência angular de amostragem de $\omega_{\mathrm{amost}}=300\ \mathrm{rad/h}$, correspondente a um período de amostragem de $T_s\approx0{,}0209\ \mathrm{h}$, utilizado para a discretização do sinal.
+
+A Figura~\ref{fig:amostragem_xa1_fr} apresenta a comparação entre o sinal contínuo e os pontos amostrados.
+Observa-se que os pontos amostrados acompanham adequadamente a forma da resposta contínua.
+Isso indica que o período de amostragem escolhido foi adequado para preservar as principais características do comportamento transitório do sistema, incluindo a resposta inversa e o tempo de acomodação.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{figuras/amostragem.png}
+  \caption{Resposta contínua e amostrada de $x_{A1}$.}
+  \label{fig:amostragem_xa1_fr}
+\end{figure}
+
+\subsection{Mapeamento dos polos para o plano discreto}
+
+Além da análise da resposta discretizada, foi avaliada a estabilidade do sistema no domínio discreto.
+Para isso, os polos da função de transferência contínua foram mapeados para o plano $z$ por meio da relação:
+\begin{equation}
+  z_i = e^{s_iT_s},
+\end{equation}
+em que $s_i$ representa um polo no plano contínuo e $z_i$ representa o polo correspondente no plano discreto.
+No tempo contínuo, a estabilidade de um sistema linear está associada à localização dos polos no semiplano esquerdo do plano $s$.
+No tempo discreto, por sua vez, a estabilidade é verificada pela localização dos polos no plano $z$, sendo necessário que todos estejam no interior do círculo unitário, isto é:
+\begin{equation}
+  |z_i| < 1.
+\end{equation}
+
+Aplicando o mapeamento com $T_s = 0{,}0209 \ \mathrm{h}$, foram obtidos os polos discretos correspondentes aos polos do modelo contínuo.
+Os valores numéricos são apresentados no Apêndice~\ref{sec:apendice_polos}.
+A Figura~\ref{fig:pzplot_discreto} mostra a localização dos polos discretos no plano $z$.
+A região delimitada pelo círculo unitário corresponde à região de estabilidade para sistemas discretos.
+Observa-se que todos os polos estão localizados no interior desse círculo, indicando que a função de transferência discretizada satisfaz o critério de estabilidade no domínio discreto.
+Além disso, nota-se que o polo mais próximo do círculo unitário é o polo dominante, estando associado ao modo mais lento da resposta, enquanto os demais polos, por estarem mais afastados, representam modos de decaimento mais rápido.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figuras/pzplot.png}
+  \caption{Localização dos polos discretos da função de transferência entre $F_R$ e $x_{A1}$ em relação ao círculo unitário no plano $z$.}
+  \label{fig:pzplot_discreto}
+\end{figure}

@@ -1,0 +1,184 @@
+\section{Análise no Domínio da Frequência}
+
+\begin{frame}{Diagrama de Bode}
+  \begin{columns}
+    \column{0.64\textwidth}
+    \scriptsize
+    \begin{equation}
+      g_{3,3}(s) \approx \frac{- 5{,}6 s^{3} - 108{,}7 s^{2} + 1249{,}8 s + 15969{,}5}{s^{4} + 106{,}2 s^{3} + 3688{,}8 s^{2} + 29427{,}6 s + 59584{,}6}
+    \end{equation}
+    \begin{equation}
+      g_{3,3}(jw) \approx \frac{5{,}6 j w^{3} + 108{,}7 w^{2} + 1249{,}8 j w + 15969{,}5}{w^{4} - 106{,}2 j w^{3} - 3688{,}8 w^{2} + 29427{,}6 j w + 59584{,}6}
+    \end{equation}
+    \column{0.475\textwidth}
+    \begin{itemize}
+      \item A função de transferência é avaliada em função da frequência de excitação (jw).
+      \item Comportamento do sistema a diferentes frequências de excitação.
+      \item Possibilidade de decompor o sistema e analisar cada parcela separadamente.
+      \item Auxílio no projeto de Filtros.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Diagrama de Bode}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/T3_FR_bode_freq.png}
+      \caption{Diagrama de bode da função de transferência que relaciona $F_R/T_3$ com marcações nas frequências de canto e natural.}
+    \end{figure}
+    \column{0.5\textwidth}
+    \begin{block}{Influência dos Polos e Zeros ($n$ = ordem)}
+      \begin{itemize}
+        \item Polo: $-20n$ dB/década | $-90n^\circ$
+        \item Zero: $+20n$ dB/década | $+90n^\circ$
+      \end{itemize}
+    \end{block}
+    \begin{itemize}
+      \item Ganho estático do sistema é mantido até aproximadamente 1 rad/h.
+      \item Nesse sistema as frequências de canto de polos e zeros estão muito próximas, sobrepondo seus efeitos.
+      \item O sistema é de no mínimo 3ª ordem, com um zero no semi-plano direito.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+% \begin{frame}{Diagrama de Bode}
+%   \begin{columns}
+%     \column{0.5\textwidth}
+%     \begin{figure}
+%       \centering
+%       %MUDAR A IMAGEM PARA A QUE ESTÁ COM AS FREQUÊNCIAS DE CANTO
+%       \includegraphics[width=\textwidth]{figuras/T3_FR_bode_freq.png}
+%       \caption{Diagrama de bode com as frequências de canto dos polos e a frequência natural explícitas.}
+%     \end{figure}
+%     \column{0.5\textwidth}
+%     \begin{table}
+%       \caption{Frequência de canto de cada polo real}
+%       \begin{tabular}{cc}
+%         \hline
+%         Símbolo & Frequência de Canto / rad/h \\
+%         \hline
+%         $w_{1}$ & 3 \\
+%         $w_{2}$ & 7 \\
+%         \hline
+%       \end{tabular}
+%     \end{table}
+%     \begin{table}
+%       \caption{Frequências natural da segunda ordem}
+%       \begin{tabular}{cc}
+%         \hline
+%         Símbolo & Frequência Natural / rad/h \\
+%         \hline
+%         $w_{3}$ & 50 \\
+%         \hline
+%       \end{tabular}
+%     \end{table}
+%   \end{columns}
+% \end{frame}
+
+% \begin{frame}{Diagrama de Bode}
+%   \begin{columns}
+%     \column{0.5\textwidth}
+%     Parcelas de Primeira Ordem:
+%     \begin{block}{Constante de Tempo}
+%       \centering
+%       $\tau = \frac{1}{w_{canto}}$
+%     \end{block}
+%     \begin{table}
+%       \caption{Constante de Tempo}
+%       \begin{tabular}{cc}
+%         \hline
+%         $w_{canto}$ / rad/h & $\tau$ / h \\
+%         \hline
+%         3 & $0{,}33$ \\
+%         7 & $0{,}14$ \\
+%         \hline
+%       \end{tabular}
+%     \end{table}
+%     \column{0.5\textwidth}
+%     Parcela de Segunda Ordem:
+%     \begin{itemize}
+%       \item O termo de segunda ordem possui polos complexos conjugados.
+%       \item Ausência de pico de ressonância no diagrama.
+%     \end{itemize}
+%     \begin{block}{Fator de Amortecimento}
+%       \centering
+%       $\frac{1}{\sqrt{2}}<\xi<1$
+%     \end{block}
+%     \begin{block}{Constante de Tempo}
+%       \centering
+%       $\tau = \frac{1}{\xi wn}$ \\
+%       $0,03$ h $< \tau < 0,02$ h
+%     \end{block}
+%   \end{columns}
+% \end{frame}
+
+\begin{frame}{Projeto de Filtro}
+  \begin{columns}
+    \column{0.55\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/T3_FR_noise.png}
+      \caption{Resposta ao degrau unitário em desvio de $F_R/T_3$ do sistema não linear, com ruído gaussiano.}
+    \end{figure}
+    \column{0.45\textwidth}
+    Ruído gaussiano com média zero e desvio padrão $\sigma = 0{,}02.$
+    \begin{block}{Objetivo}
+      Reduzir o efeito do ruído preservando a dinâmica do sistema.
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Projeto de Filtro}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/T3_FR_fft.png}
+      \caption{Espectro de frequência da resposta ruidosa do sistema.}
+    \end{figure}
+    \column{0.5\textwidth}
+    Para reduzir o risco de atenuação de componentes relevantes do sinal, adotou-se
+    $$\omega_{\mathrm{corte}} = 40\ \mathrm{rad/h}$$
+    \vspace{-2mm}
+    \begin{block}{Filtro de 1ª Ordem}
+      $$F_1(s)=\frac{1}{\frac{1}{40}s+1}$$
+    \end{block}
+    \begin{block}{Filtro de 2ª Ordem}
+      $$F_2(s)=\frac{40^2}{s^2+\frac{2\cdot40}{\sqrt{2}}s+40^2}$$
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Projeto de Filtro}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/T3_FR_bode_filter.png}
+      \caption{Comparação do diagrama de bode dos dois filtros.}
+    \end{figure}
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item O filtro de 2ª ordem oferece o dobro de atenuação na banda de rejeição do que o de 1ª ordem.
+      \item Entretanto, oferece uma maior defasagem, gerando atraso em parte da resposta do sinal.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Comparação dos Filtros}
+  \begin{columns}
+    \column{0.7\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{figuras/T3_FR_compare.png}
+      \caption{Comparação da eficácia dos dois filtros.}
+    \end{figure}
+    \column{0.3\textwidth}
+    \begin{itemize}
+      \item Ambos filtram o sinal de forma eficaz.
+      \item O filtro de segunda ordem apresenta uma atenuação ligeiramente superior, à custa de um aumento no defasamento da resposta.
+    \end{itemize}
+  \end{columns}
+\end{frame}

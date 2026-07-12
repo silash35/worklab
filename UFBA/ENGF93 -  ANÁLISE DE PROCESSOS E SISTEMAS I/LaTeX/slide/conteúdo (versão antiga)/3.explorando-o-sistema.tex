@@ -1,0 +1,113 @@
+\section{Explorando o Sistema}
+
+\begin{frame}{Simplificação: Volumes Constantes}
+  \begin{itemize}
+    \item Os volumes são variáveis integradoras.
+    \item Isto é, qualquer desbalanço entre entrada e saída faz o volume crescer ou diminuir infinitamente.
+    \item Para esta análise, assumimos \textbf{volumes constantes} e eliminamos esses integradores.
+  \end{itemize}
+  Assim, as vazões de saída passam a ser determinadas por relações algébricas:
+  \begin{flalign*}
+    F_1 &= F_{f1} + F_R \\
+    F_2 &= F_{f2} + F_1 \\
+    F_3 &= F_2 - F_P - F_R
+  \end{flalign*}
+  Com isso, fazemos a redução do modelo de \textbf{12} para \textbf{9 estados}.
+\end{frame}
+
+\begin{frame}{Ponto Estacionário}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{table}
+      \caption{Entradas $u_{ss}$}
+      \begin{tabular}{lll}
+        \hline
+        Variável & Valor & Unidade \\
+        \hline
+        $F_{f1}$ & 5.04   & m³/h \\
+        $F_{f2}$ & 5.04   & m³/h \\
+        $F_R$    & 17.00  & m³/h \\
+        $Q_1$    & 715.3  & MJ/h \\
+        $Q_2$    & 579.8  & MJ/h \\
+        $Q_3$    & 568.7  & MJ/h \\
+        $T_0$    & 359.1  & K    \\
+        \hline
+      \end{tabular}
+    \end{table}
+    \column{0.5\textwidth}
+    \begin{table}
+      \caption{Estados $y_{ss}$}
+      \begin{tabular}{lll}
+        \hline
+        Variável  & Valor & Unidade \\
+        \hline
+        $T_1$     & 432.4 & K  \\
+        $T_2$     & 427.1 & K  \\
+        $T_3$     & 432.1 & K  \\
+        $x_{A1}$  & 0.536 & -- \\
+        $x_{B1}$  & 0.448 & -- \\
+        $x_{A2}$  & 0.545 & -- \\
+        $x_{B2}$  & 0.438 & -- \\
+        $x_{A3}$  & 0.298 & -- \\
+        $x_{B3}$  & 0.670 & -- \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Resposta ao degrau em $F_R$}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figuras/step-FR-inputs.png}
+    \includegraphics[width=0.8\linewidth]{figuras/step-FR-outputs.png}
+    % \only<2>{\includegraphics[width=0.8\linewidth]{figuras/step-FR-outputs-xc.png}}
+    \caption{Entradas e saídas do sistema para um degrau em $F_R$.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \newcommand{\ua}{$\uparrow$}
+  \newcommand{\da}{$\downarrow$}
+  \newcommand{\nz}{$\approx 0$}
+  \newcommand{\nm}{$^{\text{nm}}$}
+  \begin{columns}
+    \column{0.6\textwidth}
+    \small
+    \begin{table}[h!]
+      \centering
+      \begin{tabular}{c|ccccccc}
+        \hline
+        $\mathbf{y} / \mathbf{u}$ & $F_{f1}$ & $F_{f2}$ & \textcolor{red}{$F_R$} & $Q_1$ & $Q_2$ & $Q_3$ & $T_0$ \\
+        \hline
+        $T_1$    & \da & \da & \textcolor{red}{\da\ua} & \ua    & \ua    & \ua    & \ua    \\
+        $x_{A1}$ & \ua & \ua & \textcolor{red}{\ua\da} & \da    & \da    & \da    & \da    \\
+        $x_{B1}$ & \da & \da & \textcolor{red}{\da\ua} & \ua    & \ua    & \ua    & \ua\ua \\
+        % $x_{C1}$ & \da & \da & \textcolor{red}{\da\da\nz & \ua\nz & \ua\nz & \ua\nz & \ua    \\
+        \hline
+        $T_2$    & \da & \da & \textcolor{red}{\ua}    & \ua    & \ua    & \ua    & \ua    \\
+        $x_{A2}$ & \ua & \ua & \textcolor{red}{\ua\da} & \da    & \da    & \da    & \da    \\
+        $x_{B2}$ & \da & \da & \textcolor{red}{\da\ua} & \ua    & \ua    & \ua    & \ua\ua \\
+        % $x_{C2}$ & \da & \da & \textcolor{red}{\da\da\nz} & \ua\nz & \ua\nz & \ua\nz & \ua    \\
+        \hline
+        $T_3$    & \da & \da & \textcolor{red}{\da\ua}    & \ua    & \ua    & \ua    & \ua    \\
+        $x_{A3}$ & \ua & \ua & \textcolor{red}{\da}       & \da    & \da    & \da    & \da    \\
+        $x_{B3}$ & \da & \da & \textcolor{red}{\ua}       & \ua    & \ua    & \ua    & \ua\da \\
+        % $x_{C3}$ & \da & \da & \textcolor{red}{\ua\nm\nz} & \ua\nz & \ua\nz & \ua\nz & \ua    \\
+        \hline
+      \end{tabular}
+      \caption{Interação entre entradas e estados.}
+    \end{table}
+    \column{0.4\textwidth}
+    \begin{itemize}
+      \item \ua: ganho positivo;
+      \item \da: ganho negativo;
+      \item \da\ua: ganho positivo com resposta inversa;
+      \item \ua\da: ganho negativo com resposta inversa;
+      \item \ua\ua: ganho positivo com sobressinal;
+      \item \da\da: ganho negativo com sobressinal;
+        % \item \nm: resposta não monotônica;
+        % \item \nz: ganho muito pequeno.
+    \end{itemize}
+  \end{columns}
+\end{frame}
